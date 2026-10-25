@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EduSecure - Hệ Thống Thi Trắc Nghiệm Chống Gian Lận (Bản Offline Đầy Đủ)</title>
+  <style>
+    /* 100% PURE EMBEDDED CSS - HOẠT ĐỘNG HOÀN TOÀN OFFLINE KHÔNG CẦN INTERNET */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f0f7ff;
+      background-image: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 50%, #f0f7ff 100%);
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 12px 14px 90px 14px;
+      width: 100%;
+      flex: 1;
+    }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #bae6fd;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      background: #0284c7;
+      color: #ffffff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 17px;
+      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.25);
+    }
+    .brand-title {
+      font-weight: 800;
+      font-size: 15px;
+      color: #0369a1;
+    }
+    .badge-offline {
+      font-size: 10px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-teacher-portal {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-teacher-portal:hover {
+      background: #dbeafe;
+      border-color: #93c5fd;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #bae6fd;
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.04);
+      position: relative;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #1e40af 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.2);
+    }
+    .hero h1 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .hero p {
+      font-size: 12px;
+      color: #e0f2fe;
+      line-height: 1.4;
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    @media (min-width: 600px) {
+      .rules-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .rule-box {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+    }
+    .rule-num {
+      width: 18px;
+      height: 18px;
+      background: #facc15;
+      color: #0f172a;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      gap: 6px;
+      width: 100%;
+    }
+    .btn-primary {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+    }
+    .btn-primary:hover {
+      background: #0369a1;
+    }
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+    .btn-emerald {
+      background: #059669;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+    }
+    .btn-emerald:hover {
+      background: #047857;
+    }
+    .btn-emerald:active {
+      transform: scale(0.98);
+    }
+    .btn-secondary {
+      background: #f0f9ff;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+    .btn-secondary:hover {
+      background: #e0f2fe;
+    }
+    .btn-danger {
+      background: #e11d48;
+      color: #ffffff;
+    }
+    .btn-danger:hover {
+      background: #be123c;
+    }
+    .btn-disabled {
+      background: #f1f5f9 !important;
+      color: #94a3b8 !important;
+      border: 1px solid #cbd5e1 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+    }
+    .input-group {
+      margin-bottom: 10px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+    .input-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      font-size: 13px;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    .input-control:focus {
+      outline: none;
+      border-color: #0284c7;
+      background: #ffffff;
+    }
+
+    /* Room Status Bar */
+    .room-status-bar {
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-width: 1px;
+      border-style: solid;
+    }
+    .room-status-bar.both-closed {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+    .room-status-bar.both-open {
+      background: #ecfdf5;
+      border-color: #6ee7b7;
+      color: #065f46;
+    }
+    .room-status-bar.partial {
+      background: #f0f9ff;
+      border-color: #7dd3fc;
+      color: #0369a1;
+    }
+
+    /* 2 Exam Cards Grid */
+    .exam-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (min-width: 768px) {
+      .exam-cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .exam-set-card {
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #bae6fd;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.05);
+      transition: all 0.2s;
+    }
+    .exam-set-card.card-exam-1 {
+      border-color: #bfdbfe;
+      background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    }
+    .exam-set-card.card-exam-2 {
+      border-color: #a7f3d0;
+      background: linear-gradient(135deg, #f8fafc 0%, #ecfdf5 100%);
+    }
+
+    /* Proctor Bar */
+    .proctor-bar {
+      background: #ffffff;
+      border: 1px solid #bae6fd;
+      border-radius: 16px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .timer {
+      font-family: monospace;
+      font-weight: 800;
+      font-size: 15px;
+      color: #0369a1;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      padding: 4px 10px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .strikes {
+      display: flex;
+      gap: 4px;
+    }
+    .strike-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 6px;
+      border-radius: 8px;
+      font-family: monospace;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #94a3b8;
+    }
+    .strike-badge.active {
+      background: #f59e0b;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+    .strike-badge.active.final {
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #be123c;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Horizontal Slider */
+    .slider-track {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .slider-btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid #bae6fd;
+      background: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0369a1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slider-btn.current {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .slider-btn.done {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+    }
+    .slider-btn.forfeited {
+      background: #ffe4e6;
+      color: #e11d48;
+      border-color: #fda4af;
+      text-decoration: line-through;
+    }
+
+    /* Question Box */
+    .q-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #64748b;
+    }
+    .q-tag {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .q-pts {
+      font-family: monospace;
+      font-weight: 700;
+      color: #0284c7;
+      background: #f0f9ff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid #bae6fd;
+    }
+    .q-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    /* Multiple Choice Options */
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.15s ease;
+      font-size: 13px;
+    }
+    .option-item:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+    .option-item.selected {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0c4a6e;
+      font-weight: 600;
+    }
+    .option-item.forfeited {
+      background: #fff1f2;
+      border-color: #f43f5e;
+      color: #881337;
+    }
+    .opt-letter {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 800;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .option-item.selected .opt-letter {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    /* True/False Statements */
+    .context-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #bae6fd;
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #0369a1;
+      line-height: 1.5;
+    }
+    .tf-row {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .tf-text {
+      margin-bottom: 6px;
+      color: #1e293b;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .tf-btns {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    .tf-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      cursor: pointer;
+    }
+    .tf-btn.active-true {
+      background: #16a34a;
+      color: #ffffff;
+      border-color: #16a34a;
+    }
+    .tf-btn.active-false {
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #e11d48;
+    }
+
+    /* Forfeited Alert */
+    .forfeited-banner {
+      background: #ffe4e6;
+      border: 1px solid #fecdd3;
+      color: #9f1239;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Anti-Cheat Watermark Shield */
+    .watermark-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-content: space-around;
+      opacity: 0.05;
+      font-weight: 900;
+      font-size: 16px;
+      color: #0369a1;
+      transform: rotate(-15deg);
+      user-select: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Obscured Shield when blurred */
+    .blur-shield {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 25;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    /* Bottom sticky bar on mobile */
+    .mobile-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #bae6fd;
+      padding: 8px 12px;
+      display: flex;
+      gap: 8px;
+      z-index: 35;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    }
+    @media (min-width: 600px) {
+      .mobile-bar {
+        display: none;
+      }
+    }
+
+    /* Floating Simulation Dock */
+    .sim-dock {
+      position: fixed;
+      bottom: 60px;
+      right: 10px;
+      background: #ffffff;
+      border: 1px solid #bae6fd;
+      border-radius: 14px;
+      padding: 8px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 40;
+      font-size: 11px;
+      max-width: 200px;
+    }
+    @media (min-width: 600px) {
+      .sim-dock {
+        bottom: 14px;
+        right: 14px;
+      }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      z-index: 50;
+    }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 480px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* Result Box */
+    .result-score-badge {
+      font-size: 40px;
+      font-weight: 900;
+      font-family: monospace;
+      color: #0284c7;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .result-score-badge.danger {
+      color: #e11d48;
+    }
+
+    /* Print styling */
+    @media print {
+      header, .mobile-bar, .sim-dock, .btn, .header-actions {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+      }
+      .card {
+        box-shadow: none !important;
+        border: 1px solid #000000 !important;
+      }
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=6634132a"></script></head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">🛡️</div>
+        <div>
+          <div style="display:flex; align-items:center;">
+            <span class="brand-title">EduSecure</span>
+            <span class="badge-offline">Bản Offline 2 Bộ Đề</span>
+          </div>
+          <div style="font-size:10px; color:#64748b;">Hệ thống thi trắc nghiệm chống gian lận & thoát tab</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div id="student-badge" class="hidden" style="font-size:11px; background:#f0f9ff; padding:4px 8px; border-radius:8px; border:1px solid #bae6fd;">
+          <span id="badge-name" style="font-weight:700;">Học sinh</span>
+        </div>
+        <button id="btn-open-teacher-modal" class="btn-teacher-portal">
+          👩‍🏫 Quản lý phòng thi
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- VIEW 1: LOBBY -->
+    <div id="view-lobby">
+      <div class="hero">
+        <h1>Phòng Khảo Thí Trắc Nghiệm Công Nghệ 10</h1>
+        <p>Hệ thống hỗ trợ 2 bộ đề thi riêng biệt: <strong>Đề 1 (KTTX 9 câu • 10 phút • 10.0đ)</strong> và <strong>Đề 2 (Test Nhanh 5 câu • 5 phút • 5.0đ)</strong>. Giáo viên có quyền tắt/mở từng đề thi độc lập.</p>
+
+        <div class="rules-grid">
+          <div class="rule-box">
+            <div class="rule-num">1</div>
+            <div>
+              <strong>Thoát màn hình / Chụp màn hình</strong>
+              <div style="color:#bae6fd; font-size:10px;">Phạt SAI (0 điểm) câu hỏi hiện tại ngay lập tức.</div>
+            </div>
+          </div>
+          <div class="rule-box">
+            <div class="rule-num">2</div>
+            <div>
+              <strong>Đến lần thứ 3 vi phạm</strong>
+              <div style="color:#bae6fd; font-size:10px;">Đình chỉ thi ngay, thu bài và tính 0 ĐIỂM toàn bài.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate registration form -->
+      <div class="card">
+        <h2 style="font-size:14px; font-weight:800; margin-bottom:12px; color:#0f172a;">
+          Thông Tin Thí Sinh Dự Thi (4 Lớp: 10C05, 10C06, 10C07, 10C08)
+        </h2>
+
+        <div class="input-group">
+          <label>1. Chọn Lớp học:</label>
+          <select id="select-class" class="input-control" style="background:#f0f9ff; font-weight:700;">
+            <option value="10C05">Lớp 10C05 (46 học sinh)</option>
+            <option value="10C06">Lớp 10C06 (48 học sinh)</option>
+            <option value="10C07">Lớp 10C07 (48 học sinh)</option>
+            <option value="10C08">Lớp 10C08 (47 học sinh)</option>
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:8px;">
+          <div class="input-group">
+            <label>2. Nhập Mã số / STT (VD: 15):</label>
+            <input type="number" id="input-code-num" class="input-control" placeholder="VD: 15" min="1" style="background:#f0f9ff; font-weight:800; border:2px solid #0284c7; font-size:14px; margin-bottom:4px;">
+            <select id="select-code" class="input-control" style="background:#f8fafc; font-size:11px; padding:4px;">
+            </select>
+          </div>
+          <div class="input-group">
+            <label>3. Họ và tên học sinh:</label>
+            <input type="text" id="input-name" class="input-control" readonly style="background:#f8fafc; font-weight:700; color:#0f172a;" placeholder="Tự động hiện tên khi nhập số">
+            <span id="name-status" style="font-size:10px; color:#16a34a; font-weight:600; margin-top:2px; display:block;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Room Status Banner -->
+      <div id="room-status-banner" class="room-status-bar both-open">
+        <span id="room-status-indicator" style="width:10px; height:10px; border-radius:999px; background:#10b981; flex-shrink:0;"></span>
+        <div id="room-status-text">
+          <strong>Cả 2 bộ đề đang mở:</strong> Giáo viên đã mở quyền vào thi cho cả 2 đề. Học sinh chọn bộ đề bên dưới để bắt đầu.
+        </div>
+      </div>
+
+      <!-- 2 Dedicated Exam Selection Cards -->
+      <div style="margin-top:14px;">
+        <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+          <span>📋</span> Danh Sách 2 Bộ Đề Thi Trực Tuyến
+        </h3>
+
+        <div class="exam-cards-grid">
+          
+          <!-- BỘ ĐỀ 1 -->
+          <div class="exam-set-card card-exam-1">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:10px; font-weight:900; text-transform:uppercase; background:#0284c7; color:#ffffff; padding:2px 8px; border-radius:999px;">
+                  Bộ Đề Số 1
+                </span>
+                <span id="exam1-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                  Đang Mở
+                </span>
+              </div>
+              <h4 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:4px;">
+                KTTX Bài 3 & 4 (Chuẩn Ma Trận)
+              </h4>
+              <p style="font-size:12px; color:#475569; margin-bottom:10px; line-height:1.4;">
+                Đề kiểm tra thường xuyên 9 câu: 8 câu trắc nghiệm nhiều lựa chọn (3 biết, 3 hiểu, 2 vận dụng) + 1 câu Đúng/Sai 4 ý có bối cảnh thực tế.
+              </p>
+
+              <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:11px; margin-bottom:12px;">
+                <span style="background:#ffffff; border:1px solid #bae6fd; padding:3px 8px; border-radius:8px; font-weight:700; color:#0369a1;">
+                  ⏱️ 10 phút
+                </span>
+                <span style="background:#ffffff; border:1px solid #bae6fd; padding:3px 8px; border-radius:8px; font-weight:700; color:#059669;">
+                  🎯 Thang 10.0đ
+                </span>
+                <span style="background:#ffffff; border:1px solid #bae6fd; padding:3px 8px; border-radius:8px; font-weight:700; color:#4338ca;">
+                  📝 9 câu hỏi
+                </span>
+              </div>
+            </div>
+
+            <div style="margin-top:8px;">
+              <div id="exam1-closed-alert" class="hidden" style="font-size:11px; color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:6px 10px; border-radius:8px; margin-bottom:8px; font-weight:600;">
+                ⚠️ Giáo viên hiện đang tạm khóa Đề 1. Vui lòng chờ giáo viên mở phòng thi!
+              </div>
+              <button id="btn-start-exam-1" class="btn btn-primary" style="padding:12px; font-weight:800;">
+                🚀 Vào Thi Đề 1 (9 Câu Ngẫu Nhiên)
+              </button>
+            </div>
+          </div>
+
+          <!-- BỘ ĐỀ 2 -->
+          <div class="exam-set-card card-exam-2">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:10px; font-weight:900; text-transform:uppercase; background:#059669; color:#ffffff; padding:2px 8px; border-radius:999px;">
+                  Bộ Đề Số 2 • Test Nhanh
+                </span>
+                <span id="exam2-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                  Đang Mở
+                </span>
+              </div>
+              <h4 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:4px;">
+                Test Nhanh 5 Câu (Chuẩn File PDF)
+              </h4>
+              <p style="font-size:12px; color:#475569; margin-bottom:10px; line-height:1.4;">
+                Bài kiểm tra nhanh 5 câu trắc nghiệm bốc ngẫu nhiên từ file test nhanh 5cau: 2 nhận biết, 2 thông hiểu, 1 vận dụng.
+              </p>
+
+              <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:11px; margin-bottom:12px;">
+                <span style="background:#ffffff; border:1px solid #a7f3d0; padding:3px 8px; border-radius:8px; font-weight:700; color:#047857;">
+                  ⏱️ 5 phút
+                </span>
+                <span style="background:#ffffff; border:1px solid #a7f3d0; padding:3px 8px; border-radius:8px; font-weight:700; color:#059669;">
+                  🎯 Thang 5.0đ
+                </span>
+                <span style="background:#ffffff; border:1px solid #a7f3d0; padding:3px 8px; border-radius:8px; font-weight:700; color:#0f766e;">
+                  ⚡ 5 câu hỏi
+                </span>
+              </div>
+            </div>
+
+            <div style="margin-top:8px;">
+              <div id="exam2-closed-alert" class="hidden" style="font-size:11px; color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:6px 10px; border-radius:8px; margin-bottom:8px; font-weight:600;">
+                ⚠️ Giáo viên hiện đang tạm khóa Đề 2. Vui lòng chờ giáo viên mở phòng thi!
+              </div>
+              <button id="btn-start-exam-2" class="btn btn-emerald" style="padding:12px; font-weight:800;">
+                ⚡ Vào Thi Đề 2 (Test Nhanh 5 Câu)
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VIEW 2: ACTIVE EXAM -->
+    <div id="view-exam" class="hidden">
+      <!-- Proctoring Header Bar -->
+      <div class="proctor-bar">
+        <div>
+          <span id="exam-badge-type" style="font-size:10px; color:#0284c7; font-weight:800; text-transform:uppercase; display:block;">ĐỀ THI ĐANG LÀM</span>
+          <div class="timer">
+            <span>⏱️</span>
+            <span id="timer-text">10:00</span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; color:#64748b; font-weight:700; display:block; text-align:right;">VI PHẠM (TỐI ĐA 3)</span>
+          <div class="strikes">
+            <div id="strike-1" class="strike-badge">1/3</div>
+            <div id="strike-2" class="strike-badge">2/3</div>
+            <div id="strike-3" class="strike-badge">3/3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal Question Slider -->
+      <div id="slider-track" class="slider-track"></div>
+
+      <!-- Question Card -->
+      <div class="card" style="min-height:280px;">
+        <div id="watermark-layer" class="watermark-layer"></div>
+        <div id="blur-shield" class="blur-shield hidden">
+          <div style="font-size:28px; margin-bottom:6px;">⚠️</div>
+          <strong style="color:#0f172a; font-size:14px;">Màn Hình Đang Tạm Khóa</strong>
+          <p style="font-size:11px; color:#64748b; margin-top:4px; max-width:280px;">
+            Phát hiện chuyển tab hoặc thao tác chụp màn hình. Nội dung câu hỏi đã tự động làm mờ để bảo mật.
+          </p>
+          <button id="btn-unblur" class="btn btn-primary" style="margin-top:10px; width:auto; padding:6px 16px; font-size:11px;">
+            Chạm để tiếp tục
+          </button>
+        </div>
+
+        <div id="forfeit-banner" class="forfeited-banner hidden">
+          <span>🚨</span>
+          <span>Câu này đã bị PHẠT 0 ĐIỂM do thí sinh vi phạm thoát màn hình / chụp màn hình.</span>
+        </div>
+
+        <div class="q-meta">
+          <span id="q-level-tag" class="q-tag">Nhận biết</span>
+          <span id="q-points-tag" class="q-pts">1.0 điểm</span>
+        </div>
+
+        <h2 id="q-title" class="q-title">Nội dung câu hỏi...</h2>
+
+        <!-- Context Box for Question 9 in Exam 1 -->
+        <div id="q-context-box" class="context-box hidden"></div>
+
+        <!-- Options Container for Multiple Choice -->
+        <div id="mc-options-container"></div>
+
+        <!-- Options Container for True / False -->
+        <div id="tf-options-container" class="hidden"></div>
+
+        <!-- Prev / Next Desktop Buttons -->
+        <div id="desktop-nav" style="display:flex; justify-content:space-between; margin-top:16px; padding-top:12px; border-top:1px solid #f1f5f9;">
+          <button id="btn-prev" class="btn btn-secondary" style="width:auto; padding:8px 16px;">← Câu trước</button>
+          <button id="btn-submit-desktop" class="btn btn-danger" style="width:auto; padding:8px 20px;">Nộp bài thi</button>
+          <button id="btn-next" class="btn btn-primary" style="width:auto; padding:8px 16px;">Câu sau →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: RESULT -->
+    <div id="view-result" class="hidden">
+      <div class="card" style="text-align:center;">
+        <span id="result-status-tag" style="display:inline-block; font-size:11px; font-weight:800; padding:4px 12px; border-radius:999px; margin-bottom:6px;">
+          HOÀN THÀNH BÀI THI
+        </span>
+        <h2 id="result-name" style="font-size:18px; font-weight:800; color:#0f172a;">Nguyễn Văn An</h2>
+        <div id="result-meta" style="font-size:12px; color:#64748b;">SBD: 15 • Lớp 10C05 • Đề 1</div>
+
+        <div id="result-score-box" class="result-score-badge">0.0/10</div>
+
+        <div id="disqualified-box" class="hidden" style="background:#ffe4e6; border:1px solid #fecdd3; color:#9f1239; padding:10px; border-radius:12px; font-size:12px; font-weight:700; margin:10px 0;">
+          🚨 BÀI THI BỊ ĐÌNH CHỈ: Thí sinh đã thoát màn hình 3 lần theo quy chế. Toàn bộ bài thi bị hủy điểm (0 điểm).
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; text-align:left;">
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:10px;">
+            <div style="font-size:10px; color:#64748b;">Số câu đúng:</div>
+            <strong id="res-correct" style="font-size:15px; color:#16a34a; font-family:monospace;">0/9 câu</strong>
+          </div>
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:10px;">
+            <div style="font-size:10px; color:#64748b;">Số lần vi phạm:</div>
+            <strong id="res-violations" style="font-size:15px; color:#e11d48; font-family:monospace;">0 lần</strong>
+          </div>
+        </div>
+
+        <!-- Google Sheets Sync Row Box -->
+        <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:12px; margin-top:14px; text-align:left;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <strong style="color:#065f46; font-size:12px;">📊 Bảng Điểm Sheet DANH SACH HS & KET QUA TX</strong>
+            <span style="font-size:10px; font-family:monospace; background:#ffffff; border:1px solid #6ee7b7; padding:2px 6px; border-radius:6px; color:#047857;">ID: 1DTIBxYMavsb...</span>
+          </div>
+          <p style="font-size:11px; color:#064e3b; margin-bottom:8px;">
+            Dữ liệu bài thi đã sẵn sàng để dán trực tiếp vào sheet <strong>DANH SACH HS</strong> hoặc <strong>KET QUA KIEM TRA TX</strong>.
+          </p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button id="btn-copy-sheet-row" class="btn btn-secondary" style="font-size:11px; padding:6px 12px; background:#ffffff; width:auto;">
+              📋 Sao Chép Dòng Điểm Vào Sheet
+            </button>
+            <a href="https://docs.google.com/spreadsheets/d/1DTIBxYMavsb2tF56hJLPeT4n3n7YTBKB6ckpjDzSrOs" target="_blank" class="btn btn-primary" style="font-size:11px; padding:6px 12px; text-decoration:none; display:inline-flex; align-items:center; width:auto;">
+              ↗ Mở Google Sheet DANH SACH HS
+            </a>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px; margin-top:14px;">
+          <button id="btn-retake" class="btn btn-primary">Thi Lại (Đề Mới)</button>
+          <button id="btn-back-lobby" class="btn btn-secondary">Đổi Bộ Đề Khác</button>
+          <button onclick="window.print()" class="btn btn-secondary" style="width:auto;">In Điểm</button>
+        </div>
+      </div>
+
+      <!-- Detailed Review List -->
+      <div id="review-list"></div>
+    </div>
+
+  </div>
+
+  <!-- STICKY BOTTOM BAR FOR MOBILE -->
+  <div id="mobile-bar" class="mobile-bar" style="display:none;">
+    <button id="m-btn-prev" class="btn btn-secondary" style="flex:1;">← Trước</button>
+    <button id="m-btn-next" class="btn btn-secondary" style="flex:1;">Sau →</button>
+    <button id="m-btn-submit" class="btn btn-danger" style="flex:1.2;">Nộp bài</button>
+  </div>
+
+  <!-- FLOATING SIMULATION DOCK FOR PROCTOR TESTING -->
+  <div id="sim-dock" class="sim-dock hidden">
+    <div style="font-weight:800; color:#0369a1; margin-bottom:4px; font-size:10px;">🧪 TEST GIÁM SÁT:</div>
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <button id="btn-sim-exit" style="background:#ffe4e6; border:1px solid #fecdd3; color:#9f1239; padding:4px 6px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">
+        🚨 Test: Thoát App
+      </button>
+      <button id="btn-sim-shot" style="background:#e0f2fe; border:1px solid #bae6fd; color:#0369a1; padding:4px 6px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">
+        📱 Test: Chụp Màn Hình
+      </button>
+    </div>
+  </div>
+
+  <!-- ALERT MODAL -->
+  <div id="alert-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div style="font-size:32px; text-align:center; margin-bottom:6px;">🚨</div>
+      <h3 id="modal-title" style="font-size:15px; font-weight:800; text-align:center; color:#9f1239; margin-bottom:6px;">
+        CẢNH BÁO VI PHẠM PHÒNG THI!
+      </h3>
+      <div id="modal-desc" style="font-size:12px; color:#475569; text-align:center; margin-bottom:12px; line-height:1.4;">
+        Thí sinh đã rời khỏi màn hình bài thi.
+      </div>
+      <div id="modal-penalty" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; padding:8px 10px; border-radius:10px; font-size:11px; font-weight:700; text-align:center; margin-bottom:14px;">
+        Đánh dấu câu hỏi hiện tại là SAI (0 điểm).
+      </div>
+      <button id="btn-modal-ack" class="btn btn-danger">Tôi Đã Hiểu Và Tiếp Tục</button>
+    </div>
+  </div>
+
+  <!-- TEACHER PORTAL MODAL (TẮT / MỞ RIÊNG TỪNG BỘ ĐỀ) -->
+  <div id="teacher-modal" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width:540px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">👩‍🏫</span>
+          <h3 style="font-size:16px; font-weight:800; color:#0f172a;">Bàn Điều Khiển Giáo Viên</h3>
+        </div>
+        <button id="btn-close-teacher-modal" style="background:none; border:none; font-size:20px; color:#64748b; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Password Lock Screen for Teacher -->
+      <div id="teacher-auth-box">
+        <p style="font-size:12px; color:#475569; margin-bottom:10px;">
+          Vui lòng nhập mật khẩu quản lý để cấu hình tắt/mở từng bộ đề thi:
+        </p>
+        <div class="input-group">
+          <label>Mật khẩu giáo viên:</label>
+          <input type="password" id="teacher-password-input" class="input-control" placeholder="Mặc định: giaovien123" style="font-family:monospace; font-size:14px;">
+        </div>
+        <span id="teacher-login-error" style="font-size:11px; color:#e11d48; font-weight:700; display:block; margin-bottom:8px;"></span>
+        <button id="btn-teacher-login" class="btn btn-primary">Xác Nhận Đăng Nhập</button>
+      </div>
+
+      <!-- Authenticated Teacher Control Panel -->
+      <div id="teacher-panel-content" class="hidden">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; background:#f0f9ff; padding:8px 12px; border-radius:12px; border:1px solid #bae6fd;">
+          <div>
+            <strong style="color:#0369a1; font-size:12px;">Điều khiển tắt / mở riêng từng đề thi</strong>
+            <div style="font-size:10px; color:#64748b;">Học sinh ở sảnh sẽ cập nhật trạng thái ngay lập tức</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button id="btn-toggle-all-open" class="btn btn-emerald" style="padding:4px 8px; font-size:10px; width:auto;">Mở cả 2 đề</button>
+            <button id="btn-toggle-all-close" class="btn btn-danger" style="padding:4px 8px; font-size:10px; width:auto;">Tắt cả 2 đề</button>
+          </div>
+        </div>
+
+        <!-- Toggle Item: Đề 1 -->
+        <div style="background:#ffffff; border:1px solid #bfdbfe; border-radius:14px; padding:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
+              <span style="font-size:10px; font-weight:800; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:6px;">ĐỀ 1</span>
+              <strong style="font-size:13px; color:#0f172a;">KTTX Bài 3 & 4 (9 câu • 10đ)</strong>
+            </div>
+            <div id="t-exam1-status-label" style="font-size:11px; font-weight:700; color:#15803d;">
+              ● Đang Mở Cho Học Sinh Thi
+            </div>
+          </div>
+          <button id="btn-toggle-t-exam1" class="btn btn-danger" style="width:auto; padding:8px 14px; font-size:11px;">
+            Tắt Đề 1 (Khóa)
+          </button>
+        </div>
+
+        <!-- Toggle Item: Đề 2 -->
+        <div style="background:#ffffff; border:1px solid #a7f3d0; border-radius:14px; padding:12px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
+              <span style="font-size:10px; font-weight:800; background:#dcfce7; color:#065f46; padding:2px 6px; border-radius:6px;">ĐỀ 2</span>
+              <strong style="font-size:13px; color:#0f172a;">Test Nhanh 5 Câu (5 câu • 5đ)</strong>
+            </div>
+            <div id="t-exam2-status-label" style="font-size:11px; font-weight:700; color:#15803d;">
+              ● Đang Mở Cho Học Sinh Thi
+            </div>
+          </div>
+          <button id="btn-toggle-t-exam2" class="btn btn-danger" style="width:auto; padding:8px 14px; font-size:11px;">
+            Tắt Đề 2 (Khóa)
+          </button>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px; font-size:11px; color:#475569;">
+          <strong>💡 Ghi chú dành cho Giáo Viên:</strong>
+          <ul style="padding-left:18px; margin-top:4px; line-height:1.5;">
+            <li>Khi chọn <strong>"Tắt"</strong>, nút ở màn hình học sinh đổi thành <em>"Chưa được vào thi"</em> màu xám và bị vô hiệu hóa.</li>
+            <li>Trạng thái lưu tự động vào thiết bị và đồng bộ tức thì trên tất cả các tab trình duyệt.</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:12px; display:flex; justify-content:flex-end;">
+          <button id="btn-done-teacher" class="btn btn-secondary" style="width:auto; padding:6px 16px;">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DATA & ENGINE -->
+  <script>
+    // =========================================================================
+    // 1. NGÂN HÀNG CÂU HỎI ĐỀ 1: 80 CÂU TRẮC NGHIỆM + 10 CÂU ĐÚNG/SAI (BÀI 3 & 4)
+    // =========================================================================
+    const RAW_MC_BANK = [
+      { id:1, l:'nhan_biet', q:'Công nghệ luyện kim là công nghệ điều chế kim loại hoặc hợp kim phục vụ sản xuất từ nguồn nguyên liệu nào?', opts:['Các loại quặng tự nhiên hoặc nguyên liệu tái chế chứa kim loại','Các dung dịch hóa chất tổng hợp trong phòng thí nghiệm','Sản phẩm polyme biến tính và chất dẻo công nghiệp','Các loại khoáng sản phi kim và đá vôi silicat'], exp:'Luyện kim điều chế kim loại từ quặng tự nhiên hoặc phế liệu tái chế.' },
+      { id:2, l:'nhan_biet', q:'Theo phân loại sản phẩm tạo ra, công nghệ luyện kim đen có sản phẩm chủ yếu là gì?', opts:['Gang và thép','Nhôm và hợp kim nhôm','Đồng và đồng thau','Thiếc và titan'], exp:'Sản phẩm chủ yếu của luyện kim đen là gang và thép.' },
+      { id:3, l:'nhan_biet', q:'Sản phẩm nào dưới đây là sản phẩm trực tiếp của công nghệ luyện kim màu?', opts:['Thỏi đồng nguyên chất và phôi nhôm','Thỏi gang trắng và gang xám','Thép dầm định hình chữ I','Thép cuộn cán nóng xây dựng'], exp:'Luyện kim màu tạo ra đồng, nhôm, thiếc, chì và hợp kim của chúng.' },
+      { id:4, l:'nhan_biet', q:'Bản chất kỹ thuật của công nghệ đúc kim loại là quá trình:', opts:['Rót kim loại lỏng vào lòng khuôn có hình dạng chi tiết rồi chờ đông đặc','Nung nóng phôi kim loại đến trạng thái dẻo rồi dùng búa rèn ép','Dùng dụng cụ cắt gọt để bóc tách các lớp phoi trên bề mặt phôi','Nung chảy cục bộ mép chi tiết kết hợp dùng kim loại bù để nối vĩnh viễn'], exp:'Đúc là rót kim loại lỏng vào lòng khuôn và chờ đông đặc.' },
+      { id:5, l:'thong_hieu', q:'Công nghệ đúc ly tâm thường được ứng dụng tối ưu nhất để chế tạo các sản phẩm có đặc điểm cấu trúc nào?', opts:['Các chi tiết dạng rỗng xoay như ống cống bê tông cốt thép, ống dẫn kim loại','Các chi tiết tấm phẳng có bề dày cực mỏng dưới 0.1 mm','Các bánh răng có răng nghiêng phức tạp không có lỗ ở tâm','Các hoa văn trang trí hình dạng bất cân đối trên cổng sắt'], exp:'Đúc ly tâm dựa vào lực quán tính ly tâm ép kim loại lỏng vào thành khuôn quay tạo vật rỗng xoay.' },
+      { id:6, l:'nhan_biet', q:'Bản chất của công nghệ gia công cắt gọt kim loại là:', opts:['Lấy đi một phần kim loại thừa của phôi dưới dạng phoi nhờ dụng cụ cắt','Làm biến dạng dẻo kim loại phôi ở trạng thái nóng hoặc nguội','Thiêu kết các bột kim loại dưới áp suất và nhiệt độ cao','Dùng dòng điện điện phân để làm tan chảy bề mặt kim loại'], exp:'Gia công cắt gọt bóc tách lớp kim loại thừa dưới dạng phoi.' },
+      { id:7, l:'nhan_biet', q:'Phương pháp gia công nào sau đây KHÔNG thuộc nhóm gia công cắt gọt cơ bản?', opts:['Phương pháp cán định hình','Phương pháp tiện tròn xoay','Phương pháp phay mặt phẳng và rãnh','Phương pháp mài bóng bề mặt'], exp:'Cán là gia công áp lực, không phải cắt gọt.' },
+      { id:8, l:'nhan_biet', q:'Công nghệ gia công áp lực dựa trên tính chất cơ học cốt lõi nào của kim loại?', opts:['Tính biến dạng dẻo khi chịu tác dụng của ngoại lực','Tính nóng chảy lỏng ở nhiệt độ cao','Tính dẫn điện và dẫn nhiệt tốt','Tính chống ăn mòn hóa học trong không khí'], exp:'Gia công áp lực lợi dụng tính biến dạng dẻo của kim loại.' },
+      { id:9, l:'nhan_biet', q:'Các phương pháp điển hình thuộc công nghệ gia công áp lực kim loại bao gồm:', opts:['Cán, kéo, rèn và dập','Tiện, phay, bào và mài','Đúc cát, đúc ly tâm và đúc áp lực','Hàn hồ quang, hàn hơi và hàn MAG'], exp:'Gia công áp lực gồm cán, kéo, rèn và dập.' },
+      { id:10, l:'nhan_biet', q:'Công nghệ nối các chi tiết kim loại lại với nhau thành một khối không thể tháo rời được gọi là:', opts:['Công nghệ hàn','Công nghệ đúc','Công nghệ tiện','Công nghệ dập nguội'], exp:'Hàn tạo liên kết liền khối không tháo rời.' },
+      { id:11, l:'nhan_biet', q:'Trong công nghệ hàn, phương pháp hàn nóng chảy thực hiện việc liên kết chi tiết nhờ:', opts:['Nung nóng cục bộ vị trí nối đến trạng thái nóng chảy hoàn toàn','Nung chi tiết đến trạng thái dẻo rồi dùng lực ép cơ học rất lớn','Dùng keo dán công nghiệp phủ lên bề mặt mối ghép ở nhiệt độ phòng','Siết chặt bu lông và đai ốc xuyên qua lỗ gia công sẵn'], exp:'Hàn nóng chảy nung chảy mép nối để kim loại hòa tan vào nhau.' },
+      { id:12, l:'nhan_biet', q:'Nhà máy điện nào vận hành dựa trên nguyên lý chuyển hóa thế năng của dòng nước thành năng lượng quay tuabin phát điện?', opts:['Nhà máy thủy điện','Nhà máy nhiệt điện than','Nhà máy điện hạt nhân','Nhà máy điện mặt trời'], exp:'Thủy điện biến thế năng dòng nước thành điện năng.' },
+      { id:13, l:'nhan_biet', q:'Công nghệ điện - quang là công nghệ thực hiện việc biến đổi năng lượng nào?', opts:['Biến đổi điện năng thành quang năng','Biến đổi quang năng thành điện năng','Biến đổi điện năng thành nhiệt năng','Biến đổi cơ năng thành điện năng'], exp:'Điện - quang biến đổi điện năng thành ánh sáng.' },
+      { id:14, l:'nhan_biet', q:'Bóng đèn LED (Light Emitting Diode) phát sáng dựa trên nguyên lý kỹ thuật nào?', opts:['Cho dòng điện một chiều chạy qua diode bán dẫn làm phát quang','Dùng dòng điện nung nóng dây tóc vonfram đến nhiệt độ cao phát sáng','Dùng tia cực tím phóng điện qua khí thủy ngân kích hoạt bột huỳnh quang','Dùng phản ứng hóa học phát quang giữa hai dung dịch chất lỏng'], exp:'Đèn LED phát quang tại tiếp giáp p-n của chất bán dẫn.' },
+      { id:15, l:'nhan_biet', q:'Thiết bị nào sau đây đại diện cho ứng dụng công nghệ điện - cơ ở dạng chuyển động quay?', opts:['Quạt điện gia đình','Van điện từ đóng mở nước','Rơ le điện từ ngắt mạch','Chuông điện báo động rung tịnh tiến'], exp:'Quạt điện dùng động cơ quay tròn.' },
+      { id:16, l:'nhan_biet', q:'Sáng chế rơ le (relay) điện từ do nhà khoa học Joseph Henry thực hiện vào năm nào?', opts:['Năm 1835','Năm 1879','Năm 1934','Năm 1999'], exp:'Joseph Henry phát minh rơ le điện từ năm 1835.' },
+      { id:17, l:'nhan_biet', q:'Mục đích chính của việc ứng dụng công nghệ điều khiển và tự động hóa trong sản xuất công nghiệp là:', opts:['Tự động hóa quá trình sản xuất nhằm tăng năng suất, giảm chi phí và nhân công','Thay thế hoàn toàn vật liệu kim loại bằng vật liệu nhựa nhiệt dẻo','Triệt tiêu hoàn toàn sự phụ thuộc vào nguồn năng lượng điện lưới','Sản xuất thủ công các sản phẩm có tính cá nhân hóa cao'], exp:'Tăng năng suất, giảm chi phí và bảo vệ con người.' },
+      { id:18, l:'nhan_biet', q:'Công nghệ truyền thông không dây thực hiện truyền tải dữ liệu qua khoảng cách nhờ môi trường nào?', opts:['Sóng điện từ lan truyền trong không gian','Mạng cáp quang ngầm dưới mặt đất','Dây dẫn lõi đồng bọc nhựa cách điện','Dòng chảy chất lỏng thủy lực áp suất cao'], exp:'Sóng điện từ lan truyền không dây trong không gian.' },
+      { id:19, l:'nhan_biet', q:'Theo định nghĩa chuẩn kỹ thuật, thế nào là một "Công nghệ mới"?', opts:['Là công nghệ có giải pháp kỹ thuật phát triển hơn so với công nghệ hiện tại','Là công nghệ mới được phát minh trong vòng 24 giờ gần nhất','Là công nghệ chỉ sử dụng duy nhất các nguồn nguyên liệu sinh học','Là các công cụ gia công cơ khí cầm tay thủ công truyền thống'], exp:'Công nghệ mới có giải pháp kỹ thuật tiên tiến vượt trội.' },
+      { id:20, l:'nhan_biet', q:'Vật liệu nano là loại vật liệu có kích thước cấu trúc vi mô nằm trong khoảng nào?', opts:['Từ 1 đến 100 nanômét (nm)','Từ 1 đến 100 micrômét (µm)','Từ 1 đến 100 milimét (mm)','Từ 100 đến 1000 nanômét (nm)'], exp:'Kích thước hạt nano từ 1 đến 100 nm.' },
+      { id:21, l:'nhan_biet', q:'Trong chuỗi CAD/CAM/CNC, CAD được thực hiện trước để làm gì?', opts:['Tạo mô hình hoặc bản thiết kế chi tiết trên máy tính','Đúc ngay sản phẩm trong lò','Phát điện từ ánh sáng','Truyền dữ liệu qua Bluetooth'], exp:'Bước CAD thực hiện trước để tạo mô hình hoặc bản thiết kế chi tiết trên máy tính.' },
+      { id:22, l:'nhan_biet', q:'Sản phẩm đầu ra trực tiếp của quá trình phần mềm CAM (Computer Aided Manufacturing) là gì?', opts:['Quy trình công nghệ và chương trình/mã lệnh gia công điều khiển máy','Bản vẽ thiết kế 3D hoàn chỉnh trên màn hình máy tính','Chi tiết cơ khí bằng kim loại đã gia công xong trên máy','Sản phẩm mẫu bằng nhựa in 3D'], exp:'CAM xuất mã lệnh gia công điều khiển máy CNC.' },
+      { id:23, l:'nhan_biet', q:'Bản chất kỹ thuật của công nghệ in 3D (Additive Manufacturing) là gì?', opts:['Phân tách mô hình 3D thành các lớp 2D và in đắp dần tuần tự từng lớp vật liệu','Dùng dao cắt gọt bóc tách khối vật liệu thô từ ngoài vào trong','Nấu chảy vật liệu rồi ép vào khuôn đúc có áp suất lớn','Cán ép hai trục làm mỏng vật liệu nhựa thành dạng màng'], exp:'In 3D đắp từng lớp vật liệu 2D chồng lên nhau.' },
+      { id:24, l:'nhan_biet', q:'Độ nhẵn bề mặt của sản phẩm chế tạo bằng công nghệ in 3D phụ thuộc trực tiếp vào yếu tố kỹ thuật nào?', opts:['Độ dày của từng lớp in vật liệu xếp chồng lên nhau','Màu sắc nguyên bản của cuộn nhựa in','Độ ẩm tương đối của không khí phòng làm việc','Tốc độ quay của quạt làm mát nguồn điện máy in'], exp:'Độ dày lớp in càng mỏng thì bề mặt càng nhẵn mịn.' },
+      { id:25, l:'nhan_biet', q:'Nguồn năng lượng nào sau đây thuộc nhóm năng lượng tái tạo sạch?', opts:['Năng lượng gió, năng lượng mặt trời và năng lượng địa nhiệt','Năng lượng đốt cháy than đá Quảng Ninh','Năng lượng dầu mỏ thô khai thác ngoài khơi','Khí thiên nhiên hóa lỏng LNG'], exp:'Gió, mặt trời, địa nhiệt là năng lượng tái tạo.' },
+      { id:26, l:'nhan_biet', q:'Cụm từ viết tắt "AI" đại diện cho thuật ngữ công nghệ mới nào?', opts:['Artificial Intelligence (Trí tuệ nhân tạo)','Automated Internet (Internet tự động)','Applied Information (Thông tin ứng dụng)','Advanced Integration (Tích hợp cao cấp)'], exp:'AI = Artificial Intelligence.' },
+      { id:27, l:'nhan_biet', q:'Khái niệm Internet of Things (IoT) lần đầu tiên được đề xuất bởi nhà khoa học Kevin Ashton vào năm nào?', opts:['Năm 1999','Năm 1835','Năm 1879','Năm 1968'], exp:'Kevin Ashton đề xuất năm 1999.' },
+      { id:28, l:'nhan_biet', q:'Công nghệ Internet vạn vật (IoT) cho phép thực hiện chức năng cốt lõi nào?', opts:['Kết nối, thu thập và trao đổi dữ liệu giữa các máy móc, thiết bị qua internet','Tự động tổng hợp chất dinh dưỡng trong thực phẩm không cần nấu','Đun sôi trực tiếp nước sinh hoạt bằng sóng vô tuyến','Cắt gọt các tấm thép dày bằng tia laser công suất lớn'], exp:'Kết nối thu thập và chia sẻ dữ liệu vạn vật qua mạng.' },
+      { id:29, l:'nhan_biet', q:'Điểm khác biệt cốt lõi giữa Robot thông minh và Robot cơ khí truyền thống là gì?', opts:['Robot thông minh có "bộ não" AI có khả năng nhận thức và tự ra quyết định','Robot thông minh có kích thước chiều cao lớn gấp nhiều lần','Robot thông minh chỉ có thể di chuyển bằng hệ thống bánh xích','Robot thông minh vận hành không tiêu tốn bất kỳ nguồn điện nào'], exp:'Robot thông minh có AI và cảm biến nhận thức môi trường.' },
+      { id:30, l:'nhan_biet', q:'Kỹ sư luyện kim là chuyên gia được đào tạo chuyên sâu ở trình độ đại học thuộc ngành học nào?', opts:['Ngành Kỹ thuật vật liệu kim loại','Ngành Quản lý công nghiệp','Ngành Sư phạm Kỹ thuật','Ngành Khai thác địa chất khoáng sản'], exp:'Kỹ sư luyện kim thuộc ngành Kỹ thuật Vật liệu.' },
+      { id:31, l:'thong_hieu', q:'Sản phẩm ở dạng phôi thỏi của công nghệ luyện kim đen thường được chuyển tiếp sang phân xưởng nào?', opts:['Phân xưởng gia công cán thép hoặc phân xưởng đúc kim loại','Phân xưởng may mặc dệt da công nghiệp','Phân xưởng lắp ráp linh kiện vi mạch bán dẫn','Phân xưởng chế biến thực phẩm đóng hộp'], exp:'Phôi thỏi chuyển sang xưởng cán tạo thép hình hoặc đúc.' },
+      { id:32, l:'thong_hieu', q:'Ưu điểm nổi bật nhất của công nghệ đúc kim loại so với gia công cắt gọt là gì?', opts:['Chế tạo được các chi tiết có hình dạng kết cấu khoang rỗng bên trong rất phức tạp','Sản phẩm đúc luôn có độ bóng bề mặt như mài tinh mà không cần gia công lại','Không sinh ra bất kỳ lượng hao phí vật liệu hay xỉ kim loại nào','Không cần tiêu tốn năng lượng nhiệt để làm nóng chảy kim loại'], exp:'Đúc tạo được khoang rỗng phức tạp bên trong chi tiết.' },
+      { id:33, l:'thong_hieu', q:'Sự khác biệt kỹ thuật cơ bản giữa đúc áp lực và đúc ly tâm là gì?', opts:['Đúc áp lực dùng piston ép kim loại lỏng vào khuôn; đúc ly tâm dùng lực quay tạo lực quán tính','Đúc áp lực chỉ dùng cho chất dẻo; đúc ly tâm chỉ dùng cho gỗ','Đúc áp lực tạo ra sản phẩm dạng ống dài; đúc ly tâm tạo chi tiết hình hộp','Đúc áp lực thực hiện trong môi trường chân không; đúc ly tâm thực hiện dưới nước'], exp:'Đúc áp lực ép bằng piston; đúc ly tâm dùng lực quán tính quay.' },
+      { id:34, l:'thong_hieu', q:'Khi tiến hành tiện tròn xoay chi tiết trên máy tiện cơ khí, chuyển động cắt chính là:', opts:['Chuyển động quay tròn của phôi kim loại kẹp trên trục chính','Chuyển động tịnh tiến dọc của dao tiện','Chuyển động tịnh tiến ngang của bàn dao','Chuyển động nâng hạ chiều cao của tâm máy'], exp:'Chuyển động quay tròn của phôi là chuyển động cắt chính.' },
+      { id:35, l:'thong_hieu', q:'Để gia công một chi tiết dạng trục bậc có độ chính xác kích thước cao và bề mặt nhẵn bóng, phương pháp cắt gọt tinh cuối cùng là:', opts:['Gia công mài tròn tinh','Gia công bào thô mặt phẳng','Gia công cưa đứt phôi','Gia công đục kim loại bằng tay'], exp:'Mài tròn tinh đạt cấp chính xác và độ nhẵn bóng cao nhất.' },
+      { id:36, l:'thong_hieu', q:'Trong quá trình cán kim loại qua hai trục cán quay ngược chiều, kích thước phôi bị thay đổi ra sao?', opts:['Chiều dày của phôi giảm xuống, chiều dài và chiều rộng tăng lên','Chiều dày phôi tăng lên, chiều dài giảm xuống','Cả chiều dày và chiều dài đều giảm đi một nửa','Chiều dày không đổi, chỉ có đường kính phôi tăng lên'], exp:'Phôi bị ép mỏng chiều dày và kéo dài ra.' },
+      { id:37, l:'thong_hieu', q:'Công nghệ kéo kim loại qua lỗ khuôn kéo có ưu thế vượt trội nào trong sản xuất?', opts:['Chế tạo các sản phẩm dạng dây, thỏi hoặc ống có chiều dài không hạn chế','Nấu chảy kim loại nhanh chóng ở nhiệt độ phòng','Tạo ra các lỗ khoan sâu có đường kính cực lớn','Tăng độ cứng bề mặt chi tiết mà không làm thay đổi hình dạng'], exp:'Kéo tạo sợi dây kim loại dài liên tục không hạn chế.' },
+      { id:38, l:'thong_hieu', q:'Điểm khác biệt bản chất giữa "Hàn nóng chảy" và "Hàn áp lực" nằm ở:', opts:['Trạng thái kim loại tại mối nối (nóng chảy hoàn toàn vs trạng thái dẻo kết hợp ngoại lực ép)','Loại nguồn điện sử dụng (điện một chiều vs điện xoay chiều)','Loại vật liệu nối (hàn nóng chảy cho kim loại, hàn áp lực cho chất dẻo)','Môi trường thực hiện (trong phòng kín vs ngoài trời)'], exp:'Hàn nóng chảy đưa kim loại về lỏng; hàn áp lực nung dẻo kết hợp ép.' },
+      { id:39, l:'thong_hieu', q:'Trong công nghệ hàn MAG (Metal Active Gas), vai trò của khí bảo vệ (như CO2) là gì?', opts:['Bảo vệ kim loại vũng hàn nóng chảy khỏi bị oxy hóa bởi không khí xung quanh','Làm nguội đột ngột mối hàn để kim loại không bị chảy xệ','Tăng tốc độ cháy của hồ quang điện','Tẩy sạch các vết dầu mỡ bám trên bề mặt phôi'], exp:'Khí bảo vệ ngăn oxy và nitơ xâm nhập vũng hàn lỏng.' },
+      { id:40, l:'thong_hieu', q:'Điểm tương đồng về nguyên lý giữa Nhà máy nhiệt điện than và Nhà máy điện hạt nhân là:', opts:['Đều dùng nhiệt năng đun sôi nước tạo hơi áp suất cao làm quay tuabin phát điện','Đều sử dụng năng lượng phản ứng phân hạch hạt nhân urani','Đều không phát thải bất kỳ lượng khí nhà kính hay chất thải nào','Đều vận hành dựa trên thế năng dòng chảy của nước'], exp:'Cả hai đều đun sôi nước tạo hơi áp lực quay tuabin phát điện.' },
+      { id:41, l:'thong_hieu', q:'Lý do chính khiến đèn LED tiêu thụ ít điện năng hơn nhiều so với đèn sợi đốt cùng độ sáng là:', opts:['Đèn LED chuyển trực tiếp điện năng thành quang năng qua diode bán dẫn, tỏa rất ít nhiệt','Đèn LED sử dụng dây tóc có điện trở suất cực kỳ lớn','Đèn LED vận hành dựa trên nguyên lý phóng điện qua khí nén','Đèn LED chỉ hoạt động được khi có nguồn ánh sáng mặt trời chiếu vào'], exp:'LED biến trực tiếp điện thành quang năng, tỏa rất ít nhiệt.' },
+      { id:42, l:'thong_hieu', q:'Trình tự xuất hiện trong lịch sử của các công nghệ chiếu sáng điện từ cổ điển đến hiện đại là:', opts:['Đèn sợi đốt (1879) → Đèn huỳnh quang (1934) → Đèn LED (2006)','Đèn LED (1879) → Đèn sợi đốt (1934) → Đèn huỳnh quang (2006)','Đèn huỳnh quang (1879) → Đèn LED (1934) → Đèn sợi đốt (2006)','Đèn sợi đốt (1879) → Đèn LED (1934) → Đèn huỳnh quang (2006)'], exp:'Thứ tự: Đèn sợi đốt (1879) → Huỳnh quang (1934) → LED (2006).' },
+      { id:43, l:'thong_hieu', q:'Rơ le (relay) và van điện từ (solenoid valve) đều thuộc nhóm ứng dụng điện - cơ nào?', opts:['Điện - cơ dạng chuyển động tịnh tiến','Điện - cơ dạng chuyển động quay liên tục','Điện - cơ dạng dao động sóng âm','Điện - cơ dạng biến dạng nhiệt'], exp:'Cả hai dùng cuộn hút tạo chuyển động tịnh tiến thẳng.' },
+      { id:44, l:'thong_hieu', q:'Ý nghĩa quan trọng của chuỗi liên thông CAD/CAM/CNC trong chế tạo cơ khí chính xác là gì?', opts:['Giảm thời gian từ thiết kế đến sản xuất, tăng độ chính xác và tính tự động hóa cao','Triệt tiêu hoàn toàn nhu cầu sử dụng điện năng trong nhà máy','Thay thế hoàn toàn vai trò kiểm tra chất lượng của kỹ sư','Cho phép sản xuất các sản phẩm không cần phôi ban đầu'], exp:'Rút ngắn thời gian, tăng độ chính xác và tự động hóa cao.' },
+      { id:45, l:'thong_hieu', q:'Ưu điểm lớn nhất của công nghệ truyền thông không dây so với truyền thông có dây là gì?', opts:['Tính linh động và cơ động cao, kết nối các thiết bị di động không cần dây dẫn vật lý','Băng thông truyền dữ liệu luôn tuyệt đối vô hạn trong mọi điều kiện','Tín hiệu hoàn toàn không bao giờ bị suy hao khi gặp vật cản bê tông','Không đòi hỏi bất kỳ trạm phát sóng hay thiết bị thu phát nào'], exp:'Tính cơ động và linh hoạt không cần dây cáp vật lý.' },
+      { id:46, l:'thong_hieu', q:'Yếu tố cốt lõi giúp phân biệt một "công nghệ mới" với các công nghệ hiện hữu là:', opts:['Có giải pháp kỹ thuật tiên tiến vượt trội mang lại hiệu quả cao hơn về năng suất và chất lượng','Có chi phí đầu tư ban đầu luôn rẻ hơn các dụng cụ cầm tay','Bắt buộc phải áp dụng trong ngành công nghiệp phần mềm máy tính','Được phát minh bởi các công ty đa quốc gia tại Châu Âu'], exp:'Giải pháp kỹ thuật tiên tiến vượt trội nâng cao năng suất chất lượng.' },
+      { id:47, l:'thong_hieu', q:'Nguyên nhân cốt lõi khiến vật liệu ở cấp độ nano (1-100 nm) có tính chất cơ, lý, hóa biệt lập là do:', opts:['Tỉ lệ diện tích bề mặt trên thể tích tăng lên rất lớn cùng hiệu ứng lượng tử','Khối lượng riêng của vật liệu giảm về mức bằng không','Vật liệu nano không còn chịu tác dụng của gia tốc trọng trường','Các nguyên tử tự động biến đổi thành các hạt proton tự do'], exp:'Tỉ lệ diện tích/thể tích tăng vọt kết hợp hiệu ứng lượng tử.' },
+      { id:48, l:'thong_hieu', q:'Ứng dụng của hạt nano bạc (Ag NPs) trong sản xuất vải dệt may cao cấp dựa trên tính năng:', opts:['Khả năng diệt khuẩn, kháng khuẩn và diệt mùi hôi hiệu quả','Khả năng tự phát sáng trong môi trường bóng tối','Khả năng chống thấm nước tuyệt đối như màng ni-lông','Làm tăng khối lượng sợi vải để tăng độ cách nhiệt'], exp:'Nano bạc diệt khuẩn và khử mùi hôi hiệu quả.' },
+      { id:49, l:'thong_hieu', q:'Mối quan hệ kế thừa dữ liệu trong chu trình sản xuất hiện đại diễn ra theo trình tự chuẩn nào?', opts:['Bản vẽ thiết kế 3D (CAD) → Lập quy trình & mã lệnh (CAM) → Gia công tự động (CNC)','Gia công tự động (CNC) → Lập quy trình (CAM) → Bản vẽ thiết kế (CAD)','Lập quy trình (CAM) → Bản vẽ thiết kế (CAD) → Gia công tự động (CNC)','Bản vẽ thiết kế (CAD) → Gia công tự động (CNC) → Lập quy trình (CAM)'], exp:'CAD (thiết kế) → CAM (mã lệnh) → CNC (gia công).' },
+      { id:50, l:'thong_hieu', q:'Ưu thế vượt trội của việc thiết kế sản phẩm trên phần mềm CAD so với vẽ tay trên giấy là:', opts:['Dễ dàng chỉnh sửa, mô phỏng lực, phân tích kết cấu và xuất dữ liệu sang CAM','Không cần sử dụng màn hình máy tính hay nguồn điện','Đảm bảo bản vẽ không bao giờ bị sai sót về mặt tư duy con người','Tự động chế tạo ra sản phẩm thật mà không cần máy công cụ'], exp:'Dễ dàng mô phỏng, chỉnh sửa đa chiều và xuất dữ liệu số sang CAM.' },
+      { id:51, l:'thong_hieu', q:'Muốn nâng cao độ nhẵn bóng bề mặt của sản phẩm in 3D, kỹ sư cần điều chỉnh thông số nào?', opts:['Giảm chiều dày của mỗi lớp in (thiết lập lớp in mỏng hơn)','Tăng chiều dày của mỗi lớp in lên mức tối đa của máy','Tắt quạt làm mát đầu phun nhựa trong suốt quá trình in','Tăng tốc độ di chuyển đầu in lên gấp 10 lần'], exp:'Giảm chiều dày lớp in (layer height) làm bề mặt mịn hơn.' },
+      { id:52, l:'thong_hieu', q:'Ứng dụng đột phá nhất của công nghệ in 3D trong ngành Y học hiện đại là gì?', opts:['Tạo các mảnh ghép xương, khớp nhân tạo cá nhân hóa chính xác theo cấu trúc giải phẫu bệnh nhân','Thay thế hoàn toàn các xét nghiệm máu truyền thống','Sản xuất hàng loạt các loại thuốc kháng sinh dạng nén','In ra các dụng cụ mài da tay thủ công'], exp:'In 3D xương nhân tạo cá nhân hóa khớp theo cấu trúc giải phẫu bệnh nhân.' },
+      { id:53, l:'thong_hieu', q:'Động cơ chính thúc đẩy các quốc gia chuyển đổi sang sử dụng Năng lượng tái tạo là:', opts:['Giảm ô nhiễm môi trường, giảm phát thải khí nhà kính và bảo đảm an ninh năng lượng','Năng lượng tái tạo có chi phí xây dựng ban đầu luôn bằng không','Các nguồn nhiên liệu hóa thạch (than, dầu) đang tăng dung lượng vô tận','Năng lượng tái tạo không phụ thuộc vào điều kiện thời tiết tự nhiên'], exp:'Giảm phát thải khí nhà kính và bảo đảm an ninh năng lượng sạch.' },
+      { id:54, l:'thong_hieu', q:'Công nghệ năng lượng địa nhiệt khai thác nguồn năng lượng nào để phát điện?', opts:['Nhiệt lượng dồi dào tích tụ trong lòng Trái Đất','Nhiệt lượng tỏa ra từ quá trình đốt cháy rác thải nhựa','Nhiệt lượng từ bức xạ mặt trời chiếu vào bề mặt biển','Nhiệt lượng phát sinh do ma sát gió trên tầng khí quyển'], exp:'Nhiệt lượng sâu trong lòng Trái Đất.' },
+      { id:55, l:'thong_hieu', q:'Phát biểu nào sau đây mô tả ĐÚNG bản chất của công nghệ Trí tuệ nhân tạo (AI)?', opts:['Công nghệ mô phỏng các hoạt động trí tuệ của con người (nhận thức, phân tích, ra quyết định) bằng máy tính','Phần mềm văn phòng thực hiện các phép tính số học cơ bản','Linh kiện phần cứng có khả năng tự sinh sản sinh học','Hệ thống cơ khí tự động vận hành bằng bánh răng đồng hồ'], exp:'Mô phỏng trí tuệ con người trên hệ thống máy tính.' },
+      { id:56, l:'thong_hieu', q:'Ứng dụng tiêu biểu của AI trong chẩn đoán Y tế là:', opts:['Phân tích hình ảnh X-quang, CT, MRI để hỗ trợ bác sĩ chẩn đoán sớm tổn thương','Sản xuất các loại băng gạc y tế từ sợi bông tự nhiên','Rửa sạch các dụng cụ mổ bằng nước sôi','Đo chiều cao bệnh nhân bằng thước dây cơ học'], exp:'Phân tích chẩn đoán hình ảnh y khoa phát hiện tổn thương sớm.' },
+      { id:57, l:'thong_hieu', q:'Nhờ đâu mà một thiết bị gia dụng (như máy điều hòa) trở nên "thông minh" trong hệ sinh thái IoT?', opts:['Được tích hợp cảm biến, bộ kết nối internet để gửi/nhận dữ liệu và tự động điều chỉnh','Được phủ một lớp sơn màu xanh lá cây công nghệ nano','Được trang bị hệ thống bánh xe tự chạy quanh nhà','Được nối trực tiếp với cối giã cơ khí'], exp:'Nhờ tích hợp cảm biến và chip kết nối internet truyền nhận dữ liệu.' },
+      { id:58, l:'thong_hieu', q:'Trong mô hình nông nghiệp thông minh, cảm biến độ ẩm đất gửi dữ liệu Wi-Fi để tự động bật máy bơm tưới nhỏ giọt. Quá trình này thể hiện nguyên lý:', opts:['Thu thập dữ liệu cảm biến → Truyền qua mạng → Tự động phân tích và ra lệnh điều khiển thiết bị','Gia công cắt gọt bóc tách phoi kim loại','Luyện kim màu điều chế đồng thau','Đúc ly tâm tạo ống bê tông'], exp:'Chu trình IoT: Cảm biến → Mạng truyền thông → Tự động phân tích điều khiển.' },
+      { id:59, l:'thong_hieu', q:'Tại sao Robot thông minh được ưu tiên sử dụng trong các môi trường độc hại hoặc phẫu thuật tinh vi?', opts:['Thao tác cực kỳ chuẩn xác, không bị run tay, không mệt mỏi và bảo vệ an toàn cho con người','Robot thông minh có chi phí chế tạo rẻ hơn cờ lê cầm tay','Robot thông minh không cần tiêu thụ bất kỳ nguồn điện nào','Robot thông minh có khả năng tự tạo ra thuốc chữa bệnh'], exp:'Thao tác chuẩn xác tuyệt đối, không run tay, không mệt mỏi.' },
+      { id:60, l:'thong_hieu', q:'Tại sao trong chế tạo khung nhà xưởng thép khổ lớn, công nghệ hàn lại được ưu tiên hơn bu lông ở các mối nối cố định?', opts:['Tạo liên kết kín khít, liền khối vĩnh viễn, chịu lực tốt và giảm khối lượng kết cấu','Liên kết hàn có thể tháo rời dễ dàng hàng ngày như bu lông','Thi công hàn không đòi hỏi bất kỳ kỹ năng hay đồ bảo hộ nào','Hàn không làm thay đổi nhiệt độ của chi tiết kim loại'], exp:'Tạo liên kết liền khối kín khít, chịu lực cao và giảm khối lượng kết cấu.' },
+      { id:61, l:'van_dung', q:'Một xưởng cơ khí nhận hợp đồng sản xuất hàng loạt 1.000 vỏ động cơ máy bơm có các khoang chứa nước và gân tản nhiệt phức tạp. Phương án tạo phôi tối ưu nhất là:', opts:['Công nghệ đúc kim loại (trong khuôn cát hoặc khuôn kim loại)','Gia công bóc tách phoi trên máy phay CNC từ phôi thép khối đặc','Gia công dập nguội tấm kim loại rồi hàn ghép các mảnh rời','Gia công áp lực bằng phương pháp rèn khuôn nóng từ phôi tròn'], exp:'Đúc hàng loạt là phương án rẻ nhất và tối ưu cho chi tiết gân rỗng phức tạp.' },
+      { id:62, l:'van_dung', q:'Để sản xuất các thanh ray đường sắt hoặc thép dầm chữ I dùng trong xây dựng với chiều dài hàng chục mét, phương pháp gia công áp lực phù hợp nhất là:', opts:['Công nghệ cán kim loại qua các trục cán định hình','Công nghệ đúc ly tâm trong khuôn quay','Công nghệ mài phẳng bề mặt','Công nghệ rèn tự do bằng búa hơi'], exp:'Cán qua trục cán định hình tạo thép dầm và thanh ray liên tục.' },
+      { id:63, l:'van_dung', q:'Một nhà máy viễn thông cần sản xuất các cuộn dây đồng dẫn điện đường kính nhỏ 0.5 mm với chiều dài hàng nghìn mét. Họ bắt buộc phải chọn công nghệ:', opts:['Công nghệ kéo kim loại qua lỗ khuôn kéo','Công nghệ đúc trong khuôn cát','Công nghệ tiện mặt ngoài trên máy tiện','Công nghệ hàn điện áp lực'], exp:'Kéo kim loại qua lỗ khuôn nhỏ dần tạo dây đồng đường kính nhỏ liên tục.' },
+      { id:64, l:'van_dung', q:'Để gia công một trục truyền động cơ khí có rãnh then với yêu cầu độ chính xác cao và độ nhẵn bóng bề mặt tốt, trình tự công nghệ hợp lý là:', opts:['Đúc phôi thô → Tiện tròn xoay trục → Phay rãnh then → Mài tinh đạt kích thước','Đúc cát phôi → Đem lắp ráp ngay không cần gia công cơ','Hàn dính then vào trục thô → Cán qua hai trục cán','Dập nguội phôi → Kéo qua lỗ khuôn kéo'], exp:'Tiện trục tròn → Phay rãnh then → Mài bóng cổ trục đạt dung sai.' },
+      { id:65, l:'van_dung', q:'Khi chế tạo cổng sắt mỹ thuật có nhiều hoa văn uốn lượn phức tạp, người thợ cơ khí cần phối hợp các công nghệ nào?', opts:['Gia công áp lực (uốn rèn tạo hoa văn) kết hợp Công nghệ hàn liên kết mối nối','Dùng duy nhất công nghệ đúc ly tâm','Dùng duy nhất máy phay CNC cắt gọt từ tấm thép dày','Kéo kim loại kết hợp đúc áp lực'], exp:'Rèn uốn tạo hình hoa văn kết hợp hàn liên kết mối nối.' },
+      { id:66, l:'van_dung', q:'Để cải tạo hệ thống chiếu sáng phòng học nhằm tối ưu hóa hiệu suất quang học, tiết kiệm điện năng và bảo vệ thị lực, giải pháp tối ưu là:', opts:['Thay thế toàn bộ bằng hệ thống đèn LED chuẩn quang thông','Thay bằng đèn sợi đốt dây tóc công suất lớn','Dùng đèn huỳnh quang thế hệ cũ không có chóa phản quang','Lắp đặt hệ thống đèn dầu hoả chiếu sáng'], exp:'Thay thế bằng đèn LED chuẩn quang học, không nhấp nháy, tiết kiệm điện.' },
+      { id:67, l:'van_dung', q:'Trong mạch điều khiển máy bơm nước tự động ngắt khi bể đầy, bộ phận ngắt dòng điện nguồn áp cao dựa trên tín hiệu phao điện áp thấp là ứng dụng của:', opts:['Rơ le (relay) điện từ','Đèn phóng điện huỳnh quang','Máy tiện ren vít vạn năng','Lò cao luyện gang đen'], exp:'Rơ le điện từ đóng ngắt tiếp điểm điện áp cao bằng tín hiệu phao an toàn.' },
+      { id:68, l:'van_dung', q:'Khi cần truyền tệp dữ liệu dung lượng lớn giữa hai điện thoại di động ở khoảng cách 5 mét mà không có mạng internet, công nghệ phù hợp nhất là:', opts:['Công nghệ Bluetooth hoặc Wi-Fi Direct','Công nghệ truyền dẫn cáp quang biển','Công nghệ cáp đồng trục truyền hình','Công nghệ mạng diện rộng PSTN'], exp:'Wi-Fi Direct / Bluetooth kết nối truyền file ngang hàng không cần internet.' },
+      { id:69, l:'van_dung', q:'Một địa phương vùng núi cao có địa hình dốc đứng và lưu lượng sông chảy xiết quanh năm có tiềm năng lớn nhất để xây dựng:', opts:['Nhà máy thủy điện','Nhà máy nhiệt điện khí LNG','Nhà máy điện sóng biển','Nhà máy điện hạt nhân'], exp:'Cột nước dốc và lưu lượng mạnh là tiềm năng vàng của thủy điện.' },
+      { id:70, l:'van_dung', q:'Trong sản xuất trang phục bảo hộ y tế chống dịch, việc đưa các hạt nano bạc (Ag NPs) vào sợi vải nhằm mục đích:', opts:['Tiêu diệt vi khuẩn, vi rút bám dính và tự khử mùi hôi','Làm cho bộ quần áo có khả năng chống đạn','Giúp trang phục tự phát sáng trong đêm','Tăng khối lượng bộ đồ để giữ ấm'], exp:'Nano bạc kháng khuẩn và tiêu diệt virus trên bề mặt vải.' },
+      { id:71, l:'van_dung', q:'Kỹ sư chế tạo khuôn ép vỏ điện thoại chính xác cao sẽ vận hành chuỗi công nghệ theo trình tự:', opts:['Thiết kế 3D trên CAD → Lập quy trình chạy dao trên CAM → Nạp mã lệnh điều khiển máy CNC gia công','Rèn thủ công phôi thép bằng búa → Đem sơn phủ','Cắt phôi bằng cưa tay → Đưa vào khuôn đúc cát','Lập mã lệnh CNC trực tiếp bằng tay không cần bản vẽ CAD'], exp:'Dựng 3D trên CAD → Xuất đường dao trên CAM → Máy CNC cắt gọt khuôn.' },
+      { id:72, l:'van_dung', q:'Bác sĩ phẫu thuật cần một mảnh ghép xương gò má bằng titan khớp chính xác 100% với hộp sọ bệnh nhân sau tai nạn. Công nghệ tạo hình tối ưu là:', opts:['Công nghệ in 3D kim loại sinh học từ dữ liệu quét CT 3D','Công nghệ đúc cát truyền thống hàng loạt','Công nghệ cán tấm kim loại phẳng','Công nghệ rèn dập nóng dầm thép'], exp:'In 3D titan sinh học từ dữ liệu CT khớp 100% giải phẫu bệnh nhân.' },
+      { id:73, l:'van_dung', q:'Khi phát hiện bề mặt mẫu nhựa in 3D bị sọc nhám xù xì, người vận hành cần xử lý kỹ thuật ra sao trên phần mềm cắm máy?', opts:['Giảm chiều dày lớp in (layer height) xuống giá trị nhỏ hơn','Tăng chiều dày lớp in lên gấp đôi để in nhanh hơn','Tăng nhiệt độ phòng làm việc lên 50 độ C','Tắt quạt tản nhiệt của đầu phun nhựa'], exp:'Giảm layer height xuống mỏng hơn để bề mặt nhẵn bóng.' },
+      { id:74, l:'van_dung', q:'Xử lý chất thải chăn nuôi bằng hầm Biogas để thu khí mê-tan đun nấu và phát điện là ứng dụng thuộc lĩnh vực:', opts:['Công nghệ năng lượng tái tạo (năng lượng sinh học/biomass)','Công nghệ gia công cắt gọt cơ khí','Công nghệ luyện kim đen lò cao','Công nghệ truyền thông không dây 5G'], exp:'Biogas là năng lượng tái tạo từ sinh khối (biomass).' },
+      { id:75, l:'van_dung', q:'Tính năng tự động nhận diện khuôn mặt để mở khóa màn hình trên smartphone là ứng dụng điển hình của:', opts:['Công nghệ Trí tuệ nhân tạo (AI - Thị giác máy tính)','Công nghệ gia công áp lực dập nguội','Công nghệ điện - cơ tịnh tiến','Công nghệ luyện kim màu'], exp:'Nhận diện khuôn mặt dùng thị giác máy tính AI.' },
+      { id:76, l:'van_dung', q:'Hệ thống tự động đóng rèm cửa, bật điều hòa và kích hoạt báo động khi gia chủ rời nhà là ứng dụng của:', opts:['Công nghệ Internet vạn vật (IoT - Ngôi nhà thông minh)','Công nghệ cán thép xây dựng','Công nghệ đúc ly tâm','Công nghệ hàn hồ quang que'], exp:'Ngôi nhà thông minh (Smart Home IoT).' },
+      { id:77, l:'van_dung', q:'Dàn robot tự hành AMR trong kho hàng logistics tự phân loại 100.000 bưu kiện/ngày nhờ tích hợp công nghệ:', opts:['Robot thông minh kết hợp Thị giác máy tính AI','Tay gắp cơ khí vận hành bằng dây cáp kéo tay','Máy tiện ren cơ khí truyền thống','Động cơ hơi nước đốt than'], exp:'Robot tự hành AMR tích hợp thị giác máy tính AI.' },
+      { id:78, l:'van_dung', q:'Để sản xuất một chiếc quạt điện hoàn chỉnh, nhà máy cần tích hợp các công nghệ phổ biến nào?', opts:['Đúc phôi vỏ động cơ → Cắt gọt trục xoay → Chế tạo động cơ điện (Điện - cơ) → Tự động hóa lắp ráp','Chỉ dùng duy nhất công nghệ luyện kim đen lò cao','Chỉ dùng hàn que thủ công','Chỉ dùng công nghệ kéo ống'], exp:'Đúc vỏ → Tiện trục → Chế tạo động cơ điện → Lắp ráp tự động.' },
+      { id:79, l:'van_dung', q:'Một học sinh muốn tự tạo mẫu món đồ chơi cá nhân hóa tại nhà trong 2 giờ cần sử dụng chuỗi giải pháp:', opts:['Thiết kế mô hình 3D trên phần mềm CAD → In đắp sản phẩm trên máy in 3D cá nhân','Luyện phôi gang trong lò cao mini','Cán kim loại qua máy cán hai trục','Rèn thủ công bằng búa và đe'], exp:'Dựng mô hình 3D trên CAD và in trên máy in 3D để bàn.' },
+      { id:80, l:'van_dung', q:'Phương án cấp điện bền vững, tối ưu nhất cho các trạm radar tại vùng hải đảo xa lưới điện quốc gia là:', opts:['Hệ thống tổ hợp Điện mặt trời + Điện gió kết hợp Pin lưu trữ năng lượng','Đốt than đá liên tục ngày đêm bằng lò hơi','Xây dựng nhà máy nhiệt điện khí đốt quy mô lớn','Kéo dây điện trần dưới mặt biển mà không có cách điện'], exp:'Tổ hợp năng lượng tái tạo gió + mặt trời + pin lưu trữ độc lập.' }
+    ];
+
+    const RAW_TF_BANK = [
+      {
+        id: 81,
+        title: 'Công nghệ luyện gang và thép trong lò cao',
+        ctx: 'Bối cảnh: Trong xưởng luyện kim, quặng sắt, than cốc và chất trợ dung được nạp liên tục vào lò cao ở nhiệt độ đến 1800°C để điều chế kim loại đen.',
+        stmts: [
+          { key:'a', text:'a) Công nghệ luyện kim đen tạo ra hai sản phẩm chủ lực là gang và thép.', isTrue:true },
+          { key:'b', text:'b) Sản phẩm gang thu được từ lò cao có hàm lượng carbon thấp hơn 0.01%.', isTrue:false },
+          { key:'c', text:'c) Than cốc trong lò cao vừa đóng vai trò cấp nhiệt vừa là chất khử oxy trong quặng sắt.', isTrue:true },
+          { key:'d', text:'d) Tất cả các sản phẩm thép xây dựng đều được đúc trực tiếp thành thành phẩm mà không cần qua phân xưởng cán.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) SAI (gang có C > 2.14%) | c) ĐÚNG | d) SAI (thép phải qua cán).'
+      },
+      {
+        id: 82,
+        title: 'Đặc điểm kỹ thuật của Đúc ly tâm và Đúc áp lực',
+        ctx: 'Bối cảnh: Xưởng đúc kim loại trang bị máy đúc áp lực piston và máy đúc ly tâm trục quay để chế tạo các dòng sản phẩm cơ khí khác nhau.',
+        stmts: [
+          { key:'a', text:'a) Bản chất của đúc kim loại là rót kim loại lỏng vào khuôn và chờ đông đặc.', isTrue:true },
+          { key:'b', text:'b) Đúc ly tâm tận dụng lực quán tính ly tâm để đẩy kim loại lỏng bám đều vào thành khuôn quay, rất phù hợp tạo vật rỗng tròn xoay.', isTrue:true },
+          { key:'c', text:'c) Đúc áp lực chỉ đúc được các vật liệu phi kim như chất dẻo và cao su.', isTrue:false },
+          { key:'d', text:'d) Sản phẩm đúc ly tâm bị rỗng xốp ở bề mặt ngoài do lực ly tâm đẩy bọt khí ra ngoài thành khuôn.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) ĐÚNG | c) SAI | d) SAI (bọt khí bị đẩy vào trong bề mặt rỗng).'
+      },
+      {
+        id: 83,
+        title: 'Cơ chế biến dạng dẻo trong Cán và Kéo kim loại',
+        ctx: 'Bối cảnh: Phân xưởng gia công áp lực chế tạo các thanh thép dầm xây dựng và dây đồng dẫn điện đường kính nhỏ.',
+        stmts: [
+          { key:'a', text:'a) Gia công áp lực dựa trên tính biến dạng dẻo của kim loại khi chịu ngoại lực tác dụng.', isTrue:true },
+          { key:'b', text:'b) Quá trình cán kim loại làm cho phôi giảm chiều dày và kéo dài ra theo hướng cán.', isTrue:true },
+          { key:'c', text:'c) Công nghệ kéo kim loại qua lỗ khuôn có thể tạo ra sản phẩm dạng dây có chiều dài không hạn chế.', isTrue:true },
+          { key:'d', text:'d) Khi kéo kim loại qua lỗ khuôn kéo, thể tích của khối kim loại bị giảm đi 50%.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) ĐÚNG | c) ĐÚNG | d) SAI (thể tích bảo toàn khi biến dạng dẻo).'
+      },
+      {
+        id: 84,
+        title: 'Nguyên lý vận hành Nhà máy thủy điện',
+        ctx: 'Bối cảnh: Nhà máy thủy điện Hòa Bình sử dụng đập nước cao để tạo dòng chảy áp lực mạnh đập vào bánh xe tuabin phát điện.',
+        stmts: [
+          { key:'a', text:'a) Thủy điện là công nghệ sản xuất điện năng biến đổi trực tiếp quang năng thành điện năng.', isTrue:false },
+          { key:'b', text:'b) Thế năng của nước trên hồ chứa chuyển hóa thành động năng của dòng chảy làm quay tuabin.', isTrue:true },
+          { key:'c', text:'c) Máy phát điện trong nhà máy thủy điện biến đổi cơ năng quay thành điện năng.', isTrue:true },
+          { key:'d', text:'d) Nhà máy thủy điện phát thải lượng khí CO2 lớn hơn nhà máy nhiệt điện đốt than cùng công suất.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) SAI (cơ năng thành điện năng) | b) ĐÚNG | c) ĐÚNG | d) SAI.'
+      },
+      {
+        id: 85,
+        title: 'Tiến trình phát triển Công nghệ Điện - Quang',
+        ctx: 'Bối cảnh: Lịch sử công nghệ chiếu sáng trải qua các bước ngoặt phát minh giúp nâng cao hiệu suất năng lượng và tuổi thọ bóng đèn.',
+        stmts: [
+          { key:'a', text:'a) Công nghệ điện - quang thực hiện chuyển đổi điện năng thành quang năng.', isTrue:true },
+          { key:'b', text:'b) Thomas Edison phát minh ra bóng đèn sợi đốt thương mại vào năm 1879.', isTrue:true },
+          { key:'c', text:'c) Bóng đèn LED hoạt động dựa trên sự phóng điện qua khí thủy ngân.', isTrue:false },
+          { key:'d', text:'d) Đèn LED (2006) có hiệu suất phát quang và tuổi thọ vượt trội so với đèn sợi đốt và đèn huỳnh quang.', isTrue:true }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) ĐÚNG | c) SAI (LED dùng diode bán dẫn) | d) ĐÚNG.'
+      },
+      {
+        id: 86,
+        title: 'Chuỗi công nghệ CAD/CAM/CNC trong sản xuất khuôn mẫu',
+        ctx: 'Bối cảnh: Doanh nghiệp cơ khí chính xác áp dụng chuỗi CAD/CAM/CNC để chế tạo khuôn ép nhựa vỏ điện thoại thông minh.',
+        stmts: [
+          { key:'a', text:'a) CAD là phần mềm đảm nhận việc thiết kế mô hình 3D và xuất thông số kỹ thuật của chi tiết.', isTrue:true },
+          { key:'b', text:'b) Sản phẩm đầu ra trực tiếp của phần mềm CAM là chi tiết kim loại thực tế đã gia công hoàn thiện.', isTrue:false },
+          { key:'c', text:'c) Khi hiệu chỉnh kích thước vỏ điện thoại trên CAD, hệ thống CAM cho phép cập nhật lại đường chạy dao gia công.', isTrue:true },
+          { key:'d', text:'d) Máy công cụ CNC vận hành hoàn toàn phụ thuộc vào thao tác gạt cần điều khiển thủ công của người thợ.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) SAI (CAM xuất mã G-code) | c) ĐÚNG | d) SAI (CNC chạy tự động).'
+      },
+      {
+        id: 87,
+        title: 'Bản chất kỹ thuật và yếu tố ảnh hưởng In 3D',
+        ctx: 'Bối cảnh: Nhóm nghiên cứu y sinh sử dụng máy in 3D FDM để tạo mẫu mô hình giải phẫu xương khớp phục vụ tập huấn phẫu thuật.',
+        stmts: [
+          { key:'a', text:'a) Bản chất công nghệ in 3D là phân tách mô hình 3D thành các lớp 2D và in đắp dần tuần tự từng lớp.', isTrue:true },
+          { key:'b', text:'b) Độ nhẵn bề mặt sản phẩm in 3D phụ thuộc trực tiếp vào độ dày của các lớp in (layer height).', isTrue:true },
+          { key:'c', text:'c) Thiết lập độ dày mỗi lớp in càng lớn thì bề mặt sản phẩm in 3D càng mịn bóng.', isTrue:false },
+          { key:'d', text:'d) In 3D được ứng dụng hiệu quả trong chế tạo các sản phẩm cá nhân hóa như mảnh ghép xương nhân tạo.', isTrue:true }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) ĐÚNG | c) SAI (lớp mỏng mới mịn) | d) ĐÚNG.'
+      },
+      {
+        id: 88,
+        title: 'Khai thác Năng lượng tái tạo Địa nhiệt & Mặt trời',
+        ctx: 'Bối cảnh: Trạm phát điện năng lượng sạch kết hợp các tấm pin quang điện mặt trời và hệ thống khai thác địa nhiệt lòng đất.',
+        stmts: [
+          { key:'a', text:'a) Năng lượng tái tạo là nguồn năng lượng sản xuất từ các nguồn vô hạn, ít gây ô nhiễm môi trường.', isTrue:true },
+          { key:'b', text:'b) Công nghệ điện mặt trời dùng tế bào quang điện (PV) chuyển trực tiếp bức xạ ánh sáng thành điện năng.', isTrue:true },
+          { key:'c', text:'c) Năng lượng địa nhiệt khai thác năng lượng từ sức gió thổi trên tầng khí quyển.', isTrue:false },
+          { key:'d', text:'d) Chuyển đổi sang năng lượng tái tạo giúp bảo vệ môi trường và bảo đảm an ninh năng lượng bền vững.', isTrue:true }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) ĐÚNG | c) SAI (địa nhiệt là nhiệt lòng đất) | d) ĐÚNG.'
+      },
+      {
+        id: 89,
+        title: 'Khái niệm và Kiến trúc hệ thống IoT',
+        ctx: 'Bối cảnh: Trong kỷ nguyên 4.0, hệ thống Internet vạn vật (IoT) kết nối các thiết bị cảm biến gia đình và công nghiệp qua internet.',
+        stmts: [
+          { key:'a', text:'a) Khái niệm IoT lần đầu tiên được nhà khoa học Kevin Ashton đề xuất vào năm 1999.', isTrue:true },
+          { key:'b', text:'b) Một thiết bị khi kết nối IoT chỉ có khả năng nhận tín hiệu thụ động chứ không thể gửi dữ liệu.', isTrue:false },
+          { key:'c', text:'c) Hệ thống tưới nước tự động dựa trên cảm biến độ ẩm đất gửi dữ liệu Wi-Fi là ứng dụng của IoT.', isTrue:true },
+          { key:'d', text:'d) Để vận hành IoT, các thiết bị bắt buộc phải nối với nhau bằng cáp đồng trục dưới 1 mét.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) SAI (giao tiếp 2 chiều) | c) ĐÚNG | d) SAI.'
+      },
+      {
+        id: 90,
+        title: 'Khả năng nhận thức và Ứng dụng AI & Robot thông minh',
+        ctx: 'Bối cảnh: Triển lãm công nghệ trình diễn robot phẫu thuật tích hợp AI và xe tự hành thông minh quan sát môi trường giao thông.',
+        stmts: [
+          { key:'a', text:'a) Trí tuệ nhân tạo (AI) là công nghệ mô phỏng các hoạt động trí tuệ con người bằng máy tính.', isTrue:true },
+          { key:'b', text:'b) Robot thông minh giống hệt cánh tay cơ khí truyền thống, không có bộ não xử lý hay nhận thức.', isTrue:false },
+          { key:'c', text:'c) Thị giác máy tính AI nhận diện biển số xe vi phạm để tự động phạt nguội là ứng dụng của AI.', isTrue:true },
+          { key:'d', text:'d) Hiện nay AI đã hoàn toàn thay thế 100% cảm xúc, đạo đức và ý thức tự nhiên của con người.', isTrue:false }
+        ],
+        exp: 'Đáp án: a) ĐÚNG | b) SAI (robot có vi xử lý AI) | c) ĐÚNG | d) SAI.'
+      }
+    ];
+
+    // =========================================================================
+    // 2. NGÂN HÀNG CÂU HỎI ĐỀ 2: TEST NHANH 5 CÂU (TRÍCH TỪ FILE TEST NHANH 5CAU)
+    // =========================================================================
+    const QUICK_BANK_QUESTIONS = [
+      // Nhận biết (6 câu)
+      { id: 'tn-1', l: 'nhan_biet', q: 'Công nghệ nào thu nhận kim loại từ quặng và các nguyên liệu khác?', opts: ['Luyện kim.', 'Gia công áp lực.', 'Đúc.', 'Hàn.'], exp: 'Công nghệ luyện kim có nhiệm vụ thu nhận kim loại từ quặng và các nguyên liệu khác để phục vụ cho các ngành sản xuất.' },
+      { id: 'tn-2', l: 'nhan_biet', q: 'Cặp kim loại nào đều là sản phẩm của luyện kim màu?', opts: ['Đồng và nhôm.', 'Gang và nhôm.', 'Gang và thép.', 'Thép và đồng.'], exp: 'Đồng và nhôm là các kim loại màu, được tạo ra từ công nghệ luyện kim màu (không chứa sắt).' },
+      { id: 'tn-3', l: 'nhan_biet', q: 'Trong công nghệ đúc, kim loại được đưa vào lòng khuôn chủ yếu ở trạng thái nào?', opts: ['Lỏng.', 'Rắn dạng thanh.', 'Rắn dạng dây.', 'Rắn dạng tấm.'], exp: 'Trong công nghệ đúc, kim loại được nấu chảy thành trạng thái lỏng rồi rót vào lòng khuôn để đông đặc thành chi tiết.' },
+      { id: 'tn-16', l: 'nhan_biet', q: 'Một nanômét bằng bao nhiêu mét?', opts: ['10⁻⁹ m.', '10⁻² m.', '10⁻³ m.', '10⁻⁶ m.'], exp: '1 nanômét (nm) = 10⁻⁹ mét (m).' },
+      { id: 'tn-25', l: 'nhan_biet', q: 'Tên viết tắt AI chỉ công nghệ nào?', opts: ['Trí tuệ nhân tạo.', 'Thiết kế có máy tính hỗ trợ.', 'Điều khiển số bằng máy tính.', 'Internet vạn vật.'], exp: 'AI (Artificial Intelligence) là thuật ngữ chỉ công nghệ Trí tuệ nhân tạo.' },
+      { id: 'tn-27', l: 'nhan_biet', q: 'Tên viết tắt IoT chỉ công nghệ nào?', opts: ['Internet vạn vật.', 'In ba chiều.', 'Luyện kim màu.', 'Gia công bằng máy điều khiển số.'], exp: 'IoT (Internet of Things) là mạng lưới Internet kết nối vạn vật.' },
+
+      // Thông hiểu (5 câu)
+      { id: 'tn-31', l: 'thong_hieu', q: 'Một cơ sở nấu kim loại rồi rót vào khuôn hình bánh đà. Vì sao đây là công nghệ đúc?', opts: ['Hình dạng được tạo khi kim loại lỏng đông đặc trong khuôn.', 'Hình dạng được tạo bằng nối nhiều thanh kim loại.', 'Hình dạng được tạo bằng lực ép lên phôi rắn.', 'Hình dạng được tạo bằng bóc phoi trên máy tiện.'], exp: 'Đặc trưng cơ bản của công nghệ đúc là tạo hình chi tiết bằng cách rót kim loại lỏng vào khuôn và chờ kim loại đông đặc.' },
+      { id: 'tn-32', l: 'thong_hieu', q: 'Cùng tạo chi tiết từ phôi rắn, cán và phay khác nhau cơ bản như thế nào?', opts: ['Cán làm phôi biến dạng; phay bóc vật liệu thành phoi.', 'Cán bóc phoi; phay chỉ làm phôi biến dạng.', 'Cả hai đều phải rót kim loại lỏng vào khuôn.', 'Cả hai đều nối các chi tiết bằng nhiệt.'], exp: 'Cán thuộc công nghệ gia công áp lực làm phôi biến dạng dẻo; phay thuộc công nghệ gia công cắt gọt bóc tách vật liệu dưới dạng phoi.' },
+      { id: 'tn-48', l: 'thong_hieu', q: 'Trong chuỗi thiết kế đến gia công, tại sao CAD cần đứng trước bước lập quy trình bằng CAM?', opts: ['CAM cần dữ liệu hình dạng và kích thước của thiết kế.', 'Máy CNC không dùng thông tin về sản phẩm.', 'CAM tự khai thác quặng để tạo thiết kế.', 'CAD chỉ kiểm tra sản phẩm đã hỏng.'], exp: 'CAD tạo mô hình hình học và kích thước 3D/2D; hệ thống CAM cần dữ liệu thiết kế từ CAD để lập trình đường chạy dao và quy trình gia công.' },
+      { id: 'tn-50', l: 'thong_hieu', q: 'Vì sao in 3D được gọi là phương pháp tạo hình bằng đắp lớp?', opts: ['Vật liệu được thêm dần để hình thành vật thể.', 'Chi tiết chỉ được tạo bằng nối bu lông.', 'Vật liệu chỉ bị dao tiện lấy đi.', 'Phôi luôn bị ép mỏng giữa hai trục.'], exp: 'In 3D tạo hình bằng cách bồi đắp và thêm dần từng lớp vật liệu mỏng liên tiếp cho đến khi hình thành toàn bộ vật thể.' },
+      { id: 'tn-56', l: 'thong_hieu', q: 'Cảm biến gửi số đo qua Internet cho ứng dụng. Dấu hiệu nào thể hiện rõ IoT?', opts: ['Thiết bị kết nối mạng và trao đổi dữ liệu.', 'Cảm biến có vỏ trắng.', 'Ứng dụng dùng chữ lớn.', 'Thiết bị đặt trên giá thép.'], exp: 'Dấu hiệu cốt lõi của công nghệ IoT là các thiết bị thông minh được kết nối mạng Internet để tự động thu thập và truyền tải dữ liệu.' },
+
+      // Vận dụng (5 câu)
+      { id: 'tn-62', l: 'van_dung', q: 'Trục thép có đường kính 22 mm cần giảm còn 20 mm và giữ dạng trụ tròn. Xưởng có máy tiện phù hợp. Nên chọn công đoạn nào?', opts: ['Tiện bóc lớp vật liệu ngoài của trục.', 'Rót thêm kim loại vào khuôn bao ngoài trục.', 'Sơn phủ để tăng đường kính.', 'Hàn đắp vật liệu quanh trục.'], exp: 'Để giảm đường kính ngoài của chi tiết hình trụ tròn từ 22 mm xuống 20 mm, phương pháp gia công cơ khí phù hợp và chính xác nhất là tiện bóc tách phoi ngoài trên máy tiện.' },
+      { id: 'tn-63', l: 'van_dung', q: 'Cơ sở cần nhiều tấm thép mỏng từ phôi dày, yêu cầu biến dạng bằng lực và hạn chế phoi. Phương án nào phù hợp nhất?', opts: ['Cán phôi qua các trục để giảm chiều dày.', 'Phay bỏ hầu hết chiều dày từng phôi.', 'Hàn thêm nhiều lớp lên phôi.', 'Tiện phôi thành dạng trụ.'], exp: 'Cán kim loại qua các trục quay ép lực là phương pháp tối ưu để giảm độ dày tạo tấm mỏng mà không làm mất mát vật liệu dưới dạng phoi.' },
+      { id: 'tn-64', l: 'van_dung', q: 'Khung thép bị tuột ở chỗ nối, yêu cầu sửa để tạo liên kết bền, không cần tháo rời tại đó. Nên đề xuất công nghệ nào?', opts: ['Hàn lại vị trí nối theo quy trình phù hợp.', 'Kéo thanh cho nhỏ tiết diện hơn.', 'Tiện giảm đường kính toàn bộ thanh.', 'Mài rời hai đầu thanh rồi để nguyên.'], exp: 'Hàn kim loại tạo liên kết bền vững không thể tháo rời tại điểm nối bị bung tuột của khung thép.' },
+      { id: 'tn-71', l: 'van_dung', q: 'Nhóm cần mẫu vỏ cảm biến bằng nhựa, số lượng ít, hình dạng còn thay đổi qua nhiều lần thử. Có máy in 3D phù hợp. Phương án nào thuận lợi nhất?', opts: ['Sửa mô hình số rồi in từng mẫu để thử lắp.', 'Dùng cố định mẫu cũ dù không lắp vừa.', 'Chuyển bản vẽ thành ảnh và bỏ kích thước.', 'Làm ngay khuôn hàng loạt trước khi thử.'], exp: 'Với sản phẩm số lượng ít và cần chỉnh sửa nhiều lần, in 3D mẫu nhanh trực tiếp từ mô hình số là giải pháp linh hoạt và tiết kiệm chi phí nhất.' },
+      { id: 'tn-72', l: 'van_dung', q: 'Chi tiết CNC có lỗ thiết kế quá nhỏ. Cần tăng kích thước lỗ cho loạt mới. Nên thực hiện theo thứ tự nào?', opts: ['Sửa CAD, cập nhật CAM và chương trình phù hợp, rồi chạy CNC.', 'Chạy chương trình cũ rồi mới sửa mô hình.', 'Giữ thiết kế và chương trình cũ, chỉ đổi tên tệp.', 'Bỏ dữ liệu thiết kế và tăng tốc tùy ý.'], exp: 'Quy trình chuẩn trong gia công số là: Hiệu chỉnh mô hình CAD -> Cập nhật đường chạy dao trong phần mềm CAM -> Xuất G-code chương trình máy -> Chạy gia công trên máy CNC.' }
+    ];
+
+    // Array shuffler (Fisher-Yates)
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // =========================================================================
+    // 3. EXAM GENERATORS
+    // =========================================================================
+    // Sinh Đề 1 (9 câu chuẩn ma trận: 3 biết, 3 hiểu, 2 vận dụng + 1 câu Đúng/Sai)
+    function buildExam1() {
+      const nb = shuffle(RAW_MC_BANK.filter(q => q.l === 'nhan_biet')).slice(0, 3);
+      const th = shuffle(RAW_MC_BANK.filter(q => q.l === 'thong_hieu')).slice(0, 3);
+      const vd = shuffle(RAW_MC_BANK.filter(q => q.l === 'van_dung')).slice(0, 2);
+
+      const raw8 = shuffle([...nb, ...th, ...vd]);
+      const examQuestions = raw8.map((item, idx) => {
+        const correctText = item.opts[0];
+        const shuffled = shuffle(item.opts);
+        const correctIndex = shuffled.indexOf(correctText);
+        const lvlName = item.l === 'nhan_biet' ? 'Nhận biết' : item.l === 'thong_hieu' ? 'Thông hiểu' : 'Vận dụng';
+
+        return {
+          id: idx + 1,
+          type: 'mc',
+          level: lvlName,
+          pts: 1.0,
+          question: `Câu ${idx + 1} (1.0 điểm): ${item.q}`,
+          options: shuffled,
+          correct: correctIndex,
+          exp: item.exp
+        };
+      });
+
+      const chosenTF = shuffle(RAW_TF_BANK)[0];
+      examQuestions.push({
+        id: 9,
+        type: 'tf',
+        level: 'Đúng / Sai',
+        pts: 2.0,
+        question: `Câu 9 [Trắc nghiệm Đúng/Sai - 2.0đ]: ${chosenTF.title}`,
+        ctx: chosenTF.ctx,
+        statements: chosenTF.stmts,
+        exp: chosenTF.exp
+      });
+
+      return {
+        type: 'exam1',
+        title: 'KTTX Công nghệ 10: Bài 3 & Bài 4',
+        subject: 'KTTX bài 3.4',
+        durationSec: 10 * 60,
+        totalPoints: 10.0,
+        passScore: 5.0,
+        questions: examQuestions
+      };
+    }
+
+    // Sinh Đề 2 (Test nhanh 5 câu: 2 biết, 2 hiểu, 1 vận dụng)
+    function buildExam2() {
+      const nb = shuffle(QUICK_BANK_QUESTIONS.filter(q => q.l === 'nhan_biet')).slice(0, 2);
+      const th = shuffle(QUICK_BANK_QUESTIONS.filter(q => q.l === 'thong_hieu')).slice(0, 2);
+      const vd = shuffle(QUICK_BANK_QUESTIONS.filter(q => q.l === 'van_dung')).slice(0, 1);
+
+      const raw5 = shuffle([...nb, ...th, ...vd]);
+      const examQuestions = raw5.map((item, idx) => {
+        const correctText = item.opts[0];
+        const shuffled = shuffle(item.opts);
+        const correctIndex = shuffled.indexOf(correctText);
+        const lvlName = item.l === 'nhan_biet' ? 'Nhận biết' : item.l === 'thong_hieu' ? 'Thông hiểu' : 'Vận dụng';
+
+        return {
+          id: idx + 1,
+          type: 'mc',
+          level: lvlName,
+          pts: 1.0,
+          question: `Câu ${idx + 1} (1.0 điểm): ${item.q}`,
+          options: shuffled,
+          correct: correctIndex,
+          exp: item.exp
+        };
+      });
+
+      return {
+        type: 'quick5',
+        title: 'Test Nhanh: Công nghệ 10 (5 câu)',
+        subject: 'Test nhanh bài 3.4',
+        durationSec: 5 * 60,
+        totalPoints: 5.0,
+        passScore: 2.5,
+        questions: examQuestions
+      };
+    }
+
+    // =========================================================================
+    // 4. ROOM STATUS MANAGEMENT (TẮT / MỞ RIÊNG TỪNG ĐỀ)
+    // =========================================================================
+    const ROOM_STATUS_KEY = 'edusecure_room_status';
+    let roomStatus = { exam1Open: true, exam2Open: true };
+
+    function loadRoomStatus() {
+      try {
+        const saved = localStorage.getItem(ROOM_STATUS_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (typeof parsed.exam1Open === 'boolean' && typeof parsed.exam2Open === 'boolean') {
+            roomStatus = parsed;
+          }
+        }
+      } catch (e) {}
+      applyRoomStatusUI();
+    }
+
+    function saveRoomStatus() {
+      try {
+        localStorage.setItem(ROOM_STATUS_KEY, JSON.stringify(roomStatus));
+      } catch (e) {}
+      // Broadcast to other tabs
+      try {
+        if ('BroadcastChannel' in window) {
+          const channel = new BroadcastChannel('edusecure_channel');
+          channel.postMessage({ type: 'STATUS_SYNC', status: roomStatus });
+        }
+      } catch (e) {}
+      applyRoomStatusUI();
+    }
+
+    // Listen for storage events / BroadcastChannel
+    window.addEventListener('storage', (e) => {
+      if (e.key === ROOM_STATUS_KEY) {
+        loadRoomStatus();
+      }
+    });
+    try {
+      if ('BroadcastChannel' in window) {
+        const channel = new BroadcastChannel('edusecure_channel');
+        channel.onmessage = (e) => {
+          if (e.data && e.data.type === 'STATUS_SYNC') {
+            roomStatus = e.data.status;
+            applyRoomStatusUI();
+          }
+        };
+      }
+    } catch (e) {}
+
+    function applyRoomStatusUI() {
+      // 1. Lobby Banner
+      const banner = document.getElementById('room-status-banner');
+      const indicator = document.getElementById('room-status-indicator');
+      const text = document.getElementById('room-status-text');
+
+      if (!roomStatus.exam1Open && !roomStatus.exam2Open) {
+        banner.className = 'room-status-bar both-closed';
+        indicator.style.background = '#f59e0b';
+        text.innerHTML = '<strong>Phòng thi đang đóng:</strong> Cả 2 bộ đề thi hiện đang ở trạng thái <span style="color:#b91c1c; font-weight:800;">Chưa được vào thi</span>. Vui lòng đợi giáo viên mở đề thi!';
+      } else if (roomStatus.exam1Open && roomStatus.exam2Open) {
+        banner.className = 'room-status-bar both-open';
+        indicator.style.background = '#10b981';
+        text.innerHTML = '<strong>Cả 2 bộ đề đang mở:</strong> Giáo viên đã mở quyền vào thi cho cả 2 đề. Học sinh chọn 1 trong 2 bộ đề bên dưới để bắt đầu.';
+      } else if (roomStatus.exam1Open) {
+        banner.className = 'room-status-bar partial';
+        indicator.style.background = '#0284c7';
+        text.innerHTML = '<strong>Đang mở Bộ Đề Số 1:</strong> Giáo viên đã mở <span style="color:#0369a1; font-weight:800;">Đề 1 (9 câu - 10đ)</span>. Bộ đề số 2 (Test nhanh 5 câu) hiện đang đóng.';
+      } else {
+        banner.className = 'room-status-bar partial';
+        indicator.style.background = '#059669';
+        text.innerHTML = '<strong>Đang mở Bộ Đề Số 2:</strong> Giáo viên đã mở <span style="color:#059669; font-weight:800;">Đề 2 (Test nhanh 5 câu - 5đ)</span>. Bộ đề số 1 (9 câu) hiện đang đóng.';
+      }
+
+      // 2. Exam 1 Card Button & Alert
+      const btnExam1 = document.getElementById('btn-start-exam-1');
+      const alertExam1 = document.getElementById('exam1-closed-alert');
+      const badgeExam1 = document.getElementById('exam1-badge-status');
+
+      if (roomStatus.exam1Open) {
+        btnExam1.className = 'btn btn-primary';
+        btnExam1.disabled = false;
+        btnExam1.textContent = '🚀 Vào Thi Đề 1 (9 Câu Ngẫu Nhiên)';
+        alertExam1.classList.add('hidden');
+        badgeExam1.textContent = 'Đang Mở';
+        badgeExam1.style.background = '#dcfce7';
+        badgeExam1.style.color = '#15803d';
+        badgeExam1.style.borderColor = '#86efac';
+      } else {
+        btnExam1.className = 'btn btn-disabled';
+        btnExam1.disabled = true;
+        btnExam1.textContent = '🔒 Chưa được vào thi';
+        alertExam1.classList.remove('hidden');
+        badgeExam1.textContent = 'Đang Khóa';
+        badgeExam1.style.background = '#fee2e2';
+        badgeExam1.style.color = '#b91c1c';
+        badgeExam1.style.borderColor = '#fca5a5';
+      }
+
+      // 3. Exam 2 Card Button & Alert
+      const btnExam2 = document.getElementById('btn-start-exam-2');
+      const alertExam2 = document.getElementById('exam2-closed-alert');
+      const badgeExam2 = document.getElementById('exam2-badge-status');
+
+      if (roomStatus.exam2Open) {
+        btnExam2.className = 'btn btn-emerald';
+        btnExam2.disabled = false;
+        btnExam2.textContent = '⚡ Vào Thi Đề 2 (Test Nhanh 5 Câu)';
+        alertExam2.classList.add('hidden');
+        badgeExam2.textContent = 'Đang Mở';
+        badgeExam2.style.background = '#dcfce7';
+        badgeExam2.style.color = '#15803d';
+        badgeExam2.style.borderColor = '#86efac';
+      } else {
+        btnExam2.className = 'btn btn-disabled';
+        btnExam2.disabled = true;
+        btnExam2.textContent = '🔒 Chưa được vào thi';
+        alertExam2.classList.remove('hidden');
+        badgeExam2.textContent = 'Đang Khóa';
+        badgeExam2.style.background = '#fee2e2';
+        badgeExam2.style.color = '#b91c1c';
+        badgeExam2.style.borderColor = '#fca5a5';
+      }
+
+      // 4. Update Teacher Modal Toggles
+      updateTeacherPanelUI();
+    }
+
+    function updateTeacherPanelUI() {
+      const label1 = document.getElementById('t-exam1-status-label');
+      const btn1 = document.getElementById('btn-toggle-t-exam1');
+      if (label1 && btn1) {
+        if (roomStatus.exam1Open) {
+          label1.innerHTML = '● Đang Mở Cho Học Sinh Thi';
+          label1.style.color = '#15803d';
+          btn1.className = 'btn btn-danger';
+          btn1.textContent = 'Tắt Đề 1 (Khóa)';
+        } else {
+          label1.innerHTML = '○ Đang Tắt (Học sinh thấy Chưa được vào thi)';
+          label1.style.color = '#b91c1c';
+          btn1.className = 'btn btn-primary';
+          btn1.textContent = 'Mở Đề 1 (Cho Thi)';
+        }
+      }
+
+      const label2 = document.getElementById('t-exam2-status-label');
+      const btn2 = document.getElementById('btn-toggle-t-exam2');
+      if (label2 && btn2) {
+        if (roomStatus.exam2Open) {
+          label2.innerHTML = '● Đang Mở Cho Học Sinh Thi';
+          label2.style.color = '#15803d';
+          btn2.className = 'btn btn-danger';
+          btn2.textContent = 'Tắt Đề 2 (Khóa)';
+        } else {
+          label2.innerHTML = '○ Đang Tắt (Học sinh thấy Chưa được vào thi)';
+          label2.style.color = '#b91c1c';
+          btn2.className = 'btn btn-emerald';
+          btn2.textContent = 'Mở Đề 2 (Cho Thi)';
+        }
+      }
+    }
+
+    // =========================================================================
+    // 5. GLOBAL APP STATE & REFS
+    // =========================================================================
+    let CURRENT_EXAM = buildExam1();
+    let QUESTIONS = CURRENT_EXAM.questions;
+    let currentIdx = 0;
+    let userAnswers = {};
+    let strikes = [];
+    let remaining = 10 * 60;
+    let timer = null;
+    let isActive = false;
+    let student = { name: 'Nguyễn Văn An', code: '15', class: '10C05' };
+    let lastViolation = 0;
+
+    // Elements
+    const viewLobby = document.getElementById('view-lobby');
+    const viewExam = document.getElementById('view-exam');
+    const viewResult = document.getElementById('view-result');
+    const mobileBar = document.getElementById('mobile-bar');
+    const simDock = document.getElementById('sim-dock');
+    const alertModal = document.getElementById('alert-modal');
+    const blurShield = document.getElementById('blur-shield');
+    const teacherModal = document.getElementById('teacher-modal');
+
+    // =========================================================================
+    // 6. 4-CLASS ROSTER
+    // =========================================================================
+    const ROSTER = {
+      '10C05': [
+        {code:'1',name:'Lê Hồng Hải Anh'},{code:'2',name:'Nguyễn Ngọc Mỹ Anh'},{code:'3',name:'Nguyễn Bùi Thiên Ân'},
+        {code:'4',name:'Lê Gia Bảo'},{code:'5',name:'Nguyễn Gia Bảo'},{code:'6',name:'Hoàng Minh Cảnh'},
+        {code:'7',name:'Võ Ngọc Minh Châu'},{code:'8',name:'Nguyễn Ngọc Thùy Dương'},{code:'9',name:'Trần Tiến Đạt'},
+        {code:'10',name:'Bùi Hoàng Hải'},{code:'11',name:'Vòng Quân Hải'},{code:'12',name:'Phạm Lê Nhã Hân'},
+        {code:'13',name:'Đặng Kim Hiền'},{code:'14',name:'Lê Thị Cẩm Hiền'},{code:'15',name:'Đặng Nhựt Huy'},
+        {code:'16',name:'Trần Nguyễn Mai Ka'},{code:'17',name:'Lê Uyên Khanh'},{code:'18',name:'Trần Ngọc Ngân Khánh'},
+        {code:'19',name:'Nguyễn Đăng Khoa'},{code:'20',name:'Trần Quốc Kiệt'},{code:'21',name:'Dương Ngọc Linh'},
+        {code:'22',name:'Nguyễn Đỗ Phương Linh'},{code:'23',name:'Nguyễn Hoàng Khánh Linh'},{code:'24',name:'Võ Ngọc Yến Linh'},
+        {code:'25',name:'Lê Thành Nam'},{code:'26',name:'Lê Kim Ngân'},{code:'27',name:'Lê Trọng Nghĩa'},
+        {code:'28',name:'Mai Thị Kim Ngọc'},{code:'29',name:'Huỳnh Nguyễn Minh Nguyên'},{code:'30',name:'Nguyễn An Nhi'},
+        {code:'31',name:'Nguyễn Lê Yến Nhi'},{code:'32',name:'Lê Hoàng Phúc'},{code:'33',name:'Lôi Bảo Phúc'},
+        {code:'34',name:'Nguyễn Phương Quỳnh'},{code:'35',name:'Nguyễn Minh Sang'},{code:'36',name:'Giang Minh Thiện'},
+        {code:'37',name:'Huỳnh Lê Phúc Thịnh'},{code:'38',name:'Trần Anh Thư'},{code:'39',name:'Trần Thùy Tiên'},
+        {code:'40',name:'Trịnh Nguyễn Bảo Tiên'},{code:'41',name:'Nguyễn Thị Huyền Trang'},{code:'42',name:'Nguyễn Ngọc Trâm'},
+        {code:'43',name:'Trần Thị Bảo Trân'},{code:'44',name:'Mai Thị Phương Trinh'},{code:'45',name:'Nguyễn Hoàng Nhật Vi'},
+        {code:'46',name:'Trần Nguyễn Khánh Vy'}
+      ],
+      '10C06': [
+        {code:'1',name:'Đỗ Đăng An'},{code:'2',name:'Nguyễn Thuận An'},{code:'3',name:'Hoàng Lê Tú Anh'},
+        {code:'4',name:'Phạm Vũ Thùy Anh'},{code:'5',name:'Trần Hải Anh'},{code:'6',name:'Trần Lê Nam Anh'},
+        {code:'7',name:'Vũ Đình Hải Anh'},{code:'8',name:'Nguyễn Đức Bảo'},{code:'9',name:'Lê Nguyễn Băng Châu'},
+        {code:'10',name:'Phan Nguyễn Bảo Chi'},{code:'11',name:'Lê Thụy Ánh Dương'},{code:'12',name:'Trần Anh Hào'},
+        {code:'13',name:'Nguyễn Ngọc Bảo Hân'},{code:'14',name:'Nguyễn Văn Hoàng'},{code:'15',name:'Mai Trần Minh Huy'},
+        {code:'16',name:'Hoàng Quốc An Khang'},{code:'17',name:'Nguyễn Tuấn Khang'},{code:'18',name:'Phạm Hoàng Khang'},
+        {code:'19',name:'Lê Anh Khôi'},{code:'20',name:'Đường Hà Khuê'},{code:'21',name:'Lê Hoàng Thiên Kim'},
+        {code:'22',name:'Nguyễn Ngọc Thảo Ly'},{code:'23',name:'Nguyễn Hoàn Kim Ngân'},{code:'24',name:'Phạm Thị Kim Ngân'},
+        {code:'25',name:'Phạm Thị Ngọc Ngân'},{code:'26',name:'Phạm Nguyễn Bảo Ngọc'},{code:'27',name:'Phạm Trần Bảo Ngọc'},
+        {code:'28',name:'Lê Văn Nhất'},{code:'29',name:'Cao Khả Nhi'},{code:'30',name:'Trương Ngọc Tường Như'},
+        {code:'31',name:'Lê Tiến Phát'},{code:'32',name:'Nguyễn Tấn Phát'},{code:'33',name:'Lý Gia Phú'},
+        {code:'34',name:'Đỗ Xuân Phúc'},{code:'35',name:'Nguyễn Khánh Phương'},{code:'36',name:'Ngô Trần Lệ Quyên'},
+        {code:'37',name:'Nguyễn Tấn Tài'},{code:'38',name:'Lê Nguyễn Thanh Tâm'},{code:'39',name:'Lê Nguyễn Minh Thiện'},
+        {code:'40',name:'Phạm Phương Thùy'},{code:'41',name:'Nguyễn Anh Thư'},{code:'42',name:'Đào Bảo Trân'},
+        {code:'43',name:'Nguyễn Ngọc Bảo Trân'},{code:'44',name:'Võ Huỳnh Bảo Trân'},{code:'45',name:'Trần Tấn Minh Trí'},
+        {code:'46',name:'Lê Thanh Tú'},{code:'47',name:'Văn Gia Tuấn'},{code:'48',name:'Nguyễn Hoàng Lê Vy'}
+      ],
+      '10C07': [
+        {code:'1',name:'Đinh Hoàng Thảo Anh'},{code:'2',name:'Mai Trần Huyền Anh'},{code:'3',name:'Nguyễn Quỳnh Anh'},
+        {code:'4',name:'Nguyễn Trần Phương Anh'},{code:'5',name:'Nguyễn Trần Tuấn Anh'},{code:'6',name:'Trần Ngọc Mai Anh'},
+        {code:'7',name:'Lê Ngọc Minh Châu'},{code:'8',name:'Bùi Thị Hồng Diễm'},{code:'9',name:'Trần Quốc Đạt'},
+        {code:'10',name:'Vương Gia Hào'},{code:'11',name:'Lê Nguyễn Bảo Hân'},{code:'12',name:'Nguyễn Hoàng Gia Hân'},
+        {code:'13',name:'Phạm Hà Ngọc Hân'},{code:'14',name:'Trần Nguyễn Gia Hân'},{code:'15',name:'Nguyễn Khắc Huy'},
+        {code:'16',name:'Huỳnh Lê Phúc Khang'},{code:'17',name:'Nguyễn Bảo Khang'},{code:'18',name:'Nguyễn Anh Khoa'},
+        {code:'19',name:'Vũ Đăng Khoa'},{code:'20',name:'Lê Nguyễn Ngọc Lam'},{code:'21',name:'Nguyễn Thùy Linh'},
+        {code:'22',name:'Ôn Ngọc Yến Linh'},{code:'23',name:'Chu Bảo Long'},{code:'24',name:'Nguyễn Chí Long'},
+        {code:'25',name:'Trần Xuân Mai'},{code:'26',name:'Ngô Nhật Mẫn'},{code:'27',name:'Vương Hoàng My'},
+        {code:'28',name:'Trần Kim Ngân'},{code:'29',name:'Nguyễn Bảo Ngọc'},{code:'30',name:'Đinh Vũ Thảo Nguyên'},
+        {code:'31',name:'Nguyễn Bùi Thảo Nguyên'},{code:'32',name:'Phạm Cao Nguyên'},{code:'33',name:'Trần Khôi Nguyên'},
+        {code:'34',name:'Bùi Võ Yến Nhi'},{code:'35',name:'Nguyễn Thái Tuệ Nhi'},{code:'36',name:'Trần Lê Yến Nhi'},
+        {code:'37',name:'Đặng Tố Hoàng Phúc'},{code:'38',name:'Võ Trần An Phúc'},{code:'39',name:'Hoàng Minh Anh Phương'},
+        {code:'40',name:'Trần Đức Thắng'},{code:'41',name:'Nguyễn Thụy Mai Thy'},{code:'42',name:'Trần Phạm Khánh Thy'},
+        {code:'43',name:'Huỳnh Ngọc Bảo Trâm'},{code:'44',name:'Nguyễn Thanh Tuấn'},{code:'45',name:'Ngô Nguyễn Tường Vy'},
+        {code:'46',name:'Nguyễn Hoàng Thảo Vy'},{code:'47',name:'Đỗ Như Ý'},{code:'48',name:'Nguyễn Như Ý'}
+      ],
+      '10C08': [
+        {code:'1',name:'Đinh Vũ Bảo Anh'},{code:'2',name:'Lềnh Trâm Anh'},{code:'3',name:'Mai Nhật Tường Anh'},
+        {code:'4',name:'Nguyễn Ngọc Trâm Anh'},{code:'5',name:'Trần Thị Tú Anh'},{code:'6',name:'Lê Hoàng Gia Bảo'},
+        {code:'7',name:'Trần An Bình'},{code:'8',name:'Mai Tiến Đạt'},{code:'9',name:'Đoàn Tâm Đoan'},
+        {code:'10',name:'Đoàn Minh Đức'},{code:'11',name:'Lê Ngân Giang'},{code:'12',name:'Tôn Nữ Bảo Hân'},
+        {code:'13',name:'Đồng Văn Hậu'},{code:'14',name:'Nguyễn Kim Hoàng'},{code:'15',name:'Nguyễn Trường Huy'},
+        {code:'16',name:'Liu Ní Khang'},{code:'17',name:'Nguyễn Minh Thiên Kim'},{code:'18',name:'Đặng Lê Hoàng Lâm'},
+        {code:'19',name:'Cổ Hồ Phương Linh'},{code:'20',name:'Quy Khánh Linh'},{code:'21',name:'Đỗ Phú Lộc'},
+        {code:'22',name:'Nguyễn Huỳnh Xuân Mai'},{code:'23',name:'Đỗ Quang Minh'},{code:'24',name:'Nguyễn Thanh Ánh Minh'},
+        {code:'25',name:'Nguyễn Thị Bình Minh'},{code:'26',name:'Ngô Hàm Nghi'},{code:'27',name:'Nguyễn Thị Minh Ngọc'},
+        {code:'28',name:'Lưu Ngọc Nhi'},{code:'29',name:'Chu Anh Quốc'},{code:'30',name:'Đỗ Tú Quyên'},
+        {code:'31',name:'Nguyễn Lê Bảo Quyên'},{code:'32',name:'Đoàn Lê Minh Sang'},{code:'33',name:'Huỳnh Ngô Trường Sơn'},
+        {code:'34',name:'Nguyễn Anh Thư'},{code:'35',name:'Lê An Thy'},{code:'36',name:'Nguyễn Phạm Thùy Tiên'},
+        {code:'37',name:'Bùi Thị Hương Trà'},{code:'38',name:'Lê Ngọc Hương Trà'},{code:'39',name:'Nguyễn Thiên Trang'},
+        {code:'40',name:'Trần Nguyễn Thuỳ Trang'},{code:'41',name:'Ngô Thanh Tùng'},{code:'42',name:'Huỳnh Thị Ngọc Tuyết'},
+        {code:'43',name:'Nguyễn Thị Ngọc Tỷ'},{code:'44',name:'Trương Thanh Ngọc Thuỳ Vân'},{code:'45',name:'Nguyễn Vũ Phúc Vinh'},
+        {code:'46',name:'Đỗ Hoàng Lê Vy'},{code:'47',name:'Thái Hải Yến'}
+      ]
+    };
+
+    function updateStudentSelect() {
+      const cls = document.getElementById('select-class').value;
+      const list = ROSTER[cls] || [];
+      const codeSelect = document.getElementById('select-code');
+      codeSelect.innerHTML = '<option value="">-- Hoặc chọn nhanh từ danh sách --</option>';
+      list.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.code;
+        opt.textContent = `STT ${item.code} — ${item.name}`;
+        codeSelect.appendChild(opt);
+      });
+      syncFromNumberInput();
+    }
+
+    function syncFromNumberInput() {
+      const cls = document.getElementById('select-class').value;
+      const list = ROSTER[cls] || [];
+      const numInput = document.getElementById('input-code-num');
+      const rawVal = numInput ? numInput.value.trim() : '';
+      const statusSpan = document.getElementById('name-status');
+      if (!rawVal) {
+        document.getElementById('input-name').value = '';
+        document.getElementById('select-code').value = '';
+        if (statusSpan) statusSpan.textContent = '';
+        return;
+      }
+      const numVal = parseInt(rawVal, 10);
+      const match = list.find(s => parseInt(s.code, 10) === numVal);
+      if (match) {
+        document.getElementById('input-name').value = match.name;
+        document.getElementById('select-code').value = match.code;
+        if (statusSpan) {
+          statusSpan.textContent = `✓ Khớp danh sách: ${match.name} (STT ${match.code} - Lớp ${cls})`;
+          statusSpan.style.color = '#16a34a';
+        }
+      } else {
+        document.getElementById('input-name').value = '';
+        document.getElementById('select-code').value = '';
+        if (statusSpan) {
+          statusSpan.textContent = `Lớp ${cls} có STT từ 1 đến ${list.length}. Chưa tìm thấy số ${rawVal}`;
+          statusSpan.style.color = '#dc2626';
+        }
+      }
+    }
+
+    document.getElementById('input-code-num').oninput = syncFromNumberInput;
+    document.getElementById('select-class').onchange = updateStudentSelect;
+    document.getElementById('select-code').onchange = () => {
+      const cls = document.getElementById('select-class').value;
+      const code = document.getElementById('select-code').value;
+      const list = ROSTER[cls] || [];
+      const match = list.find(s => s.code === code);
+      if (match) {
+        document.getElementById('input-code-num').value = match.code;
+        document.getElementById('input-name').value = match.name;
+        const statusSpan = document.getElementById('name-status');
+        if (statusSpan) {
+          statusSpan.textContent = `✓ Khớp danh sách: ${match.name} (STT ${match.code} - Lớp ${cls})`;
+          statusSpan.style.color = '#16a34a';
+        }
+      }
+    };
+    updateStudentSelect();
+
+    // =========================================================================
+    // 7. START EXAMS LOGIC (ĐỀ 1 & ĐỀ 2)
+    // =========================================================================
+    function startExamFlow(examType) {
+      if (examType === 'exam1' && !roomStatus.exam1Open) {
+        alert('Giáo viên hiện đang tạm khóa Đề số 1. Vui lòng chờ giáo viên mở phòng thi!');
+        return;
+      }
+      if (examType === 'quick5' && !roomStatus.exam2Open) {
+        alert('Giáo viên hiện đang tạm khóa Đề số 2 (Test nhanh). Vui lòng chờ giáo viên mở phòng thi!');
+        return;
+      }
+
+      const cls = document.getElementById('select-class').value;
+      const code = (document.getElementById('input-code-num').value.trim()) || document.getElementById('select-code').value;
+      const name = document.getElementById('input-name').value.trim();
+
+      if (!name || !code) {
+        alert('Vui lòng nhập Mã số / STT của bạn (VD: 15) để xác nhận tên học sinh trước khi vào thi!');
+        return;
+      }
+
+      // Generate the selected exam
+      CURRENT_EXAM = (examType === 'quick5') ? buildExam2() : buildExam1();
+      QUESTIONS = CURRENT_EXAM.questions;
+
+      student = { name, code, class: cls };
+      document.getElementById('badge-name').textContent = `${name} (Lớp ${cls} - #${code})`;
+      document.getElementById('student-badge').classList.remove('hidden');
+
+      // Update exam badge
+      document.getElementById('exam-badge-type').textContent = (examType === 'quick5') ? 'TEST NHANH 5 CÂU (5 PHÚT)' : 'KTTX BÀI 3 & 4 (9 CÂU - 10 PHÚT)';
+
+      // Auto notify Google Sheets LOGIN event
+      try {
+        fetch('https://script.google.com/macros/s/AKfycbwqvh3UB8Th7DOuEpFXzlN7VY8XAYtkqm0zMqENGTqktCVqtqgT-CEanj1_nWf1pSaocA/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'LOGIN',
+            sheetId: '1DTIBxYMavsb2tF56hJLPeT4n3n7YTBKB6ckpjDzSrOs',
+            fullName: name,
+            studentCode: code,
+            className: cls,
+            testType: CURRENT_EXAM.subject,
+            loginTime: new Date().toLocaleString('vi-VN')
+          })
+        }).catch(() => {});
+      } catch (e) {}
+
+      // Watermark
+      const wm = document.getElementById('watermark-layer');
+      wm.innerHTML = '';
+      for (let i = 0; i < 8; i++) {
+        const item = document.createElement('div');
+        item.textContent = `${cls} • #${code} • ${name}`;
+        wm.appendChild(item);
+      }
+
+      currentIdx = 0;
+      userAnswers = {};
+      strikes = [];
+      remaining = CURRENT_EXAM.durationSec;
+      isActive = true;
+
+      viewLobby.classList.add('hidden');
+      viewResult.classList.add('hidden');
+      viewExam.classList.remove('hidden');
+      mobileBar.style.display = 'flex';
+      simDock.classList.remove('hidden');
+      document.getElementById('desktop-nav').style.display = 'flex';
+
+      updateStrikesUI();
+      renderSlider();
+      renderQuestion();
+      startTimer();
+    }
+
+    document.getElementById('btn-start-exam-1').onclick = () => startExamFlow('exam1');
+    document.getElementById('btn-start-exam-2').onclick = () => startExamFlow('quick5');
+
+    // =========================================================================
+    // 8. ANTI-CHEAT DETECTION & PROCTORING
+    // =========================================================================
+    function onViolation(reason) {
+      if (!isActive) return;
+      const now = Date.now();
+      if (now - lastViolation < 1200) return; // cooldown
+      lastViolation = now;
+
+      blurShield.classList.remove('hidden');
+
+      const strikeNum = strikes.length + 1;
+      const timeStr = new Date().toLocaleTimeString('vi-VN');
+
+      // Forfeit current question
+      if (!userAnswers[currentIdx]) {
+        userAnswers[currentIdx] = { choice: null, tf: {}, forfeited: true, scoreEarned: 0 };
+      } else {
+        userAnswers[currentIdx].forfeited = true;
+        userAnswers[currentIdx].scoreEarned = 0;
+      }
+
+      strikes.push({
+        num: strikeNum,
+        time: timeStr,
+        qIdx: currentIdx,
+        reason: reason
+      });
+
+      updateStrikesUI();
+      renderSlider();
+      renderQuestion();
+
+      document.getElementById('modal-title').textContent = strikeNum >= 3 ? '🚨 ĐÌNH CHỈ THI - HỦY BÀI (0 ĐIỂM)' : `🚨 CẢNH BÁO VI PHẠM LẦN ${strikeNum}/3!`;
+      document.getElementById('modal-desc').textContent = `${reason}. Vi phạm ghi nhận lúc ${timeStr}.`;
+      document.getElementById('modal-penalty').textContent = strikeNum >= 3 
+        ? 'Bạn đã vi phạm thoát màn hình 3 lần. Toàn bộ bài thi bị hủy điểm và tính 0.0 điểm!'
+        : `Câu hỏi số ${currentIdx + 1} đã bị đánh dấu SAI (0 điểm) và không được tính điểm.`;
+      
+      alertModal.classList.remove('hidden');
+    }
+
+    function updateStrikesUI() {
+      for (let i = 1; i <= 3; i++) {
+        const el = document.getElementById(`strike-${i}`);
+        if (i <= strikes.length) {
+          el.className = (i === 3) ? 'strike-badge active final' : 'strike-badge active';
+        } else {
+          el.className = 'strike-badge';
+        }
+      }
+    }
+
+    document.getElementById('btn-modal-ack').onclick = () => {
+      alertModal.classList.add('hidden');
+      blurShield.classList.add('hidden');
+      if (strikes.length >= 3) {
+        submitExam(true);
+      }
+    };
+    document.getElementById('btn-unblur').onclick = () => {
+      blurShield.classList.add('hidden');
+    };
+
+    // Listeners
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && isActive) {
+        onViolation('Thí sinh chuyển sang tab hoặc ứng dụng khác');
+      }
+    });
+
+    window.addEventListener('blur', () => {
+      if (isActive) {
+        onViolation('Giao diện thi mất tiêu điểm (chuyển app hoặc chụp màn hình)');
+      }
+    });
+
+    // Screenshots
+    document.addEventListener('keydown', (e) => {
+      if (!isActive) return;
+      if (e.key === 'PrintScreen' || e.code === 'PrintScreen' || e.keyCode === 44) {
+        e.preventDefault();
+        try { navigator.clipboard?.writeText('CẢNH BÁO: Nghiêm cấm chụp màn hình!'); } catch (err) {}
+        onViolation('Phát hiện bấm phím PrintScreen');
+        return;
+      }
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        try { navigator.clipboard?.writeText('CẢNH BÁO: Nghiêm cấm chụp màn hình!'); } catch (err) {}
+        onViolation('Mở phím tắt chụp màn hình Snipping Tool (Win+Shift+S)');
+        return;
+      }
+      if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
+        e.preventDefault();
+        onViolation('Chụp màn hình máy tính macOS (Command+Shift+3/4)');
+        return;
+      }
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+        onViolation('Bấm lệnh In / Lưu đề thi ra tệp PDF');
+        return;
+      }
+    });
+
+    // Mobile gestures
+    document.addEventListener('touchstart', (e) => {
+      if (isActive && e.touches && e.touches.length >= 3) {
+        e.preventDefault();
+        onViolation('Phát hiện cử chỉ vuốt 3 ngón tay để chụp ảnh màn hình điện thoại');
+      }
+    }, { passive: false });
+
+    document.addEventListener('touchcancel', () => {
+      if (isActive) {
+        onViolation('Phát hiện bấm phím cứng chụp màn hình điện thoại (touchcancel)');
+      }
+    });
+
+    window.addEventListener('pagehide', () => {
+      if (isActive) {
+        onViolation('Thí sinh ẩn ứng dụng hoặc chuyển đổi màn hình trên điện thoại');
+      }
+    });
+
+    // Simulation buttons
+    document.getElementById('btn-sim-exit').onclick = () => {
+      onViolation(`Giả lập học sinh thoát app tại Câu #${currentIdx + 1}`);
+    };
+    document.getElementById('btn-sim-shot').onclick = () => {
+      onViolation(`Phát hiện thao tác chụp màn hình điện thoại tại Câu #${currentIdx + 1}`);
+    };
+
+    // =========================================================================
+    // 9. TIMER & NAVIGATION
+    // =========================================================================
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60).toString().padStart(2, '0');
+        const s = (remaining % 60).toString().padStart(2, '0');
+        document.getElementById('timer-text').textContent = `${m}:${s}`;
+
+        if (remaining <= 0) {
+          clearInterval(timer);
+          alert('Hết giờ làm bài!');
+          submitExam(false);
+        }
+      }, 1000);
+    }
+
+    function renderSlider() {
+      const track = document.getElementById('slider-track');
+      track.innerHTML = '';
+      QUESTIONS.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        let cls = 'slider-btn';
+        if (idx === currentIdx) cls += ' current';
+        const a = userAnswers[idx];
+        if (a) {
+          if (a.forfeited) cls += ' forfeited';
+          else if (a.choice !== null && a.choice !== undefined || (a.tf && Object.keys(a.tf).length > 0)) cls += ' done';
+        }
+        btn.className = cls;
+        btn.textContent = (idx + 1);
+        btn.onclick = () => {
+          currentIdx = idx;
+          renderQuestion();
+          renderSlider();
+        };
+        track.appendChild(btn);
+      });
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIdx];
+      const a = userAnswers[currentIdx];
+      const isForfeited = !!a?.forfeited;
+
+      const lvlTag = document.getElementById('q-level-tag');
+      if (lvlTag) {
+        lvlTag.textContent = q.level || 'Nhận biết';
+        lvlTag.style.display = 'inline-block';
+      }
+
+      document.getElementById('q-points-tag').textContent = q.type === 'tf' ? '2.0 điểm' : '1.0 điểm';
+      document.getElementById('q-title').textContent = q.question;
+
+      const forfeitBanner = document.getElementById('forfeit-banner');
+      if (isForfeited) forfeitBanner.classList.remove('hidden');
+      else forfeitBanner.classList.add('hidden');
+
+      const ctxBox = document.getElementById('q-context-box');
+      const mcBox = document.getElementById('mc-options-container');
+      const tfBox = document.getElementById('tf-options-container');
+
+      if (q.type === 'tf') {
+        ctxBox.classList.remove('hidden');
+        ctxBox.innerHTML = `
+          <strong>${q.ctx}</strong>
+          <div style="margin-top:6px; font-size:11px; color:#0284c7; border-top:1px dashed #bae6fd; padding-top:4px;">
+            Quy tắc chấm: Đúng 1 lệnh: <strong>0,2đ</strong> • Đúng 2: <strong>0,5đ</strong> • Đúng 3: <strong>1,0đ</strong> • Đúng 4: <strong>2,0đ</strong>
+          </div>
+        `;
+        mcBox.classList.add('hidden');
+        tfBox.classList.remove('hidden');
+        renderTF(q, a);
+      } else {
+        ctxBox.classList.add('hidden');
+        mcBox.classList.remove('hidden');
+        tfBox.classList.add('hidden');
+        renderMC(q, a);
+      }
+
+      document.getElementById('btn-prev').disabled = (currentIdx === 0);
+      document.getElementById('m-btn-prev').disabled = (currentIdx === 0);
+    }
+
+    function renderMC(q, a) {
+      const box = document.getElementById('mc-options-container');
+      box.innerHTML = '';
+      q.options.forEach((opt, optIdx) => {
+        const letter = String.fromCharCode(65 + optIdx);
+        const isSelected = (a?.choice === optIdx);
+        const isForfeited = !!a?.forfeited;
+
+        const row = document.createElement('div');
+        let cls = 'option-item';
+        if (isSelected) cls += isForfeited ? ' forfeited selected' : ' selected';
+        row.className = cls;
+
+        row.innerHTML = `
+          <div class="opt-letter">${letter}</div>
+          <div class="opt-text" style="flex:1;">${opt}</div>
+          ${isSelected ? `<span style="color:${isForfeited ? '#e11d48' : '#0284c7'}; font-weight:800; margin-left:auto;">✓</span>` : ''}
+        `;
+
+        row.onclick = () => {
+          if (!userAnswers[currentIdx]) userAnswers[currentIdx] = { choice: optIdx, tf: {}, forfeited: false };
+          else userAnswers[currentIdx].choice = optIdx;
+          renderQuestion();
+          renderSlider();
+        };
+        box.appendChild(row);
+      });
+    }
+
+    function renderTF(q, a) {
+      const box = document.getElementById('tf-options-container');
+      box.innerHTML = '<div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:6px;">Chọn ĐÚNG hoặc SAI cho từng nhận định:</div>';
+      
+      q.statements.forEach((stmt) => {
+        const val = a?.tf?.[stmt.key];
+        const row = document.createElement('div');
+        row.className = 'tf-row';
+        row.innerHTML = `
+          <div class="tf-text">${stmt.text}</div>
+          <div class="tf-btns">
+            <button class="tf-btn ${val === true ? 'active-true' : ''}">ĐÚNG</button>
+            <button class="tf-btn ${val === false ? 'active-false' : ''}">SAI</button>
+          </div>
+        `;
+
+        const [btnT, btnF] = row.querySelectorAll('.tf-btn');
+        btnT.onclick = () => {
+          if (!userAnswers[currentIdx]) userAnswers[currentIdx] = { choice: null, tf: {}, forfeited: false };
+          userAnswers[currentIdx].tf[stmt.key] = true;
+          renderQuestion();
+          renderSlider();
+        };
+        btnF.onclick = () => {
+          if (!userAnswers[currentIdx]) userAnswers[currentIdx] = { choice: null, tf: {}, forfeited: false };
+          userAnswers[currentIdx].tf[stmt.key] = false;
+          renderQuestion();
+          renderSlider();
+        };
+
+        box.appendChild(row);
+      });
+    }
+
+    function goPrev() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion();
+        renderSlider();
+      }
+    }
+    function goNext() {
+      if (currentIdx < QUESTIONS.length - 1) {
+        currentIdx++;
+        renderQuestion();
+        renderSlider();
+      }
+    }
+
+    document.getElementById('btn-prev').onclick = goPrev;
+    document.getElementById('m-btn-prev').onclick = goPrev;
+    document.getElementById('btn-next').onclick = goNext;
+    document.getElementById('m-btn-next').onclick = goNext;
+
+    document.getElementById('btn-submit-desktop').onclick = () => {
+      if (confirm('Bạn có chắc chắn muốn nộp bài thi ngay?')) {
+        submitExam(false);
+      }
+    };
+    document.getElementById('m-btn-submit').onclick = () => {
+      if (confirm('Xác nhận nộp bài thi ngay?')) {
+        submitExam(false);
+      }
+    };
+
+    // =========================================================================
+    // 10. SUBMIT & SCORING
+    // =========================================================================
+    function submitExam(disqualified = false) {
+      clearInterval(timer);
+      isActive = false;
+
+      let totalScore = 0;
+      let correctCount = 0;
+      let correctNB = 0;
+      let correctTH = 0;
+      let correctVD = 0;
+      let tfSummary = '0/4 ý (0đ)';
+
+      QUESTIONS.forEach((q, idx) => {
+        const a = userAnswers[idx];
+        if (!a) return;
+
+        if (q.type === 'tf') {
+          let stmtsCorrect = 0;
+          let qScore = 0;
+          if (!a.forfeited) {
+            q.statements.forEach(s => {
+              if (a.tf && a.tf[s.key] === s.isTrue) {
+                stmtsCorrect++;
+              }
+            });
+
+            if (stmtsCorrect === 1) qScore = 0.2;
+            else if (stmtsCorrect === 2) qScore = 0.5;
+            else if (stmtsCorrect === 3) qScore = 1.0;
+            else if (stmtsCorrect === 4) qScore = 2.0;
+
+            if (stmtsCorrect === 4) correctCount++;
+            tfSummary = `Đúng ${stmtsCorrect}/4 ý (${qScore.toFixed(1)}đ)`;
+          }
+          a.scoreEarned = qScore;
+          totalScore += qScore;
+        } else {
+          let qScore = 0;
+          if (!a.forfeited && a.choice === q.correct) {
+            qScore = 1.0;
+            correctCount++;
+            if (q.level === 'Nhận biết') correctNB++;
+            else if (q.level === 'Thông hiểu') correctTH++;
+            else if (q.level === 'Vận dụng') correctVD++;
+          }
+          a.scoreEarned = qScore;
+          totalScore += qScore;
+        }
+      });
+
+      const maxScore = CURRENT_EXAM.totalPoints;
+      let finalScore = disqualified ? 0 : Number(Math.min(maxScore, Math.max(0, totalScore)).toFixed(1));
+
+      viewExam.classList.add('hidden');
+      mobileBar.style.display = 'none';
+      simDock.classList.add('hidden');
+      viewResult.classList.remove('hidden');
+
+      const examNameLabel = CURRENT_EXAM.type === 'quick5' ? 'Đề 2 (Test Nhanh 5 Câu)' : 'Đề 1 (KTTX 9 Câu)';
+      document.getElementById('result-name').textContent = student.name;
+      document.getElementById('result-meta').textContent = `SBD: ${student.code} • Lớp: ${student.class} • ${examNameLabel}`;
+      document.getElementById('result-score-box').textContent = `${finalScore.toFixed(1)}/${maxScore.toFixed(0)}`;
+      document.getElementById('res-correct').textContent = `${correctCount}/${QUESTIONS.length} câu`;
+      document.getElementById('res-violations').textContent = `${strikes.length} lần`;
+
+      const scoreBox = document.getElementById('result-score-box');
+      const tag = document.getElementById('result-status-tag');
+      const disBox = document.getElementById('disqualified-box');
+
+      if (disqualified) {
+        scoreBox.className = 'result-score-badge danger';
+        tag.textContent = 'ĐÌNH CHỈ THI (0 ĐIỂM)';
+        tag.style.background = '#ffe4e6';
+        tag.style.color = '#e11d48';
+        disBox.classList.remove('hidden');
+      } else {
+        scoreBox.className = 'result-score-badge';
+        const isPass = finalScore >= CURRENT_EXAM.passScore;
+        tag.textContent = isPass ? 'ĐẠT YÊU CẦU' : 'CHƯA ĐẠT';
+        tag.style.background = isPass ? '#dcfce7' : '#fee2e2';
+        tag.style.color = isPass ? '#15803d' : '#b91c1c';
+        disBox.classList.add('hidden');
+      }
+
+      // Review List
+      const reviewBox = document.getElementById('review-list');
+      reviewBox.innerHTML = '<h3 style="font-size:14px; font-weight:800; margin:16px 0 8px 0; color:#0f172a;">Chi Tiết Từng Câu Hỏi:</h3>';
+
+      QUESTIONS.forEach((q, idx) => {
+        const a = userAnswers[idx];
+        const isForfeited = !!a?.forfeited;
+        const ptsEarned = a?.scoreEarned || 0;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.marginBottom = '10px';
+        card.style.padding = '14px';
+
+        let statusBadge = '';
+        if (isForfeited) {
+          statusBadge = '<span style="background:#ffe4e6; color:#e11d48; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">🚨 Phạt 0đ (Thoát màn hình/Chụp)</span>';
+        } else if (ptsEarned > 0) {
+          statusBadge = `<span style="background:#dcfce7; color:#15803d; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">✓ Đạt +${ptsEarned.toFixed(1)}đ</span>`;
+        } else {
+          statusBadge = '<span style="background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">0 điểm</span>';
+        }
+
+        let innerContent = '';
+        if (q.type === 'tf') {
+          let stmtsHtml = '';
+          q.statements.forEach(s => {
+            const userVal = a?.tf?.[s.key];
+            const isMatch = (userVal === s.isTrue);
+            stmtsHtml += `
+              <div style="padding:6px 8px; border-radius:8px; margin-bottom:4px; font-size:11px; background:${isMatch ? '#ecfdf5' : '#fff1f2'}; display:flex; justify-content:space-between; align-items:center;">
+                <span>${s.text}</span>
+                <span style="font-weight:700; font-family:monospace; margin-left:8px;">
+                  Chọn: ${userVal === true ? 'ĐÚNG' : userVal === false ? 'SAI' : '-'} | Đáp án: ${s.isTrue ? 'ĐÚNG' : 'SAI'}
+                </span>
+              </div>
+            `;
+          });
+          innerContent = `
+            <div style="margin:8px 0;">${stmtsHtml}</div>
+            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
+              ${q.exp}
+            </div>
+          `;
+        } else {
+          let optsHtml = '';
+          q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const isChosen = (a?.choice === optIdx);
+            const isKey = (optIdx === q.correct);
+            let optStyle = 'padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;';
+            if (isKey) optStyle += 'background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;';
+            else if (isChosen) optStyle += 'background:#fff1f2; border-color:#fca5a5; color:#991b1b;';
+            else optStyle += 'background:#ffffff; color:#475569;';
+
+            optsHtml += `
+              <div style="${optStyle}">
+                <strong>${letter}.</strong> ${opt} ${isChosen ? '(Thí sinh chọn)' : ''} ${isKey ? '(Đáp án chuẩn)' : ''}
+              </div>
+            `;
+          });
+          innerContent = `
+            <div style="margin:8px 0;">${optsHtml}</div>
+            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
+              💡 <strong>Giải thích:</strong> ${q.exp}
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <strong style="font-size:12px; color:#0f172a;">Câu ${idx + 1} (${q.type === 'tf' ? '2.0đ' : '1.0đ'}) [${q.level}]</strong>
+            ${statusBadge}
+          </div>
+          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
+            ${q.question}
+          </div>
+          ${innerContent}
+        `;
+        reviewBox.appendChild(card);
+      });
+
+      // Prepare Copy Row for Google Sheets (14 columns)
+      const nowStr = new Date().toLocaleString('vi-VN');
+      const timeSpentFormatted = remaining <= 0 ? 'Hết giờ' : `${CURRENT_EXAM.durationSec - remaining} giây`;
+      const examCode = (CURRENT_EXAM.type === 'quick5' ? 'TN-' : 'CN-') + Math.floor(100 + Math.random() * 899);
+
+      const sheetRow = [
+        nowStr,
+        student.code,
+        student.name,
+        student.class,
+        CURRENT_EXAM.subject,
+        examCode,
+        'Lần 1: Chính thức',
+        strikes.length,
+        timeSpentFormatted,
+        finalScore.toFixed(2),
+        correctNB,
+        correctTH,
+        correctVD,
+        CURRENT_EXAM.type === 'quick5' ? 'Không có phần Đ/S' : tfSummary
+      ].join('\t');
+
+      const copyBtn = document.getElementById('btn-copy-sheet-row');
+      if (copyBtn) {
+        copyBtn.onclick = () => {
+          navigator.clipboard.writeText(sheetRow).then(() => {
+            alert('Đã sao chép 14 cột chuẩn! Bạn có thể dán (Ctrl+V) vào Google Sheets.');
+          }).catch(() => {
+            prompt('Dòng dữ liệu của bạn (hãy nhấn Ctrl+C để copy):', sheetRow);
+          });
+        };
+      }
+
+      // Auto Push to Google Sheets via Webhook
+      try {
+        fetch('https://script.google.com/macros/s/AKfycbwqvh3UB8Th7DOuEpFXzlN7VY8XAYtkqm0zMqENGTqktCVqtqgT-CEanj1_nWf1pSaocA/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'SUBMISSION',
+            sheetId: '1DTIBxYMavsb2tF56hJLPeT4n3n7YTBKB6ckpjDzSrOs',
+            fullName: student.name,
+            studentCode: student.code,
+            className: student.class,
+            finishTime: nowStr,
+            testName: CURRENT_EXAM.subject,
+            examCode: examCode,
+            attemptLabel: 'Lần 1: Chính thức',
+            violationsCount: strikes.length,
+            timeSpentFormatted: timeSpentFormatted,
+            score: Number(finalScore.toFixed(2)),
+            correctNhanBiet: correctNB,
+            correctThongHieu: correctTH,
+            correctVanDung: correctVD,
+            tfResultText: CURRENT_EXAM.type === 'quick5' ? 'Không có' : tfSummary
+          })
+        }).catch(() => {});
+      } catch (e) {}
+    }
+
+    // Retake Exam Button
+    document.getElementById('btn-retake').onclick = () => {
+      startExamFlow(CURRENT_EXAM.type);
+    };
+
+    // Back to Lobby Button
+    document.getElementById('btn-back-lobby').onclick = () => {
+      viewResult.classList.add('hidden');
+      viewExam.classList.add('hidden');
+      viewLobby.classList.remove('hidden');
+      mobileBar.style.display = 'none';
+      simDock.classList.add('hidden');
+      applyRoomStatusUI();
+    };
+
+    // =========================================================================
+    // 11. TEACHER PORTAL & TOGGLES CONTROLS
+    // =========================================================================
+    let isTeacherAuthenticated = false;
+
+    document.getElementById('btn-open-teacher-modal').onclick = () => {
+      teacherModal.classList.remove('hidden');
+      document.getElementById('teacher-login-error').textContent = '';
+      if (!isTeacherAuthenticated) {
+        document.getElementById('teacher-auth-box').classList.remove('hidden');
+        document.getElementById('teacher-panel-content').classList.add('hidden');
+      } else {
+        document.getElementById('teacher-auth-box').classList.add('hidden');
+        document.getElementById('teacher-panel-content').classList.remove('hidden');
+        updateTeacherPanelUI();
+      }
+    };
+
+    document.getElementById('btn-close-teacher-modal').onclick = () => {
+      teacherModal.classList.add('hidden');
+    };
+    document.getElementById('btn-done-teacher').onclick = () => {
+      teacherModal.classList.add('hidden');
+    };
+
+    document.getElementById('btn-teacher-login').onclick = () => {
+      const pwd = document.getElementById('teacher-password-input').value.trim();
+      if (pwd === 'giaovien123' || pwd === '123456' || pwd === 'admin') {
+        isTeacherAuthenticated = true;
+        document.getElementById('teacher-auth-box').classList.add('hidden');
+        document.getElementById('teacher-panel-content').classList.remove('hidden');
+        updateTeacherPanelUI();
+      } else {
+        document.getElementById('teacher-login-error').textContent = 'Mật khẩu chưa chính xác! (Mặc định: giaovien123)';
+      }
+    };
+
+    // Individual Toggles
+    document.getElementById('btn-toggle-t-exam1').onclick = () => {
+      roomStatus.exam1Open = !roomStatus.exam1Open;
+      saveRoomStatus();
+    };
+
+    document.getElementById('btn-toggle-t-exam2').onclick = () => {
+      roomStatus.exam2Open = !roomStatus.exam2Open;
+      saveRoomStatus();
+    };
+
+    // Batch Toggles
+    document.getElementById('btn-toggle-all-open').onclick = () => {
+      roomStatus.exam1Open = true;
+      roomStatus.exam2Open = true;
+      saveRoomStatus();
+    };
+
+    document.getElementById('btn-toggle-all-close').onclick = () => {
+      roomStatus.exam1Open = false;
+      roomStatus.exam2Open = false;
+      saveRoomStatus();
+    };
+
+    // Initial Load
+    loadRoomStatus();
+  </script>
+</body>
+</html>
