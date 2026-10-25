@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>EduSecure - Đề Thi Công Nghệ 10 (Chuẩn Ma Trận 90 Câu - Bản Offline)</title>
+  <title>EduSecure - Hệ Thống Thi Trắc Nghiệm Chống Gian Lận (Bản Offline Đầy Đủ)</title>
   <style>
     /* 100% PURE EMBEDDED CSS - HOẠT ĐỘNG HOÀN TOÀN OFFLINE KHÔNG CẦN INTERNET */
     * {
@@ -26,7 +26,7 @@
       display: none !important;
     }
     .container {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 12px 14px 90px 14px;
       width: 100%;
@@ -41,12 +41,13 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
     .header-inner {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
     }
     .brand {
       display: flex;
@@ -54,16 +55,17 @@
       gap: 8px;
     }
     .brand-icon {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       background: #0284c7;
       color: #ffffff;
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 17px;
+      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.25);
     }
     .brand-title {
       font-weight: 800;
@@ -75,10 +77,33 @@
       background: #ecfdf5;
       color: #047857;
       border: 1px solid #a7f3d0;
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 999px;
       font-weight: 700;
       margin-left: 6px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-teacher-portal {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-teacher-portal:hover {
+      background: #dbeafe;
+      border-color: #93c5fd;
     }
     .card {
       background: #ffffff;
@@ -95,6 +120,7 @@
       border-radius: 20px;
       padding: 18px;
       margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.2);
     }
     .hero h1 {
       font-size: 17px;
@@ -159,8 +185,21 @@
       color: #ffffff;
       box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
     }
-    .btn-primary:active {
+    .btn-primary:hover {
       background: #0369a1;
+    }
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+    .btn-emerald {
+      background: #059669;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+    }
+    .btn-emerald:hover {
+      background: #047857;
+    }
+    .btn-emerald:active {
       transform: scale(0.98);
     }
     .btn-secondary {
@@ -168,9 +207,22 @@
       color: #0369a1;
       border: 1px solid #bae6fd;
     }
+    .btn-secondary:hover {
+      background: #e0f2fe;
+    }
     .btn-danger {
       background: #e11d48;
       color: #ffffff;
+    }
+    .btn-danger:hover {
+      background: #be123c;
+    }
+    .btn-disabled {
+      background: #f1f5f9 !important;
+      color: #94a3b8 !important;
+      border: 1px solid #cbd5e1 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
     }
     .input-group {
       margin-bottom: 10px;
@@ -195,6 +247,66 @@
       outline: none;
       border-color: #0284c7;
       background: #ffffff;
+    }
+
+    /* Room Status Bar */
+    .room-status-bar {
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-width: 1px;
+      border-style: solid;
+    }
+    .room-status-bar.both-closed {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+    .room-status-bar.both-open {
+      background: #ecfdf5;
+      border-color: #6ee7b7;
+      color: #065f46;
+    }
+    .room-status-bar.partial {
+      background: #f0f9ff;
+      border-color: #7dd3fc;
+      color: #0369a1;
+    }
+
+    /* 2 Exam Cards Grid */
+    .exam-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (min-width: 768px) {
+      .exam-cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .exam-set-card {
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #bae6fd;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.05);
+      transition: all 0.2s;
+    }
+    .exam-set-card.card-exam-1 {
+      border-color: #bfdbfe;
+      background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    }
+    .exam-set-card.card-exam-2 {
+      border-color: #a7f3d0;
+      background: linear-gradient(135deg, #f8fafc 0%, #ecfdf5 100%);
     }
 
     /* Proctor Bar */
@@ -528,10 +640,12 @@
     .modal-card {
       background: #ffffff;
       border-radius: 20px;
-      max-width: 380px;
+      max-width: 480px;
       width: 100%;
-      padding: 18px;
+      padding: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     /* Result Box */
@@ -549,7 +663,7 @@
 
     /* Print styling */
     @media print {
-      header, .mobile-bar, .sim-dock, .btn {
+      header, .mobile-bar, .sim-dock, .btn, .header-actions {
         display: none !important;
       }
       body {
@@ -572,13 +686,18 @@
         <div>
           <div style="display:flex; align-items:center;">
             <span class="brand-title">EduSecure</span>
-            <span class="badge-offline">Bản Offline 90 Câu</span>
+            <span class="badge-offline">Bản Offline 2 Bộ Đề</span>
           </div>
           <div style="font-size:10px; color:#64748b;">Hệ thống thi trắc nghiệm chống gian lận & thoát tab</div>
         </div>
       </div>
-      <div id="student-badge" class="hidden" style="font-size:11px; background:#f0f9ff; padding:4px 8px; border-radius:8px; border:1px solid #bae6fd;">
-        <span id="badge-name" style="font-weight:700;">Học sinh</span>
+      <div class="header-actions">
+        <div id="student-badge" class="hidden" style="font-size:11px; background:#f0f9ff; padding:4px 8px; border-radius:8px; border:1px solid #bae6fd;">
+          <span id="badge-name" style="font-weight:700;">Học sinh</span>
+        </div>
+        <button id="btn-open-teacher-modal" class="btn-teacher-portal">
+          👩‍🏫 Quản lý phòng thi
+        </button>
       </div>
     </div>
   </header>
@@ -589,8 +708,8 @@
     <!-- VIEW 1: LOBBY -->
     <div id="view-lobby">
       <div class="hero">
-        <h1>Phòng Khảo Thí Công Nghệ 10 (Chuẩn Ma Trận 9 Câu)</h1>
-        <p>Bốc ngẫu nhiên từ ngân hàng 90 câu chuẩn hóa (Bài 3 & Bài 4 SGK mới): 8 câu nhiều lựa chọn (1.0đ/câu) + 1 câu Đúng/Sai (2.0đ). Thang điểm: 10.0đ.</p>
+        <h1>Phòng Khảo Thí Trắc Nghiệm Công Nghệ 10</h1>
+        <p>Hệ thống hỗ trợ 2 bộ đề thi riêng biệt: <strong>Đề 1 (KTTX 9 câu • 10 phút • 10.0đ)</strong> và <strong>Đề 2 (Test Nhanh 5 câu • 5 phút • 5.0đ)</strong>. Giáo viên có quyền tắt/mở từng đề thi độc lập.</p>
 
         <div class="rules-grid">
           <div class="rule-box">
@@ -639,23 +758,109 @@
             <span id="name-status" style="font-size:10px; color:#16a34a; font-weight:600; margin-top:2px; display:block;"></span>
           </div>
         </div>
+      </div>
 
-        <div style="margin-top:14px;">
-          <button id="btn-start" class="btn btn-primary" style="padding:14px; font-size:15px; width:100%; font-weight:800;">
-            🚀 Vào thi (Bốc Đề 9 Câu Ngẫu Nhiên)
-          </button>
+      <!-- Live Room Status Banner -->
+      <div id="room-status-banner" class="room-status-bar both-open">
+        <span id="room-status-indicator" style="width:10px; height:10px; border-radius:999px; background:#10b981; flex-shrink:0;"></span>
+        <div id="room-status-text">
+          <strong>Cả 2 bộ đề đang mở:</strong> Giáo viên đã mở quyền vào thi cho cả 2 đề. Học sinh chọn bộ đề bên dưới để bắt đầu.
         </div>
       </div>
 
-      <!-- Matrix description -->
-      <div class="card" style="font-size:12px; color:#475569;">
-        <strong style="color:#0369a1; display:block; margin-bottom:4px;">📋 Cấu Trúc Đề Thi 9 Câu:</strong>
-        <ul style="padding-left:18px; line-height:1.6;">
-          <li><strong>Câu 1 - 8 (Trắc nghiệm 4 lựa chọn):</strong> 8 câu bốc ngẫu nhiên từ ngân hàng đề thi (1.0 điểm/câu). Các phương án A-B-C-D được xáo trộn tự động.</li>
-          <li><strong>Câu 9 (Trắc nghiệm Đúng/Sai 4 lệnh):</strong> 1 câu hỏi bối cảnh kỹ thuật thực tế với 4 lệnh hỏi (2.0 điểm). Đúng 1 lệnh: 0,2đ • Đúng 2 lệnh: 0,5đ • Đúng 3 lệnh: 1,0đ • Đúng 4 lệnh: 2,0đ.</li>
-          <li><strong>Tổng điểm:</strong> 10.0 điểm • <strong>Thời gian:</strong> 15 phút.</li>
-        </ul>
+      <!-- 2 Dedicated Exam Selection Cards -->
+      <div style="margin-top:14px;">
+        <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+          <span>📋</span> Danh Sách 2 Bộ Đề Thi Trực Tuyến
+        </h3>
+
+        <div class="exam-cards-grid">
+          
+          <!-- BỘ ĐỀ 1 -->
+          <div class="exam-set-card card-exam-1">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:10px; font-weight:900; text-transform:uppercase; background:#0284c7; color:#ffffff; padding:2px 8px; border-radius:999px;">
+                  Bộ Đề Số 1
+                </span>
+                <span id="exam1-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                  Đang Mở
+                </span>
+              </div>
+              <h4 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:4px;">
+                KTTX Bài 3 & 4 (Chuẩn Ma Trận)
+              </h4>
+              <p style="font-size:12px; color:#475569; margin-bottom:10px; line-height:1.4;">
+                Đề kiểm tra thường xuyên 9 câu: 8 câu trắc nghiệm nhiều lựa chọn (3 biết, 3 hiểu, 2 vận dụng) + 1 câu Đúng/Sai 4 ý có bối cảnh thực tế.
+              </p>
+
+              <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:11px; margin-bottom:12px;">
+                <span style="background:#ffffff; border:1px solid #bae6fd; padding:3px 8px; border-radius:8px; font-weight:700; color:#0369a1;">
+                  ⏱️ 10 phút
+                </span>
+                <span style="background:#ffffff; border:1px solid #bae6fd; padding:3px 8px; border-radius:8px; font-weight:700; color:#059669;">
+                  🎯 Thang 10.0đ
+                </span>
+                <span style="background:#ffffff; border:1px solid #bae6fd; padding:3px 8px; border-radius:8px; font-weight:700; color:#4338ca;">
+                  📝 9 câu hỏi
+                </span>
+              </div>
+            </div>
+
+            <div style="margin-top:8px;">
+              <div id="exam1-closed-alert" class="hidden" style="font-size:11px; color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:6px 10px; border-radius:8px; margin-bottom:8px; font-weight:600;">
+                ⚠️ Giáo viên hiện đang tạm khóa Đề 1. Vui lòng chờ giáo viên mở phòng thi!
+              </div>
+              <button id="btn-start-exam-1" class="btn btn-primary" style="padding:12px; font-weight:800;">
+                🚀 Vào Thi Đề 1 (9 Câu Ngẫu Nhiên)
+              </button>
+            </div>
+          </div>
+
+          <!-- BỘ ĐỀ 2 -->
+          <div class="exam-set-card card-exam-2">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:10px; font-weight:900; text-transform:uppercase; background:#059669; color:#ffffff; padding:2px 8px; border-radius:999px;">
+                  Bộ Đề Số 2 • Test Nhanh
+                </span>
+                <span id="exam2-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                  Đang Mở
+                </span>
+              </div>
+              <h4 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:4px;">
+                Test Nhanh 5 Câu (Chuẩn File PDF)
+              </h4>
+              <p style="font-size:12px; color:#475569; margin-bottom:10px; line-height:1.4;">
+                Bài kiểm tra nhanh 5 câu trắc nghiệm bốc ngẫu nhiên từ file test nhanh 5cau: 2 nhận biết, 2 thông hiểu, 1 vận dụng.
+              </p>
+
+              <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:11px; margin-bottom:12px;">
+                <span style="background:#ffffff; border:1px solid #a7f3d0; padding:3px 8px; border-radius:8px; font-weight:700; color:#047857;">
+                  ⏱️ 5 phút
+                </span>
+                <span style="background:#ffffff; border:1px solid #a7f3d0; padding:3px 8px; border-radius:8px; font-weight:700; color:#059669;">
+                  🎯 Thang 5.0đ
+                </span>
+                <span style="background:#ffffff; border:1px solid #a7f3d0; padding:3px 8px; border-radius:8px; font-weight:700; color:#0f766e;">
+                  ⚡ 5 câu hỏi
+                </span>
+              </div>
+            </div>
+
+            <div style="margin-top:8px;">
+              <div id="exam2-closed-alert" class="hidden" style="font-size:11px; color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:6px 10px; border-radius:8px; margin-bottom:8px; font-weight:600;">
+                ⚠️ Giáo viên hiện đang tạm khóa Đề 2. Vui lòng chờ giáo viên mở phòng thi!
+              </div>
+              <button id="btn-start-exam-2" class="btn btn-emerald" style="padding:12px; font-weight:800;">
+                ⚡ Vào Thi Đề 2 (Test Nhanh 5 Câu)
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
+
     </div>
 
     <!-- VIEW 2: ACTIVE EXAM -->
@@ -663,10 +868,10 @@
       <!-- Proctoring Header Bar -->
       <div class="proctor-bar">
         <div>
-          <span style="font-size:10px; color:#64748b; font-weight:700; display:block;">THỜI GIAN CÒN LẠI</span>
+          <span id="exam-badge-type" style="font-size:10px; color:#0284c7; font-weight:800; text-transform:uppercase; display:block;">ĐỀ THI ĐANG LÀM</span>
           <div class="timer">
             <span>⏱️</span>
-            <span id="timer-text">15:00</span>
+            <span id="timer-text">10:00</span>
           </div>
         </div>
 
@@ -703,13 +908,13 @@
         </div>
 
         <div class="q-meta">
-          <span id="q-level-tag" class="q-tag" style="display:none;"></span>
+          <span id="q-level-tag" class="q-tag">Nhận biết</span>
           <span id="q-points-tag" class="q-pts">1.0 điểm</span>
         </div>
 
         <h2 id="q-title" class="q-title">Nội dung câu hỏi...</h2>
 
-        <!-- Context Box for Question 9 -->
+        <!-- Context Box for Question 9 in Exam 1 -->
         <div id="q-context-box" class="context-box hidden"></div>
 
         <!-- Options Container for Multiple Choice -->
@@ -719,8 +924,9 @@
         <div id="tf-options-container" class="hidden"></div>
 
         <!-- Prev / Next Desktop Buttons -->
-        <div id="desktop-nav" style="display:flex; justify-content:space-between; margin-top:16px; pt-3; border-top:1px solid #f1f5f9;">
+        <div id="desktop-nav" style="display:flex; justify-content:space-between; margin-top:16px; padding-top:12px; border-top:1px solid #f1f5f9;">
           <button id="btn-prev" class="btn btn-secondary" style="width:auto; padding:8px 16px;">← Câu trước</button>
+          <button id="btn-submit-desktop" class="btn btn-danger" style="width:auto; padding:8px 20px;">Nộp bài thi</button>
           <button id="btn-next" class="btn btn-primary" style="width:auto; padding:8px 16px;">Câu sau →</button>
         </div>
       </div>
@@ -733,18 +939,18 @@
           HOÀN THÀNH BÀI THI
         </span>
         <h2 id="result-name" style="font-size:18px; font-weight:800; color:#0f172a;">Nguyễn Văn An</h2>
-        <div id="result-meta" style="font-size:12px; color:#64748b;">SBD: SBD-102 • Lớp 10A1</div>
+        <div id="result-meta" style="font-size:12px; color:#64748b;">SBD: 15 • Lớp 10C05 • Đề 1</div>
 
         <div id="result-score-box" class="result-score-badge">0.0/10</div>
 
         <div id="disqualified-box" class="hidden" style="background:#ffe4e6; border:1px solid #fecdd3; color:#9f1239; padding:10px; border-radius:12px; font-size:12px; font-weight:700; margin:10px 0;">
-          🚨 BÀI THI BỊ ĐÌNH CHỈ: Thí sinh đã thoát màn hình 3 lần theo quy chế. Điểm số bị hủy về 0.0 điểm.
+          🚨 BÀI THI BỊ ĐÌNH CHỈ: Thí sinh đã thoát màn hình 3 lần theo quy chế. Toàn bộ bài thi bị hủy điểm (0 điểm).
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; text-align:left;">
           <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:10px;">
             <div style="font-size:10px; color:#64748b;">Số câu đúng:</div>
-            <strong id="res-correct" style="font-size:15px; color:#16a34a; font-family:monospace;">0/9</strong>
+            <strong id="res-correct" style="font-size:15px; color:#16a34a; font-family:monospace;">0/9 câu</strong>
           </div>
           <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:10px;">
             <div style="font-size:10px; color:#64748b;">Số lần vi phạm:</div>
@@ -753,19 +959,19 @@
         </div>
 
         <!-- Google Sheets Sync Row Box -->
-        <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:12px; margin-top:14px;">
+        <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:12px; margin-top:14px; text-align:left;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="color:#065f46; font-size:12px;">📊 Bảng Điểm Sheet DANH SACH HS</strong>
+            <strong style="color:#065f46; font-size:12px;">📊 Bảng Điểm Sheet DANH SACH HS & KET QUA TX</strong>
             <span style="font-size:10px; font-family:monospace; background:#ffffff; border:1px solid #6ee7b7; padding:2px 6px; border-radius:6px; color:#047857;">ID: 1DTIBxYMavsb...</span>
           </div>
           <p style="font-size:11px; color:#064e3b; margin-bottom:8px;">
-            Dữ liệu bài thi đã sẵn sàng để dán trực tiếp vào sheet <strong>DANH SACH HS</strong>.
+            Dữ liệu bài thi đã sẵn sàng để dán trực tiếp vào sheet <strong>DANH SACH HS</strong> hoặc <strong>KET QUA KIEM TRA TX</strong>.
           </p>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button id="btn-copy-sheet-row" class="btn btn-secondary" style="font-size:11px; padding:6px 12px; background:#ffffff;">
+            <button id="btn-copy-sheet-row" class="btn btn-secondary" style="font-size:11px; padding:6px 12px; background:#ffffff; width:auto;">
               📋 Sao Chép Dòng Điểm Vào Sheet
             </button>
-            <a href="https://docs.google.com/spreadsheets/d/1DTIBxYMavsb2tF56hJLPeT4n3n7YTBKB6ckpjDzSrOs" target="_blank" class="btn btn-primary" style="font-size:11px; padding:6px 12px; text-decoration:none; display:inline-flex; align-items:center;">
+            <a href="https://docs.google.com/spreadsheets/d/1DTIBxYMavsb2tF56hJLPeT4n3n7YTBKB6ckpjDzSrOs" target="_blank" class="btn btn-primary" style="font-size:11px; padding:6px 12px; text-decoration:none; display:inline-flex; align-items:center; width:auto;">
               ↗ Mở Google Sheet DANH SACH HS
             </a>
           </div>
@@ -773,7 +979,8 @@
 
         <div style="display:flex; gap:8px; margin-top:14px;">
           <button id="btn-retake" class="btn btn-primary">Thi Lại (Đề Mới)</button>
-          <button onclick="window.print()" class="btn btn-secondary" style="width:auto;">In Kết Quả</button>
+          <button id="btn-back-lobby" class="btn btn-secondary">Đổi Bộ Đề Khác</button>
+          <button onclick="window.print()" class="btn btn-secondary" style="width:auto;">In Điểm</button>
         </div>
       </div>
 
@@ -820,10 +1027,95 @@
     </div>
   </div>
 
-  <!-- QUESTION BANK & LOGIC SCRIPT -->
+  <!-- TEACHER PORTAL MODAL (TẮT / MỞ RIÊNG TỪNG BỘ ĐỀ) -->
+  <div id="teacher-modal" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width:540px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">👩‍🏫</span>
+          <h3 style="font-size:16px; font-weight:800; color:#0f172a;">Bàn Điều Khiển Giáo Viên</h3>
+        </div>
+        <button id="btn-close-teacher-modal" style="background:none; border:none; font-size:20px; color:#64748b; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Password Lock Screen for Teacher -->
+      <div id="teacher-auth-box">
+        <p style="font-size:12px; color:#475569; margin-bottom:10px;">
+          Vui lòng nhập mật khẩu quản lý để cấu hình tắt/mở từng bộ đề thi:
+        </p>
+        <div class="input-group">
+          <label>Mật khẩu giáo viên:</label>
+          <input type="password" id="teacher-password-input" class="input-control" placeholder="Mặc định: giaovien123" style="font-family:monospace; font-size:14px;">
+        </div>
+        <span id="teacher-login-error" style="font-size:11px; color:#e11d48; font-weight:700; display:block; margin-bottom:8px;"></span>
+        <button id="btn-teacher-login" class="btn btn-primary">Xác Nhận Đăng Nhập</button>
+      </div>
+
+      <!-- Authenticated Teacher Control Panel -->
+      <div id="teacher-panel-content" class="hidden">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; background:#f0f9ff; padding:8px 12px; border-radius:12px; border:1px solid #bae6fd;">
+          <div>
+            <strong style="color:#0369a1; font-size:12px;">Điều khiển tắt / mở riêng từng đề thi</strong>
+            <div style="font-size:10px; color:#64748b;">Học sinh ở sảnh sẽ cập nhật trạng thái ngay lập tức</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button id="btn-toggle-all-open" class="btn btn-emerald" style="padding:4px 8px; font-size:10px; width:auto;">Mở cả 2 đề</button>
+            <button id="btn-toggle-all-close" class="btn btn-danger" style="padding:4px 8px; font-size:10px; width:auto;">Tắt cả 2 đề</button>
+          </div>
+        </div>
+
+        <!-- Toggle Item: Đề 1 -->
+        <div style="background:#ffffff; border:1px solid #bfdbfe; border-radius:14px; padding:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
+              <span style="font-size:10px; font-weight:800; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:6px;">ĐỀ 1</span>
+              <strong style="font-size:13px; color:#0f172a;">KTTX Bài 3 & 4 (9 câu • 10đ)</strong>
+            </div>
+            <div id="t-exam1-status-label" style="font-size:11px; font-weight:700; color:#15803d;">
+              ● Đang Mở Cho Học Sinh Thi
+            </div>
+          </div>
+          <button id="btn-toggle-t-exam1" class="btn btn-danger" style="width:auto; padding:8px 14px; font-size:11px;">
+            Tắt Đề 1 (Khóa)
+          </button>
+        </div>
+
+        <!-- Toggle Item: Đề 2 -->
+        <div style="background:#ffffff; border:1px solid #a7f3d0; border-radius:14px; padding:12px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
+              <span style="font-size:10px; font-weight:800; background:#dcfce7; color:#065f46; padding:2px 6px; border-radius:6px;">ĐỀ 2</span>
+              <strong style="font-size:13px; color:#0f172a;">Test Nhanh 5 Câu (5 câu • 5đ)</strong>
+            </div>
+            <div id="t-exam2-status-label" style="font-size:11px; font-weight:700; color:#15803d;">
+              ● Đang Mở Cho Học Sinh Thi
+            </div>
+          </div>
+          <button id="btn-toggle-t-exam2" class="btn btn-danger" style="width:auto; padding:8px 14px; font-size:11px;">
+            Tắt Đề 2 (Khóa)
+          </button>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px; font-size:11px; color:#475569;">
+          <strong>💡 Ghi chú dành cho Giáo Viên:</strong>
+          <ul style="padding-left:18px; margin-top:4px; line-height:1.5;">
+            <li>Khi chọn <strong>"Tắt"</strong>, nút ở màn hình học sinh đổi thành <em>"Chưa được vào thi"</em> màu xám và bị vô hiệu hóa.</li>
+            <li>Trạng thái lưu tự động vào thiết bị và đồng bộ tức thì trên tất cả các tab trình duyệt.</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:12px; display:flex; justify-content:flex-end;">
+          <button id="btn-done-teacher" class="btn btn-secondary" style="width:auto; padding:6px 16px;">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DATA & ENGINE -->
   <script>
-    // 80 CÂU TRẮC NGHIỆM NHIỀU LỰA CHỌN (PDF BÀI 3 & 4)
-    // Đáp án chuẩn gốc: A (index 0)
+    // =========================================================================
+    // 1. NGÂN HÀNG CÂU HỎI ĐỀ 1: 80 CÂU TRẮC NGHIỆM + 10 CÂU ĐÚNG/SAI (BÀI 3 & 4)
+    // =========================================================================
     const RAW_MC_BANK = [
       { id:1, l:'nhan_biet', q:'Công nghệ luyện kim là công nghệ điều chế kim loại hoặc hợp kim phục vụ sản xuất từ nguồn nguyên liệu nào?', opts:['Các loại quặng tự nhiên hoặc nguyên liệu tái chế chứa kim loại','Các dung dịch hóa chất tổng hợp trong phòng thí nghiệm','Sản phẩm polyme biến tính và chất dẻo công nghiệp','Các loại khoáng sản phi kim và đá vôi silicat'], exp:'Luyện kim điều chế kim loại từ quặng tự nhiên hoặc phế liệu tái chế.' },
       { id:2, l:'nhan_biet', q:'Theo phân loại sản phẩm tạo ra, công nghệ luyện kim đen có sản phẩm chủ yếu là gì?', opts:['Gang và thép','Nhôm và hợp kim nhôm','Đồng và đồng thau','Thiếc và titan'], exp:'Sản phẩm chủ yếu của luyện kim đen là gang và thép.' },
@@ -845,7 +1137,7 @@
       { id:18, l:'nhan_biet', q:'Công nghệ truyền thông không dây thực hiện truyền tải dữ liệu qua khoảng cách nhờ môi trường nào?', opts:['Sóng điện từ lan truyền trong không gian','Mạng cáp quang ngầm dưới mặt đất','Dây dẫn lõi đồng bọc nhựa cách điện','Dòng chảy chất lỏng thủy lực áp suất cao'], exp:'Sóng điện từ lan truyền không dây trong không gian.' },
       { id:19, l:'nhan_biet', q:'Theo định nghĩa chuẩn kỹ thuật, thế nào là một "Công nghệ mới"?', opts:['Là công nghệ có giải pháp kỹ thuật phát triển hơn so với công nghệ hiện tại','Là công nghệ mới được phát minh trong vòng 24 giờ gần nhất','Là công nghệ chỉ sử dụng duy nhất các nguồn nguyên liệu sinh học','Là các công cụ gia công cơ khí cầm tay thủ công truyền thống'], exp:'Công nghệ mới có giải pháp kỹ thuật tiên tiến vượt trội.' },
       { id:20, l:'nhan_biet', q:'Vật liệu nano là loại vật liệu có kích thước cấu trúc vi mô nằm trong khoảng nào?', opts:['Từ 1 đến 100 nanômét (nm)','Từ 1 đến 100 micrômét (µm)','Từ 1 đến 100 milimét (mm)','Từ 100 đến 1000 nanômét (nm)'], exp:'Kích thước hạt nano từ 1 đến 100 nm.' },
-      { id:21, l:'nhan_biet', q:'Cụm từ viết tắt "CAD" trong hệ thống CAD/CAM/CNC đại diện cho thuật ngữ tiếng Anh nào?', opts:['Computer Aided Design','Computer Automated Drafting','Control And Application Design','Computer Applied Device'], exp:'CAD = Computer Aided Design.' },
+      { id:21, l:'nhan_biet', q:'Trong chuỗi CAD/CAM/CNC, CAD được thực hiện trước để làm gì?', opts:['Tạo mô hình hoặc bản thiết kế chi tiết trên máy tính','Đúc ngay sản phẩm trong lò','Phát điện từ ánh sáng','Truyền dữ liệu qua Bluetooth'], exp:'Bước CAD thực hiện trước để tạo mô hình hoặc bản thiết kế chi tiết trên máy tính.' },
       { id:22, l:'nhan_biet', q:'Sản phẩm đầu ra trực tiếp của quá trình phần mềm CAM (Computer Aided Manufacturing) là gì?', opts:['Quy trình công nghệ và chương trình/mã lệnh gia công điều khiển máy','Bản vẽ thiết kế 3D hoàn chỉnh trên màn hình máy tính','Chi tiết cơ khí bằng kim loại đã gia công xong trên máy','Sản phẩm mẫu bằng nhựa in 3D'], exp:'CAM xuất mã lệnh gia công điều khiển máy CNC.' },
       { id:23, l:'nhan_biet', q:'Bản chất kỹ thuật của công nghệ in 3D (Additive Manufacturing) là gì?', opts:['Phân tách mô hình 3D thành các lớp 2D và in đắp dần tuần tự từng lớp vật liệu','Dùng dao cắt gọt bóc tách khối vật liệu thô từ ngoài vào trong','Nấu chảy vật liệu rồi ép vào khuôn đúc có áp suất lớn','Cán ép hai trục làm mỏng vật liệu nhựa thành dạng màng'], exp:'In 3D đắp từng lớp vật liệu 2D chồng lên nhau.' },
       { id:24, l:'nhan_biet', q:'Độ nhẵn bề mặt của sản phẩm chế tạo bằng công nghệ in 3D phụ thuộc trực tiếp vào yếu tố kỹ thuật nào?', opts:['Độ dày của từng lớp in vật liệu xếp chồng lên nhau','Màu sắc nguyên bản của cuộn nhựa in','Độ ẩm tương đối của không khí phòng làm việc','Tốc độ quay của quạt làm mát nguồn điện máy in'], exp:'Độ dày lớp in càng mỏng thì bề mặt càng nhẵn mịn.' },
@@ -907,8 +1199,6 @@
       { id:80, l:'van_dung', q:'Phương án cấp điện bền vững, tối ưu nhất cho các trạm radar tại vùng hải đảo xa lưới điện quốc gia là:', opts:['Hệ thống tổ hợp Điện mặt trời + Điện gió kết hợp Pin lưu trữ năng lượng','Đốt than đá liên tục ngày đêm bằng lò hơi','Xây dựng nhà máy nhiệt điện khí đốt quy mô lớn','Kéo dây điện trần dưới mặt biển mà không có cách điện'], exp:'Tổ hợp năng lượng tái tạo gió + mặt trời + pin lưu trữ độc lập.' }
     ];
 
-    // 10 CÂU TRẮC NGHIỆM ĐÚNG / SAI CÓ BỐI CẢNH (CÂU 81 - 90)
-    // Thang điểm 2.0đ: Đúng 1: 0.2đ, Đúng 2: 0.5đ, Đúng 3: 1.0đ, Đúng 4: 2.0đ
     const RAW_TF_BANK = [
       {
         id: 81,
@@ -1032,6 +1322,33 @@
       }
     ];
 
+    // =========================================================================
+    // 2. NGÂN HÀNG CÂU HỎI ĐỀ 2: TEST NHANH 5 CÂU (TRÍCH TỪ FILE TEST NHANH 5CAU)
+    // =========================================================================
+    const QUICK_BANK_QUESTIONS = [
+      // Nhận biết (6 câu)
+      { id: 'tn-1', l: 'nhan_biet', q: 'Công nghệ nào thu nhận kim loại từ quặng và các nguyên liệu khác?', opts: ['Luyện kim.', 'Gia công áp lực.', 'Đúc.', 'Hàn.'], exp: 'Công nghệ luyện kim có nhiệm vụ thu nhận kim loại từ quặng và các nguyên liệu khác để phục vụ cho các ngành sản xuất.' },
+      { id: 'tn-2', l: 'nhan_biet', q: 'Cặp kim loại nào đều là sản phẩm của luyện kim màu?', opts: ['Đồng và nhôm.', 'Gang và nhôm.', 'Gang và thép.', 'Thép và đồng.'], exp: 'Đồng và nhôm là các kim loại màu, được tạo ra từ công nghệ luyện kim màu (không chứa sắt).' },
+      { id: 'tn-3', l: 'nhan_biet', q: 'Trong công nghệ đúc, kim loại được đưa vào lòng khuôn chủ yếu ở trạng thái nào?', opts: ['Lỏng.', 'Rắn dạng thanh.', 'Rắn dạng dây.', 'Rắn dạng tấm.'], exp: 'Trong công nghệ đúc, kim loại được nấu chảy thành trạng thái lỏng rồi rót vào lòng khuôn để đông đặc thành chi tiết.' },
+      { id: 'tn-16', l: 'nhan_biet', q: 'Một nanômét bằng bao nhiêu mét?', opts: ['10⁻⁹ m.', '10⁻² m.', '10⁻³ m.', '10⁻⁶ m.'], exp: '1 nanômét (nm) = 10⁻⁹ mét (m).' },
+      { id: 'tn-25', l: 'nhan_biet', q: 'Tên viết tắt AI chỉ công nghệ nào?', opts: ['Trí tuệ nhân tạo.', 'Thiết kế có máy tính hỗ trợ.', 'Điều khiển số bằng máy tính.', 'Internet vạn vật.'], exp: 'AI (Artificial Intelligence) là thuật ngữ chỉ công nghệ Trí tuệ nhân tạo.' },
+      { id: 'tn-27', l: 'nhan_biet', q: 'Tên viết tắt IoT chỉ công nghệ nào?', opts: ['Internet vạn vật.', 'In ba chiều.', 'Luyện kim màu.', 'Gia công bằng máy điều khiển số.'], exp: 'IoT (Internet of Things) là mạng lưới Internet kết nối vạn vật.' },
+
+      // Thông hiểu (5 câu)
+      { id: 'tn-31', l: 'thong_hieu', q: 'Một cơ sở nấu kim loại rồi rót vào khuôn hình bánh đà. Vì sao đây là công nghệ đúc?', opts: ['Hình dạng được tạo khi kim loại lỏng đông đặc trong khuôn.', 'Hình dạng được tạo bằng nối nhiều thanh kim loại.', 'Hình dạng được tạo bằng lực ép lên phôi rắn.', 'Hình dạng được tạo bằng bóc phoi trên máy tiện.'], exp: 'Đặc trưng cơ bản của công nghệ đúc là tạo hình chi tiết bằng cách rót kim loại lỏng vào khuôn và chờ kim loại đông đặc.' },
+      { id: 'tn-32', l: 'thong_hieu', q: 'Cùng tạo chi tiết từ phôi rắn, cán và phay khác nhau cơ bản như thế nào?', opts: ['Cán làm phôi biến dạng; phay bóc vật liệu thành phoi.', 'Cán bóc phoi; phay chỉ làm phôi biến dạng.', 'Cả hai đều phải rót kim loại lỏng vào khuôn.', 'Cả hai đều nối các chi tiết bằng nhiệt.'], exp: 'Cán thuộc công nghệ gia công áp lực làm phôi biến dạng dẻo; phay thuộc công nghệ gia công cắt gọt bóc tách vật liệu dưới dạng phoi.' },
+      { id: 'tn-48', l: 'thong_hieu', q: 'Trong chuỗi thiết kế đến gia công, tại sao CAD cần đứng trước bước lập quy trình bằng CAM?', opts: ['CAM cần dữ liệu hình dạng và kích thước của thiết kế.', 'Máy CNC không dùng thông tin về sản phẩm.', 'CAM tự khai thác quặng để tạo thiết kế.', 'CAD chỉ kiểm tra sản phẩm đã hỏng.'], exp: 'CAD tạo mô hình hình học và kích thước 3D/2D; hệ thống CAM cần dữ liệu thiết kế từ CAD để lập trình đường chạy dao và quy trình gia công.' },
+      { id: 'tn-50', l: 'thong_hieu', q: 'Vì sao in 3D được gọi là phương pháp tạo hình bằng đắp lớp?', opts: ['Vật liệu được thêm dần để hình thành vật thể.', 'Chi tiết chỉ được tạo bằng nối bu lông.', 'Vật liệu chỉ bị dao tiện lấy đi.', 'Phôi luôn bị ép mỏng giữa hai trục.'], exp: 'In 3D tạo hình bằng cách bồi đắp và thêm dần từng lớp vật liệu mỏng liên tiếp cho đến khi hình thành toàn bộ vật thể.' },
+      { id: 'tn-56', l: 'thong_hieu', q: 'Cảm biến gửi số đo qua Internet cho ứng dụng. Dấu hiệu nào thể hiện rõ IoT?', opts: ['Thiết bị kết nối mạng và trao đổi dữ liệu.', 'Cảm biến có vỏ trắng.', 'Ứng dụng dùng chữ lớn.', 'Thiết bị đặt trên giá thép.'], exp: 'Dấu hiệu cốt lõi của công nghệ IoT là các thiết bị thông minh được kết nối mạng Internet để tự động thu thập và truyền tải dữ liệu.' },
+
+      // Vận dụng (5 câu)
+      { id: 'tn-62', l: 'van_dung', q: 'Trục thép có đường kính 22 mm cần giảm còn 20 mm và giữ dạng trụ tròn. Xưởng có máy tiện phù hợp. Nên chọn công đoạn nào?', opts: ['Tiện bóc lớp vật liệu ngoài của trục.', 'Rót thêm kim loại vào khuôn bao ngoài trục.', 'Sơn phủ để tăng đường kính.', 'Hàn đắp vật liệu quanh trục.'], exp: 'Để giảm đường kính ngoài của chi tiết hình trụ tròn từ 22 mm xuống 20 mm, phương pháp gia công cơ khí phù hợp và chính xác nhất là tiện bóc tách phoi ngoài trên máy tiện.' },
+      { id: 'tn-63', l: 'van_dung', q: 'Cơ sở cần nhiều tấm thép mỏng từ phôi dày, yêu cầu biến dạng bằng lực và hạn chế phoi. Phương án nào phù hợp nhất?', opts: ['Cán phôi qua các trục để giảm chiều dày.', 'Phay bỏ hầu hết chiều dày từng phôi.', 'Hàn thêm nhiều lớp lên phôi.', 'Tiện phôi thành dạng trụ.'], exp: 'Cán kim loại qua các trục quay ép lực là phương pháp tối ưu để giảm độ dày tạo tấm mỏng mà không làm mất mát vật liệu dưới dạng phoi.' },
+      { id: 'tn-64', l: 'van_dung', q: 'Khung thép bị tuột ở chỗ nối, yêu cầu sửa để tạo liên kết bền, không cần tháo rời tại đó. Nên đề xuất công nghệ nào?', opts: ['Hàn lại vị trí nối theo quy trình phù hợp.', 'Kéo thanh cho nhỏ tiết diện hơn.', 'Tiện giảm đường kính toàn bộ thanh.', 'Mài rời hai đầu thanh rồi để nguyên.'], exp: 'Hàn kim loại tạo liên kết bền vững không thể tháo rời tại điểm nối bị bung tuột của khung thép.' },
+      { id: 'tn-71', l: 'van_dung', q: 'Nhóm cần mẫu vỏ cảm biến bằng nhựa, số lượng ít, hình dạng còn thay đổi qua nhiều lần thử. Có máy in 3D phù hợp. Phương án nào thuận lợi nhất?', opts: ['Sửa mô hình số rồi in từng mẫu để thử lắp.', 'Dùng cố định mẫu cũ dù không lắp vừa.', 'Chuyển bản vẽ thành ảnh và bỏ kích thước.', 'Làm ngay khuôn hàng loạt trước khi thử.'], exp: 'Với sản phẩm số lượng ít và cần chỉnh sửa nhiều lần, in 3D mẫu nhanh trực tiếp từ mô hình số là giải pháp linh hoạt và tiết kiệm chi phí nhất.' },
+      { id: 'tn-72', l: 'van_dung', q: 'Chi tiết CNC có lỗ thiết kế quá nhỏ. Cần tăng kích thước lỗ cho loạt mới. Nên thực hiện theo thứ tự nào?', opts: ['Sửa CAD, cập nhật CAM và chương trình phù hợp, rồi chạy CNC.', 'Chạy chương trình cũ rồi mới sửa mô hình.', 'Giữ thiết kế và chương trình cũ, chỉ đổi tên tệp.', 'Bỏ dữ liệu thiết kế và tăng tốc tùy ý.'], exp: 'Quy trình chuẩn trong gia công số là: Hiệu chỉnh mô hình CAD -> Cập nhật đường chạy dao trong phần mềm CAM -> Xuất G-code chương trình máy -> Chạy gia công trên máy CNC.' }
+    ];
+
     // Array shuffler (Fisher-Yates)
     function shuffle(arr) {
       const a = [...arr];
@@ -1042,18 +1359,18 @@
       return a;
     }
 
-    // Bốc ngẫu nhiên đề thi 9 câu chuẩn ma trận:
-    // - 8 câu TN: 3 biết, 3 hiểu, 2 vận dụng (1đ/câu)
-    // - 1 câu Đúng/Sai: 1 biết, 1 hiểu, 2 vận dụng (2đ)
-    function buildRandomExam() {
+    // =========================================================================
+    // 3. EXAM GENERATORS
+    // =========================================================================
+    // Sinh Đề 1 (9 câu chuẩn ma trận: 3 biết, 3 hiểu, 2 vận dụng + 1 câu Đúng/Sai)
+    function buildExam1() {
       const nb = shuffle(RAW_MC_BANK.filter(q => q.l === 'nhan_biet')).slice(0, 3);
       const th = shuffle(RAW_MC_BANK.filter(q => q.l === 'thong_hieu')).slice(0, 3);
       const vd = shuffle(RAW_MC_BANK.filter(q => q.l === 'van_dung')).slice(0, 2);
 
-      // Trộn ngẫu nhiên các mức độ câu hỏi ở các vị trí bất kỳ từ câu 1 đến câu 8
       const raw8 = shuffle([...nb, ...th, ...vd]);
       const examQuestions = raw8.map((item, idx) => {
-        const correctText = item.opts[0]; // A is correct in raw
+        const correctText = item.opts[0];
         const shuffled = shuffle(item.opts);
         const correctIndex = shuffled.indexOf(correctText);
         const lvlName = item.l === 'nhan_biet' ? 'Nhận biết' : item.l === 'thong_hieu' ? 'Thông hiểu' : 'Vận dụng';
@@ -1070,7 +1387,6 @@
         };
       });
 
-      // 1 câu Đúng/Sai
       const chosenTF = shuffle(RAW_TF_BANK)[0];
       examQuestions.push({
         id: 9,
@@ -1083,18 +1399,228 @@
         exp: chosenTF.exp
       });
 
-      return examQuestions;
+      return {
+        type: 'exam1',
+        title: 'KTTX Công nghệ 10: Bài 3 & Bài 4',
+        subject: 'KTTX bài 3.4',
+        durationSec: 10 * 60,
+        totalPoints: 10.0,
+        passScore: 5.0,
+        questions: examQuestions
+      };
     }
 
-    // Global App State
-    let QUESTIONS = buildRandomExam();
+    // Sinh Đề 2 (Test nhanh 5 câu: 2 biết, 2 hiểu, 1 vận dụng)
+    function buildExam2() {
+      const nb = shuffle(QUICK_BANK_QUESTIONS.filter(q => q.l === 'nhan_biet')).slice(0, 2);
+      const th = shuffle(QUICK_BANK_QUESTIONS.filter(q => q.l === 'thong_hieu')).slice(0, 2);
+      const vd = shuffle(QUICK_BANK_QUESTIONS.filter(q => q.l === 'van_dung')).slice(0, 1);
+
+      const raw5 = shuffle([...nb, ...th, ...vd]);
+      const examQuestions = raw5.map((item, idx) => {
+        const correctText = item.opts[0];
+        const shuffled = shuffle(item.opts);
+        const correctIndex = shuffled.indexOf(correctText);
+        const lvlName = item.l === 'nhan_biet' ? 'Nhận biết' : item.l === 'thong_hieu' ? 'Thông hiểu' : 'Vận dụng';
+
+        return {
+          id: idx + 1,
+          type: 'mc',
+          level: lvlName,
+          pts: 1.0,
+          question: `Câu ${idx + 1} (1.0 điểm): ${item.q}`,
+          options: shuffled,
+          correct: correctIndex,
+          exp: item.exp
+        };
+      });
+
+      return {
+        type: 'quick5',
+        title: 'Test Nhanh: Công nghệ 10 (5 câu)',
+        subject: 'Test nhanh bài 3.4',
+        durationSec: 5 * 60,
+        totalPoints: 5.0,
+        passScore: 2.5,
+        questions: examQuestions
+      };
+    }
+
+    // =========================================================================
+    // 4. ROOM STATUS MANAGEMENT (TẮT / MỞ RIÊNG TỪNG ĐỀ)
+    // =========================================================================
+    const ROOM_STATUS_KEY = 'edusecure_room_status';
+    let roomStatus = { exam1Open: true, exam2Open: true };
+
+    function loadRoomStatus() {
+      try {
+        const saved = localStorage.getItem(ROOM_STATUS_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (typeof parsed.exam1Open === 'boolean' && typeof parsed.exam2Open === 'boolean') {
+            roomStatus = parsed;
+          }
+        }
+      } catch (e) {}
+      applyRoomStatusUI();
+    }
+
+    function saveRoomStatus() {
+      try {
+        localStorage.setItem(ROOM_STATUS_KEY, JSON.stringify(roomStatus));
+      } catch (e) {}
+      // Broadcast to other tabs
+      try {
+        if ('BroadcastChannel' in window) {
+          const channel = new BroadcastChannel('edusecure_channel');
+          channel.postMessage({ type: 'STATUS_SYNC', status: roomStatus });
+        }
+      } catch (e) {}
+      applyRoomStatusUI();
+    }
+
+    // Listen for storage events / BroadcastChannel
+    window.addEventListener('storage', (e) => {
+      if (e.key === ROOM_STATUS_KEY) {
+        loadRoomStatus();
+      }
+    });
+    try {
+      if ('BroadcastChannel' in window) {
+        const channel = new BroadcastChannel('edusecure_channel');
+        channel.onmessage = (e) => {
+          if (e.data && e.data.type === 'STATUS_SYNC') {
+            roomStatus = e.data.status;
+            applyRoomStatusUI();
+          }
+        };
+      }
+    } catch (e) {}
+
+    function applyRoomStatusUI() {
+      // 1. Lobby Banner
+      const banner = document.getElementById('room-status-banner');
+      const indicator = document.getElementById('room-status-indicator');
+      const text = document.getElementById('room-status-text');
+
+      if (!roomStatus.exam1Open && !roomStatus.exam2Open) {
+        banner.className = 'room-status-bar both-closed';
+        indicator.style.background = '#f59e0b';
+        text.innerHTML = '<strong>Phòng thi đang đóng:</strong> Cả 2 bộ đề thi hiện đang ở trạng thái <span style="color:#b91c1c; font-weight:800;">Chưa được vào thi</span>. Vui lòng đợi giáo viên mở đề thi!';
+      } else if (roomStatus.exam1Open && roomStatus.exam2Open) {
+        banner.className = 'room-status-bar both-open';
+        indicator.style.background = '#10b981';
+        text.innerHTML = '<strong>Cả 2 bộ đề đang mở:</strong> Giáo viên đã mở quyền vào thi cho cả 2 đề. Học sinh chọn 1 trong 2 bộ đề bên dưới để bắt đầu.';
+      } else if (roomStatus.exam1Open) {
+        banner.className = 'room-status-bar partial';
+        indicator.style.background = '#0284c7';
+        text.innerHTML = '<strong>Đang mở Bộ Đề Số 1:</strong> Giáo viên đã mở <span style="color:#0369a1; font-weight:800;">Đề 1 (9 câu - 10đ)</span>. Bộ đề số 2 (Test nhanh 5 câu) hiện đang đóng.';
+      } else {
+        banner.className = 'room-status-bar partial';
+        indicator.style.background = '#059669';
+        text.innerHTML = '<strong>Đang mở Bộ Đề Số 2:</strong> Giáo viên đã mở <span style="color:#059669; font-weight:800;">Đề 2 (Test nhanh 5 câu - 5đ)</span>. Bộ đề số 1 (9 câu) hiện đang đóng.';
+      }
+
+      // 2. Exam 1 Card Button & Alert
+      const btnExam1 = document.getElementById('btn-start-exam-1');
+      const alertExam1 = document.getElementById('exam1-closed-alert');
+      const badgeExam1 = document.getElementById('exam1-badge-status');
+
+      if (roomStatus.exam1Open) {
+        btnExam1.className = 'btn btn-primary';
+        btnExam1.disabled = false;
+        btnExam1.textContent = '🚀 Vào Thi Đề 1 (9 Câu Ngẫu Nhiên)';
+        alertExam1.classList.add('hidden');
+        badgeExam1.textContent = 'Đang Mở';
+        badgeExam1.style.background = '#dcfce7';
+        badgeExam1.style.color = '#15803d';
+        badgeExam1.style.borderColor = '#86efac';
+      } else {
+        btnExam1.className = 'btn btn-disabled';
+        btnExam1.disabled = true;
+        btnExam1.textContent = '🔒 Chưa được vào thi';
+        alertExam1.classList.remove('hidden');
+        badgeExam1.textContent = 'Đang Khóa';
+        badgeExam1.style.background = '#fee2e2';
+        badgeExam1.style.color = '#b91c1c';
+        badgeExam1.style.borderColor = '#fca5a5';
+      }
+
+      // 3. Exam 2 Card Button & Alert
+      const btnExam2 = document.getElementById('btn-start-exam-2');
+      const alertExam2 = document.getElementById('exam2-closed-alert');
+      const badgeExam2 = document.getElementById('exam2-badge-status');
+
+      if (roomStatus.exam2Open) {
+        btnExam2.className = 'btn btn-emerald';
+        btnExam2.disabled = false;
+        btnExam2.textContent = '⚡ Vào Thi Đề 2 (Test Nhanh 5 Câu)';
+        alertExam2.classList.add('hidden');
+        badgeExam2.textContent = 'Đang Mở';
+        badgeExam2.style.background = '#dcfce7';
+        badgeExam2.style.color = '#15803d';
+        badgeExam2.style.borderColor = '#86efac';
+      } else {
+        btnExam2.className = 'btn btn-disabled';
+        btnExam2.disabled = true;
+        btnExam2.textContent = '🔒 Chưa được vào thi';
+        alertExam2.classList.remove('hidden');
+        badgeExam2.textContent = 'Đang Khóa';
+        badgeExam2.style.background = '#fee2e2';
+        badgeExam2.style.color = '#b91c1c';
+        badgeExam2.style.borderColor = '#fca5a5';
+      }
+
+      // 4. Update Teacher Modal Toggles
+      updateTeacherPanelUI();
+    }
+
+    function updateTeacherPanelUI() {
+      const label1 = document.getElementById('t-exam1-status-label');
+      const btn1 = document.getElementById('btn-toggle-t-exam1');
+      if (label1 && btn1) {
+        if (roomStatus.exam1Open) {
+          label1.innerHTML = '● Đang Mở Cho Học Sinh Thi';
+          label1.style.color = '#15803d';
+          btn1.className = 'btn btn-danger';
+          btn1.textContent = 'Tắt Đề 1 (Khóa)';
+        } else {
+          label1.innerHTML = '○ Đang Tắt (Học sinh thấy Chưa được vào thi)';
+          label1.style.color = '#b91c1c';
+          btn1.className = 'btn btn-primary';
+          btn1.textContent = 'Mở Đề 1 (Cho Thi)';
+        }
+      }
+
+      const label2 = document.getElementById('t-exam2-status-label');
+      const btn2 = document.getElementById('btn-toggle-t-exam2');
+      if (label2 && btn2) {
+        if (roomStatus.exam2Open) {
+          label2.innerHTML = '● Đang Mở Cho Học Sinh Thi';
+          label2.style.color = '#15803d';
+          btn2.className = 'btn btn-danger';
+          btn2.textContent = 'Tắt Đề 2 (Khóa)';
+        } else {
+          label2.innerHTML = '○ Đang Tắt (Học sinh thấy Chưa được vào thi)';
+          label2.style.color = '#b91c1c';
+          btn2.className = 'btn btn-emerald';
+          btn2.textContent = 'Mở Đề 2 (Cho Thi)';
+        }
+      }
+    }
+
+    // =========================================================================
+    // 5. GLOBAL APP STATE & REFS
+    // =========================================================================
+    let CURRENT_EXAM = buildExam1();
+    let QUESTIONS = CURRENT_EXAM.questions;
     let currentIdx = 0;
-    let userAnswers = {}; // { [idx]: { choice: number|null, tf: { [key]: boolean }, forfeited: boolean, scoreEarned?: number } }
+    let userAnswers = {};
     let strikes = [];
-    let remaining = 15 * 60;
+    let remaining = 10 * 60;
     let timer = null;
     let isActive = false;
-    let student = { name: 'Nguyễn Văn An', code: 'SBD-102', class: '10A1' };
+    let student = { name: 'Nguyễn Văn An', code: '15', class: '10C05' };
     let lastViolation = 0;
 
     // Elements
@@ -1105,154 +1631,11 @@
     const simDock = document.getElementById('sim-dock');
     const alertModal = document.getElementById('alert-modal');
     const blurShield = document.getElementById('blur-shield');
+    const teacherModal = document.getElementById('teacher-modal');
 
-    // Anti-Cheat: Violation Trigger
-    function onViolation(reason) {
-      if (!isActive) return;
-      const now = Date.now();
-      if (now - lastViolation < 1200) return; // cooldown
-      lastViolation = now;
-
-      // Obscure screen
-      blurShield.classList.remove('hidden');
-
-      const strikeNum = strikes.length + 1;
-      const timeStr = new Date().toLocaleTimeString('vi-VN');
-
-      // Forfeit current question
-      if (!userAnswers[currentIdx]) {
-        userAnswers[currentIdx] = { choice: null, tf: {}, forfeited: true, scoreEarned: 0 };
-      } else {
-        userAnswers[currentIdx].forfeited = true;
-        userAnswers[currentIdx].scoreEarned = 0;
-      }
-
-      strikes.push({
-        num: strikeNum,
-        time: timeStr,
-        qIdx: currentIdx,
-        reason: reason
-      });
-
-      updateStrikesUI();
-      renderSlider();
-      renderQuestion();
-
-      // Show alert modal
-      document.getElementById('modal-title').textContent = strikeNum >= 3 ? '🚨 ĐÌNH CHỈ THI - HỦY BÀI (0 ĐIỂM)' : `🚨 CẢNH BÁO VI PHẠM LẦN ${strikeNum}/3!`;
-      document.getElementById('modal-desc').textContent = `${reason}. Vi phạm ghi nhận lúc ${timeStr}.`;
-      document.getElementById('modal-penalty').textContent = strikeNum >= 3 
-        ? 'Bạn đã vi phạm thoát màn hình 3 lần. Bài thi tự động kết thúc và tính 0 điểm toàn bài!'
-        : `Câu hỏi số ${currentIdx + 1} đã bị đánh dấu SAI (0 điểm) và không được tính điểm.`;
-      
-      alertModal.classList.remove('hidden');
-    }
-
-    function updateStrikesUI() {
-      for (let i = 1; i <= 3; i++) {
-        const el = document.getElementById(`strike-${i}`);
-        if (i <= strikes.length) {
-          el.className = (i === 3) ? 'strike-badge active final' : 'strike-badge active';
-        } else {
-          el.className = 'strike-badge';
-        }
-      }
-    }
-
-    // Modal acknowledge
-    document.getElementById('btn-modal-ack').onclick = () => {
-      alertModal.classList.add('hidden');
-      blurShield.classList.add('hidden');
-      if (strikes.length >= 3) {
-        submitExam(true);
-      }
-    };
-    document.getElementById('btn-unblur').onclick = () => {
-      blurShield.classList.add('hidden');
-    };
-
-    // Anti-Cheat Listeners
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && isActive) {
-        onViolation('Thí sinh chuyển sang tab hoặc ứng dụng khác');
-      }
-    });
-
-    window.addEventListener('blur', () => {
-      if (isActive) {
-        onViolation('Giao diện thi mất tiêu điểm (chuyển app hoặc chụp màn hình)');
-      }
-    });
-
-    window.addEventListener('focus', () => {
-      // return
-    });
-
-    // Keyboard Screenshot Traps
-    document.addEventListener('keydown', (e) => {
-      if (!isActive) return;
-
-      // PrintScreen
-      if (e.key === 'PrintScreen' || e.code === 'PrintScreen' || e.keyCode === 44) {
-        e.preventDefault();
-        try { navigator.clipboard?.writeText('CẢNH BÁO: Nghiêm cấm chụp màn hình!'); } catch (err) {}
-        onViolation('Phát hiện bấm phím PrintScreen');
-        return;
-      }
-
-      // Windows Snipping Tool (Win+Shift+S)
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 's' || e.key === 'S')) {
-        e.preventDefault();
-        try { navigator.clipboard?.writeText('CẢNH BÁO: Nghiêm cấm chụp màn hình!'); } catch (err) {}
-        onViolation('Mở phím tắt chụp màn hình Snipping Tool (Win+Shift+S)');
-        return;
-      }
-
-      // Mac screenshot (Cmd+Shift+3/4/5)
-      if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
-        e.preventDefault();
-        onViolation('Chụp màn hình máy tính macOS (Command+Shift+3/4)');
-        return;
-      }
-
-      // Ctrl + P (Print / Save as PDF)
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
-        e.preventDefault();
-        onViolation('Bấm lệnh In / Lưu đề thi ra tệp PDF');
-        return;
-      }
-    });
-
-    // Mobile 3-finger swipe screenshot trap
-    document.addEventListener('touchstart', (e) => {
-      if (isActive && e.touches && e.touches.length >= 3) {
-        e.preventDefault();
-        onViolation('Phát hiện cử chỉ vuốt 3 ngón tay để chụp ảnh màn hình điện thoại');
-      }
-    }, { passive: false });
-
-    // Mobile Hardware Button (Power + Volume down) touch cancel
-    document.addEventListener('touchcancel', () => {
-      if (isActive) {
-        onViolation('Phát hiện bấm phím cứng chụp màn hình điện thoại (touchcancel)');
-      }
-    });
-
-    window.addEventListener('pagehide', () => {
-      if (isActive) {
-        onViolation('Thí sinh ẩn ứng dụng hoặc chuyển đổi màn hình trên điện thoại');
-      }
-    });
-
-    // Simulation buttons
-    document.getElementById('btn-sim-exit').onclick = () => {
-      onViolation(`Giả lập học sinh thoát app tại Câu #${currentIdx + 1}`);
-    };
-    document.getElementById('btn-sim-shot').onclick = () => {
-      onViolation(`Phát hiện thao tác chụp màn hình điện thoại tại Câu #${currentIdx + 1}`);
-    };
-
-    // 4-Class Student Roster
+    // =========================================================================
+    // 6. 4-CLASS ROSTER
+    // =========================================================================
     const ROSTER = {
       '10C05': [
         {code:'1',name:'Lê Hồng Hải Anh'},{code:'2',name:'Nguyễn Ngọc Mỹ Anh'},{code:'3',name:'Nguyễn Bùi Thiên Ân'},
@@ -1392,25 +1775,40 @@
     };
     updateStudentSelect();
 
-    // Start Exam (Generates fresh random 9-question exam each time)
-    document.getElementById('btn-start').onclick = () => {
+    // =========================================================================
+    // 7. START EXAMS LOGIC (ĐỀ 1 & ĐỀ 2)
+    // =========================================================================
+    function startExamFlow(examType) {
+      if (examType === 'exam1' && !roomStatus.exam1Open) {
+        alert('Giáo viên hiện đang tạm khóa Đề số 1. Vui lòng chờ giáo viên mở phòng thi!');
+        return;
+      }
+      if (examType === 'quick5' && !roomStatus.exam2Open) {
+        alert('Giáo viên hiện đang tạm khóa Đề số 2 (Test nhanh). Vui lòng chờ giáo viên mở phòng thi!');
+        return;
+      }
+
       const cls = document.getElementById('select-class').value;
       const code = (document.getElementById('input-code-num').value.trim()) || document.getElementById('select-code').value;
       const name = document.getElementById('input-name').value.trim();
 
       if (!name || !code) {
-        alert('Vui lòng nhập Mã số / STT của bạn (VD: 15) để xác nhận tên học sinh!');
+        alert('Vui lòng nhập Mã số / STT của bạn (VD: 15) để xác nhận tên học sinh trước khi vào thi!');
         return;
       }
 
-      // Generate a brand new randomized 9-question exam (levels shuffled across questions 1-8, question 9 is True/False)
-      QUESTIONS = buildRandomExam();
+      // Generate the selected exam
+      CURRENT_EXAM = (examType === 'quick5') ? buildExam2() : buildExam1();
+      QUESTIONS = CURRENT_EXAM.questions;
 
       student = { name, code, class: cls };
       document.getElementById('badge-name').textContent = `${name} (Lớp ${cls} - #${code})`;
       document.getElementById('student-badge').classList.remove('hidden');
 
-      // Tự động ghi nhận thời gian đăng nhập vào Google Sheets Cột D
+      // Update exam badge
+      document.getElementById('exam-badge-type').textContent = (examType === 'quick5') ? 'TEST NHANH 5 CÂU (5 PHÚT)' : 'KTTX BÀI 3 & 4 (9 CÂU - 10 PHÚT)';
+
+      // Auto notify Google Sheets LOGIN event
       try {
         fetch('https://script.google.com/macros/s/AKfycbwqvh3UB8Th7DOuEpFXzlN7VY8XAYtkqm0zMqENGTqktCVqtqgT-CEanj1_nWf1pSaocA/exec', {
           method: 'POST',
@@ -1422,12 +1820,13 @@
             fullName: name,
             studentCode: code,
             className: cls,
+            testType: CURRENT_EXAM.subject,
             loginTime: new Date().toLocaleString('vi-VN')
           })
         }).catch(() => {});
       } catch (e) {}
 
-      // Update watermark
+      // Watermark
       const wm = document.getElementById('watermark-layer');
       wm.innerHTML = '';
       for (let i = 0; i < 8; i++) {
@@ -1439,7 +1838,7 @@
       currentIdx = 0;
       userAnswers = {};
       strikes = [];
-      remaining = 15 * 60;
+      remaining = CURRENT_EXAM.durationSec;
       isActive = true;
 
       viewLobby.classList.add('hidden');
@@ -1453,8 +1852,146 @@
       renderSlider();
       renderQuestion();
       startTimer();
+    }
+
+    document.getElementById('btn-start-exam-1').onclick = () => startExamFlow('exam1');
+    document.getElementById('btn-start-exam-2').onclick = () => startExamFlow('quick5');
+
+    // =========================================================================
+    // 8. ANTI-CHEAT DETECTION & PROCTORING
+    // =========================================================================
+    function onViolation(reason) {
+      if (!isActive) return;
+      const now = Date.now();
+      if (now - lastViolation < 1200) return; // cooldown
+      lastViolation = now;
+
+      blurShield.classList.remove('hidden');
+
+      const strikeNum = strikes.length + 1;
+      const timeStr = new Date().toLocaleTimeString('vi-VN');
+
+      // Forfeit current question
+      if (!userAnswers[currentIdx]) {
+        userAnswers[currentIdx] = { choice: null, tf: {}, forfeited: true, scoreEarned: 0 };
+      } else {
+        userAnswers[currentIdx].forfeited = true;
+        userAnswers[currentIdx].scoreEarned = 0;
+      }
+
+      strikes.push({
+        num: strikeNum,
+        time: timeStr,
+        qIdx: currentIdx,
+        reason: reason
+      });
+
+      updateStrikesUI();
+      renderSlider();
+      renderQuestion();
+
+      document.getElementById('modal-title').textContent = strikeNum >= 3 ? '🚨 ĐÌNH CHỈ THI - HỦY BÀI (0 ĐIỂM)' : `🚨 CẢNH BÁO VI PHẠM LẦN ${strikeNum}/3!`;
+      document.getElementById('modal-desc').textContent = `${reason}. Vi phạm ghi nhận lúc ${timeStr}.`;
+      document.getElementById('modal-penalty').textContent = strikeNum >= 3 
+        ? 'Bạn đã vi phạm thoát màn hình 3 lần. Toàn bộ bài thi bị hủy điểm và tính 0.0 điểm!'
+        : `Câu hỏi số ${currentIdx + 1} đã bị đánh dấu SAI (0 điểm) và không được tính điểm.`;
+      
+      alertModal.classList.remove('hidden');
+    }
+
+    function updateStrikesUI() {
+      for (let i = 1; i <= 3; i++) {
+        const el = document.getElementById(`strike-${i}`);
+        if (i <= strikes.length) {
+          el.className = (i === 3) ? 'strike-badge active final' : 'strike-badge active';
+        } else {
+          el.className = 'strike-badge';
+        }
+      }
+    }
+
+    document.getElementById('btn-modal-ack').onclick = () => {
+      alertModal.classList.add('hidden');
+      blurShield.classList.add('hidden');
+      if (strikes.length >= 3) {
+        submitExam(true);
+      }
+    };
+    document.getElementById('btn-unblur').onclick = () => {
+      blurShield.classList.add('hidden');
     };
 
+    // Listeners
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && isActive) {
+        onViolation('Thí sinh chuyển sang tab hoặc ứng dụng khác');
+      }
+    });
+
+    window.addEventListener('blur', () => {
+      if (isActive) {
+        onViolation('Giao diện thi mất tiêu điểm (chuyển app hoặc chụp màn hình)');
+      }
+    });
+
+    // Screenshots
+    document.addEventListener('keydown', (e) => {
+      if (!isActive) return;
+      if (e.key === 'PrintScreen' || e.code === 'PrintScreen' || e.keyCode === 44) {
+        e.preventDefault();
+        try { navigator.clipboard?.writeText('CẢNH BÁO: Nghiêm cấm chụp màn hình!'); } catch (err) {}
+        onViolation('Phát hiện bấm phím PrintScreen');
+        return;
+      }
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        try { navigator.clipboard?.writeText('CẢNH BÁO: Nghiêm cấm chụp màn hình!'); } catch (err) {}
+        onViolation('Mở phím tắt chụp màn hình Snipping Tool (Win+Shift+S)');
+        return;
+      }
+      if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
+        e.preventDefault();
+        onViolation('Chụp màn hình máy tính macOS (Command+Shift+3/4)');
+        return;
+      }
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+        onViolation('Bấm lệnh In / Lưu đề thi ra tệp PDF');
+        return;
+      }
+    });
+
+    // Mobile gestures
+    document.addEventListener('touchstart', (e) => {
+      if (isActive && e.touches && e.touches.length >= 3) {
+        e.preventDefault();
+        onViolation('Phát hiện cử chỉ vuốt 3 ngón tay để chụp ảnh màn hình điện thoại');
+      }
+    }, { passive: false });
+
+    document.addEventListener('touchcancel', () => {
+      if (isActive) {
+        onViolation('Phát hiện bấm phím cứng chụp màn hình điện thoại (touchcancel)');
+      }
+    });
+
+    window.addEventListener('pagehide', () => {
+      if (isActive) {
+        onViolation('Thí sinh ẩn ứng dụng hoặc chuyển đổi màn hình trên điện thoại');
+      }
+    });
+
+    // Simulation buttons
+    document.getElementById('btn-sim-exit').onclick = () => {
+      onViolation(`Giả lập học sinh thoát app tại Câu #${currentIdx + 1}`);
+    };
+    document.getElementById('btn-sim-shot').onclick = () => {
+      onViolation(`Phát hiện thao tác chụp màn hình điện thoại tại Câu #${currentIdx + 1}`);
+    };
+
+    // =========================================================================
+    // 9. TIMER & NAVIGATION
+    // =========================================================================
     function startTimer() {
       clearInterval(timer);
       timer = setInterval(() => {
@@ -1481,7 +2018,7 @@
         const a = userAnswers[idx];
         if (a) {
           if (a.forfeited) cls += ' forfeited';
-          else if (a.choice !== null || (a.tf && Object.keys(a.tf).length > 0)) cls += ' done';
+          else if (a.choice !== null && a.choice !== undefined || (a.tf && Object.keys(a.tf).length > 0)) cls += ' done';
         }
         btn.className = cls;
         btn.textContent = (idx + 1);
@@ -1500,7 +2037,11 @@
       const isForfeited = !!a?.forfeited;
 
       const lvlTag = document.getElementById('q-level-tag');
-      if (lvlTag) lvlTag.style.display = 'none';
+      if (lvlTag) {
+        lvlTag.textContent = q.level || 'Nhận biết';
+        lvlTag.style.display = 'inline-block';
+      }
+
       document.getElementById('q-points-tag').textContent = q.type === 'tf' ? '2.0 điểm' : '1.0 điểm';
       document.getElementById('q-title').textContent = q.question;
 
@@ -1516,7 +2057,7 @@
         ctxBox.classList.remove('hidden');
         ctxBox.innerHTML = `
           <strong>${q.ctx}</strong>
-          <div style="margin-top:6px; font-size:11px; color:#0284c7; border-top:1px dashed #bae6fd; pt-1;">
+          <div style="margin-top:6px; font-size:11px; color:#0284c7; border-top:1px dashed #bae6fd; padding-top:4px;">
             Quy tắc chấm: Đúng 1 lệnh: <strong>0,2đ</strong> • Đúng 2: <strong>0,5đ</strong> • Đúng 3: <strong>1,0đ</strong> • Đúng 4: <strong>2,0đ</strong>
           </div>
         `;
@@ -1549,7 +2090,7 @@
 
         row.innerHTML = `
           <div class="opt-letter">${letter}</div>
-          <div class="opt-text">${opt}</div>
+          <div class="opt-text" style="flex:1;">${opt}</div>
           ${isSelected ? `<span style="color:${isForfeited ? '#e11d48' : '#0284c7'}; font-weight:800; margin-left:auto;">✓</span>` : ''}
         `;
 
@@ -1617,19 +2158,30 @@
     document.getElementById('btn-next').onclick = goNext;
     document.getElementById('m-btn-next').onclick = goNext;
 
+    document.getElementById('btn-submit-desktop').onclick = () => {
+      if (confirm('Bạn có chắc chắn muốn nộp bài thi ngay?')) {
+        submitExam(false);
+      }
+    };
     document.getElementById('m-btn-submit').onclick = () => {
       if (confirm('Xác nhận nộp bài thi ngay?')) {
         submitExam(false);
       }
     };
 
-    // Submit Exam with exact formula (8x1.0đ + 2.0đ TF)
+    // =========================================================================
+    // 10. SUBMIT & SCORING
+    // =========================================================================
     function submitExam(disqualified = false) {
       clearInterval(timer);
       isActive = false;
 
       let totalScore = 0;
       let correctCount = 0;
+      let correctNB = 0;
+      let correctTH = 0;
+      let correctVD = 0;
+      let tfSummary = '0/4 ý (0đ)';
 
       QUESTIONS.forEach((q, idx) => {
         const a = userAnswers[idx];
@@ -1651,6 +2203,7 @@
             else if (stmtsCorrect === 4) qScore = 2.0;
 
             if (stmtsCorrect === 4) correctCount++;
+            tfSummary = `Đúng ${stmtsCorrect}/4 ý (${qScore.toFixed(1)}đ)`;
           }
           a.scoreEarned = qScore;
           totalScore += qScore;
@@ -1659,22 +2212,27 @@
           if (!a.forfeited && a.choice === q.correct) {
             qScore = 1.0;
             correctCount++;
+            if (q.level === 'Nhận biết') correctNB++;
+            else if (q.level === 'Thông hiểu') correctTH++;
+            else if (q.level === 'Vận dụng') correctVD++;
           }
           a.scoreEarned = qScore;
           totalScore += qScore;
         }
       });
 
-      let finalScore = disqualified ? 0 : Number(Math.min(10, Math.max(0, totalScore)).toFixed(1));
+      const maxScore = CURRENT_EXAM.totalPoints;
+      let finalScore = disqualified ? 0 : Number(Math.min(maxScore, Math.max(0, totalScore)).toFixed(1));
 
       viewExam.classList.add('hidden');
       mobileBar.style.display = 'none';
       simDock.classList.add('hidden');
       viewResult.classList.remove('hidden');
 
+      const examNameLabel = CURRENT_EXAM.type === 'quick5' ? 'Đề 2 (Test Nhanh 5 Câu)' : 'Đề 1 (KTTX 9 Câu)';
       document.getElementById('result-name').textContent = student.name;
-      document.getElementById('result-meta').textContent = `SBD: ${student.code} • Lớp ${student.class}`;
-      document.getElementById('result-score-box').textContent = `${finalScore.toFixed(1)}/10`;
+      document.getElementById('result-meta').textContent = `SBD: ${student.code} • Lớp: ${student.class} • ${examNameLabel}`;
+      document.getElementById('result-score-box').textContent = `${finalScore.toFixed(1)}/${maxScore.toFixed(0)}`;
       document.getElementById('res-correct').textContent = `${correctCount}/${QUESTIONS.length} câu`;
       document.getElementById('res-violations').textContent = `${strikes.length} lần`;
 
@@ -1690,13 +2248,14 @@
         disBox.classList.remove('hidden');
       } else {
         scoreBox.className = 'result-score-badge';
-        tag.textContent = finalScore >= 5.0 ? 'ĐẠT YÊU CẦU' : 'CHƯA ĐẠT';
-        tag.style.background = '#dcfce7';
-        tag.style.color = '#15803d';
+        const isPass = finalScore >= CURRENT_EXAM.passScore;
+        tag.textContent = isPass ? 'ĐẠT YÊU CẦU' : 'CHƯA ĐẠT';
+        tag.style.background = isPass ? '#dcfce7' : '#fee2e2';
+        tag.style.color = isPass ? '#15803d' : '#b91c1c';
         disBox.classList.add('hidden');
       }
 
-      // Render Detailed Review List
+      // Review List
       const reviewBox = document.getElementById('review-list');
       reviewBox.innerHTML = '<h3 style="font-size:14px; font-weight:800; margin:16px 0 8px 0; color:#0f172a;">Chi Tiết Từng Câu Hỏi:</h3>';
 
@@ -1767,7 +2326,7 @@
 
         card.innerHTML = `
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu ${idx + 1} (${q.type === 'tf' ? '2.0đ' : '1.0đ'})</strong>
+            <strong style="font-size:12px; color:#0f172a;">Câu ${idx + 1} (${q.type === 'tf' ? '2.0đ' : '1.0đ'}) [${q.level}]</strong>
             ${statusBadge}
           </div>
           <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
@@ -1778,40 +2337,17 @@
         reviewBox.appendChild(card);
       });
 
-      // Prepare breakdown and copy row for Google Sheet KET QUA KIEM TRA TX & DANH SACH HS
-      let correctNB = 0;
-      let correctTH = 0;
-      let correctVD = 0;
-      let tfSummary = '0/4 ý (0đ)';
-
-      QUESTIONS.forEach((q, idx) => {
-        const u = userAnswers[idx];
-        if (!u || u.forfeited) return;
-        if (q.type === 'mc' && u.selected === q.correct) {
-          if (q.level === 'Nhận biết') correctNB++;
-          else if (q.level === 'Thông hiểu') correctTH++;
-          else if (q.level === 'Vận dụng') correctVD++;
-        } else if (q.type === 'tf') {
-          let stCount = 0;
-          q.statements.forEach(st => {
-            if (u.tf && u.tf[st.key] === st.ans) stCount++;
-          });
-          const pts = stCount === 4 ? 2.0 : stCount === 3 ? 1.0 : stCount === 2 ? 0.5 : stCount === 1 ? 0.2 : 0;
-          tfSummary = `Đúng ${stCount}/4 ý (${pts.toFixed(1)}đ)`;
-        }
-      });
-
+      // Prepare Copy Row for Google Sheets (14 columns)
       const nowStr = new Date().toLocaleString('vi-VN');
-      const timeSpentFormatted = remaining <= 0 ? 'Hết giờ' : `${15 * 60 - remaining} giây`;
-      const examCode = 'CN-' + Math.floor(100 + Math.random() * 899);
+      const timeSpentFormatted = remaining <= 0 ? 'Hết giờ' : `${CURRENT_EXAM.durationSec - remaining} giây`;
+      const examCode = (CURRENT_EXAM.type === 'quick5' ? 'TN-' : 'CN-') + Math.floor(100 + Math.random() * 899);
 
-      // Chuẩn 14 cột theo yêu cầu cho KET QUA KIEM TRA TX:
-      const sheetRowTX = [
+      const sheetRow = [
         nowStr,
         student.code,
         student.name,
         student.class,
-        'KTTX bài 3.4',
+        CURRENT_EXAM.subject,
         examCode,
         'Lần 1: Chính thức',
         strikes.length,
@@ -1820,21 +2356,21 @@
         correctNB,
         correctTH,
         correctVD,
-        tfSummary
+        CURRENT_EXAM.type === 'quick5' ? 'Không có phần Đ/S' : tfSummary
       ].join('\t');
 
       const copyBtn = document.getElementById('btn-copy-sheet-row');
       if (copyBtn) {
         copyBtn.onclick = () => {
-          navigator.clipboard.writeText(sheetRowTX).then(() => {
-            alert('Đã sao chép 14 cột chuẩn! Bạn có thể dán (Ctrl+V) vào Google Sheets KET QUA KIEM TRA TX hoặc DANH SACH HS.');
+          navigator.clipboard.writeText(sheetRow).then(() => {
+            alert('Đã sao chép 14 cột chuẩn! Bạn có thể dán (Ctrl+V) vào Google Sheets.');
           }).catch(() => {
-            prompt('Dòng dữ liệu của bạn (hãy nhấn Ctrl+C để copy):', sheetRowTX);
+            prompt('Dòng dữ liệu của bạn (hãy nhấn Ctrl+C để copy):', sheetRow);
           });
         };
       }
 
-      // Tự động đẩy kết quả thi lên Google Sheets
+      // Auto Push to Google Sheets via Webhook
       try {
         fetch('https://script.google.com/macros/s/AKfycbwqvh3UB8Th7DOuEpFXzlN7VY8XAYtkqm0zMqENGTqktCVqtqgT-CEanj1_nWf1pSaocA/exec', {
           method: 'POST',
@@ -1847,7 +2383,7 @@
             studentCode: student.code,
             className: student.class,
             finishTime: nowStr,
-            testName: 'KTTX bài 3.4',
+            testName: CURRENT_EXAM.subject,
             examCode: examCode,
             attemptLabel: 'Lần 1: Chính thức',
             violationsCount: strikes.length,
@@ -1856,7 +2392,7 @@
             correctNhanBiet: correctNB,
             correctThongHieu: correctTH,
             correctVanDung: correctVD,
-            tfResultText: tfSummary
+            tfResultText: CURRENT_EXAM.type === 'quick5' ? 'Không có' : tfSummary
           })
         }).catch(() => {});
       } catch (e) {}
@@ -1864,23 +2400,82 @@
 
     // Retake Exam Button
     document.getElementById('btn-retake').onclick = () => {
-      QUESTIONS = buildRandomExam();
-      currentIdx = 0;
-      userAnswers = {};
-      strikes = [];
-      remaining = 15 * 60;
-      isActive = true;
-
-      viewResult.classList.add('hidden');
-      viewExam.classList.remove('hidden');
-      mobileBar.style.display = 'flex';
-      simDock.classList.remove('hidden');
-
-      updateStrikesUI();
-      renderSlider();
-      renderQuestion();
-      startTimer();
+      startExamFlow(CURRENT_EXAM.type);
     };
+
+    // Back to Lobby Button
+    document.getElementById('btn-back-lobby').onclick = () => {
+      viewResult.classList.add('hidden');
+      viewExam.classList.add('hidden');
+      viewLobby.classList.remove('hidden');
+      mobileBar.style.display = 'none';
+      simDock.classList.add('hidden');
+      applyRoomStatusUI();
+    };
+
+    // =========================================================================
+    // 11. TEACHER PORTAL & TOGGLES CONTROLS
+    // =========================================================================
+    let isTeacherAuthenticated = false;
+
+    document.getElementById('btn-open-teacher-modal').onclick = () => {
+      teacherModal.classList.remove('hidden');
+      document.getElementById('teacher-login-error').textContent = '';
+      if (!isTeacherAuthenticated) {
+        document.getElementById('teacher-auth-box').classList.remove('hidden');
+        document.getElementById('teacher-panel-content').classList.add('hidden');
+      } else {
+        document.getElementById('teacher-auth-box').classList.add('hidden');
+        document.getElementById('teacher-panel-content').classList.remove('hidden');
+        updateTeacherPanelUI();
+      }
+    };
+
+    document.getElementById('btn-close-teacher-modal').onclick = () => {
+      teacherModal.classList.add('hidden');
+    };
+    document.getElementById('btn-done-teacher').onclick = () => {
+      teacherModal.classList.add('hidden');
+    };
+
+    document.getElementById('btn-teacher-login').onclick = () => {
+      const pwd = document.getElementById('teacher-password-input').value.trim();
+      if (pwd === 'giaovien123' || pwd === '123456' || pwd === 'admin') {
+        isTeacherAuthenticated = true;
+        document.getElementById('teacher-auth-box').classList.add('hidden');
+        document.getElementById('teacher-panel-content').classList.remove('hidden');
+        updateTeacherPanelUI();
+      } else {
+        document.getElementById('teacher-login-error').textContent = 'Mật khẩu chưa chính xác! (Mặc định: giaovien123)';
+      }
+    };
+
+    // Individual Toggles
+    document.getElementById('btn-toggle-t-exam1').onclick = () => {
+      roomStatus.exam1Open = !roomStatus.exam1Open;
+      saveRoomStatus();
+    };
+
+    document.getElementById('btn-toggle-t-exam2').onclick = () => {
+      roomStatus.exam2Open = !roomStatus.exam2Open;
+      saveRoomStatus();
+    };
+
+    // Batch Toggles
+    document.getElementById('btn-toggle-all-open').onclick = () => {
+      roomStatus.exam1Open = true;
+      roomStatus.exam2Open = true;
+      saveRoomStatus();
+    };
+
+    document.getElementById('btn-toggle-all-close').onclick = () => {
+      roomStatus.exam1Open = false;
+      roomStatus.exam2Open = false;
+      saveRoomStatus();
+    };
+
+    // Initial Load
+    loadRoomStatus();
   </script>
 </body>
 </html>
