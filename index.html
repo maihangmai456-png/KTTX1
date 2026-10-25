@@ -692,9 +692,6 @@
         </div>
       </div>
       <div class="header-actions">
-        <button id="btn-back-home-header" class="btn-teacher-portal" style="background:#f0fdf4; color:#166534; border-color:#bbf7d0;" onclick="window.location.href='/'">
-          🏠 Về trang chủ
-        </button>
         <div id="student-badge" class="hidden" style="font-size:11px; background:#f0f9ff; padding:4px 8px; border-radius:8px; border:1px solid #bae6fd;">
           <span id="badge-name" style="font-weight:700;">Học sinh</span>
         </div>
@@ -1043,19 +1040,15 @@
 
       <!-- Password Lock Screen for Teacher -->
       <div id="teacher-auth-box">
-        <p style="font-size:12px; color:#475569; margin-bottom:12px; line-height:1.4;">
-          Vui lòng nhập tài khoản và mật khẩu giáo viên để quản lý bật/tắt từng bộ đề thi:
+        <p style="font-size:12px; color:#475569; margin-bottom:10px;">
+          Vui lòng nhập mật khẩu quản lý để cấu hình tắt/mở từng bộ đề thi:
         </p>
-        <div class="input-group" style="margin-bottom:10px;">
-          <label style="font-size:12px; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Tên đăng nhập:</label>
-          <input type="text" id="teacher-username-input" class="input-control" placeholder="Nhập tên đăng nhập..." value="MaiHang" style="font-size:13px;">
+        <div class="input-group">
+          <label>Mật khẩu giáo viên:</label>
+          <input type="password" id="teacher-password-input" class="input-control" placeholder="Mặc định: giaovien123" style="font-family:monospace; font-size:14px;">
         </div>
-        <div class="input-group" style="margin-bottom:10px;">
-          <label style="font-size:12px; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Mật khẩu:</label>
-          <input type="password" id="teacher-password-input" class="input-control" placeholder="Nhập mật khẩu..." style="font-family:monospace; font-size:14px;">
-        </div>
-        <span id="teacher-login-error" style="font-size:11px; color:#e11d48; font-weight:700; display:block; margin-bottom:10px; min-height:16px;"></span>
-        <button id="btn-teacher-login" class="btn btn-primary" style="width:100%; font-weight:800; padding:10px;">Đăng Nhập Quản Lý</button>
+        <span id="teacher-login-error" style="font-size:11px; color:#e11d48; font-weight:700; display:block; margin-bottom:8px;"></span>
+        <button id="btn-teacher-login" class="btn btn-primary">Xác Nhận Đăng Nhập</button>
       </div>
 
       <!-- Authenticated Teacher Control Panel -->
@@ -1068,7 +1061,6 @@
           <div style="display:flex; gap:6px;">
             <button id="btn-toggle-all-open" class="btn btn-emerald" style="padding:4px 8px; font-size:10px; width:auto;">Mở cả 2 đề</button>
             <button id="btn-toggle-all-close" class="btn btn-danger" style="padding:4px 8px; font-size:10px; width:auto;">Tắt cả 2 đề</button>
-            <button id="btn-teacher-logout" class="btn" style="padding:4px 8px; font-size:10px; width:auto; background:#f1f5f9; color:#475569; border:1px solid #cbd5e1;">Đăng xuất</button>
           </div>
         </div>
 
@@ -1457,23 +1449,12 @@
     // =========================================================================
     // 4. ROOM STATUS MANAGEMENT (TẮT / MỞ RIÊNG TỪNG ĐỀ)
     // =========================================================================
-    const PRIMARY_ROOM_KEY = 'edusecure_exam_status_map_v2';
-    const FALLBACK_ROOM_KEY = 'edusecure_room_status';
-    let roomStatus = { exam1Open: false, exam2Open: false };
-
-    function formatDateTimeVN(d = new Date()) {
-      const day = String(d.getDate()).padStart(2, '0');
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const year = d.getFullYear();
-      const hours = String(d.getHours()).padStart(2, '0');
-      const minutes = String(d.getMinutes()).padStart(2, '0');
-      const seconds = String(d.getSeconds()).padStart(2, '0');
-      return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-    }
+    const ROOM_STATUS_KEY = 'edusecure_room_status';
+    let roomStatus = { exam1Open: true, exam2Open: true };
 
     function loadRoomStatus() {
       try {
-        const saved = localStorage.getItem(PRIMARY_ROOM_KEY) || localStorage.getItem(FALLBACK_ROOM_KEY);
+        const saved = localStorage.getItem(ROOM_STATUS_KEY);
         if (saved) {
           const parsed = JSON.parse(saved);
           if (typeof parsed.exam1Open === 'boolean' && typeof parsed.exam2Open === 'boolean') {
@@ -1486,17 +1467,13 @@
 
     function saveRoomStatus() {
       try {
-        localStorage.setItem(PRIMARY_ROOM_KEY, JSON.stringify(roomStatus));
-        localStorage.setItem(FALLBACK_ROOM_KEY, JSON.stringify(roomStatus));
-        localStorage.setItem('edusecure_room_opened_v1', String(roomStatus.exam1Open || roomStatus.exam2Open));
+        localStorage.setItem(ROOM_STATUS_KEY, JSON.stringify(roomStatus));
       } catch (e) {}
-      // Broadcast to other tabs & React app
+      // Broadcast to other tabs
       try {
         if ('BroadcastChannel' in window) {
-          const channel = new BroadcastChannel('edusecure_room_channel');
-          channel.postMessage({ type: 'EXAM_ROOM_STATUS_CHANGE', status: roomStatus });
-          channel.postMessage({ type: 'ROOM_STATUS_CHANGE', isOpen: roomStatus.exam1Open || roomStatus.exam2Open });
-          channel.close();
+          const channel = new BroadcastChannel('edusecure_channel');
+          channel.postMessage({ type: 'STATUS_SYNC', status: roomStatus });
         }
       } catch (e) {}
       applyRoomStatusUI();
@@ -1844,7 +1821,7 @@
             studentCode: code,
             className: cls,
             testType: CURRENT_EXAM.subject,
-            loginTime: formatDateTimeVN(new Date())
+            loginTime: new Date().toLocaleString('vi-VN')
           })
         }).catch(() => {});
       } catch (e) {}
@@ -2361,7 +2338,7 @@
       });
 
       // Prepare Copy Row for Google Sheets (14 columns)
-      const nowStr = formatDateTimeVN(new Date());
+      const nowStr = new Date().toLocaleString('vi-VN');
       const timeSpentFormatted = remaining <= 0 ? 'Hết giờ' : `${CURRENT_EXAM.durationSec - remaining} giây`;
       const examCode = (CURRENT_EXAM.type === 'quick5' ? 'TN-' : 'CN-') + Math.floor(100 + Math.random() * 899);
 
@@ -2447,7 +2424,6 @@
       if (!isTeacherAuthenticated) {
         document.getElementById('teacher-auth-box').classList.remove('hidden');
         document.getElementById('teacher-panel-content').classList.add('hidden');
-        setTimeout(() => document.getElementById('teacher-password-input')?.focus(), 100);
       } else {
         document.getElementById('teacher-auth-box').classList.add('hidden');
         document.getElementById('teacher-panel-content').classList.remove('hidden');
@@ -2458,46 +2434,21 @@
     document.getElementById('btn-close-teacher-modal').onclick = () => {
       teacherModal.classList.add('hidden');
     };
-    const btnDone = document.getElementById('btn-done-teacher');
-    if (btnDone) {
-      btnDone.onclick = () => {
-        teacherModal.classList.add('hidden');
-      };
-    }
-
-    const btnLogout = document.getElementById('btn-teacher-logout');
-    if (btnLogout) {
-      btnLogout.onclick = () => {
-        isTeacherAuthenticated = false;
-        document.getElementById('teacher-auth-box').classList.remove('hidden');
-        document.getElementById('teacher-panel-content').classList.add('hidden');
-        const pwdInput = document.getElementById('teacher-password-input');
-        if (pwdInput) pwdInput.value = '';
-      };
-    }
+    document.getElementById('btn-done-teacher').onclick = () => {
+      teacherModal.classList.add('hidden');
+    };
 
     document.getElementById('btn-teacher-login').onclick = () => {
-      const user = (document.getElementById('teacher-username-input')?.value || '').trim().toLowerCase().replace(/\s+/g, '');
-      const pwd = (document.getElementById('teacher-password-input')?.value || '').trim();
-      if ((user === 'maihang' || user === 'maihằng' || user === '') && pwd === '123456hang') {
+      const pwd = document.getElementById('teacher-password-input').value.trim();
+      if (pwd === 'giaovien123' || pwd === '123456' || pwd === 'admin') {
         isTeacherAuthenticated = true;
         document.getElementById('teacher-auth-box').classList.add('hidden');
         document.getElementById('teacher-panel-content').classList.remove('hidden');
-        document.getElementById('teacher-login-error').textContent = '';
-        const pwdInput = document.getElementById('teacher-password-input');
-        if (pwdInput) pwdInput.value = '';
         updateTeacherPanelUI();
       } else {
-        document.getElementById('teacher-login-error').textContent = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
+        document.getElementById('teacher-login-error').textContent = 'Mật khẩu chưa chính xác! (Mặc định: giaovien123)';
       }
     };
-
-    document.getElementById('teacher-password-input')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') document.getElementById('btn-teacher-login').click();
-    });
-    document.getElementById('teacher-username-input')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') document.getElementById('teacher-password-input')?.focus();
-    });
 
     // Individual Toggles
     document.getElementById('btn-toggle-t-exam1').onclick = () => {
