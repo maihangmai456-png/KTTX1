@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi"><head>
+<html lang="vi">
+<head>
   <script type="module" src="/@vite/client"></script>
 
   <meta charset="UTF-8">
@@ -676,7 +677,7 @@
       }
     }
   </style>
-<script src="/_aistudio-iframe.js?v=1f94f900"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style></head>
+<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body>
 
   <!-- HEADER -->
@@ -689,12 +690,12 @@
             <span class="brand-title">EduSecure</span>
             <span class="badge-offline">Bản Offline 2 Bộ Đề</span>
           </div>
-          <div style="font-size:10px; color:#64748b;">Hệ thống thi trắc nghiệm chống gian lận &amp; thoát tab</div>
+          <div style="font-size:10px; color:#64748b;">Hệ thống thi trắc nghiệm chống gian lận & thoát tab</div>
         </div>
       </div>
       <div class="header-actions">
-        <div id="student-badge" class="" style="font-size:11px; background:#f0f9ff; padding:4px 8px; border-radius:8px; border:1px solid #bae6fd; display:flex; align-items:center; gap:6px;">
-          <span id="badge-name" style="font-weight:700;">Dương Ngọc Linh (10C05 - #21)</span>
+        <div id="student-badge" class="hidden" style="font-size:11px; background:#f0f9ff; padding:4px 8px; border-radius:8px; border:1px solid #bae6fd; display:flex; align-items:center; gap:6px;">
+          <span id="badge-name" style="font-weight:700;">Học sinh</span>
           <button id="btn-logout-student" style="background:none; border:none; color:#0284c7; cursor:pointer; font-size:10px; text-decoration:underline; padding:0 2px;">(Đổi)</button>
         </div>
         <button id="btn-open-gv-portal" class="btn-teacher-portal">
@@ -708,7 +709,7 @@
   <div class="container">
 
     <!-- VIEW 0: TRANG ĐĂNG NHẬP THÍ SINH (HIỂN THỊ ĐẦU TIÊN KHI MỞ WEB) -->
-    <div id="view-login" class="hidden">
+    <div id="view-login">
       <div class="hero">
         <h1>Phòng Khảo Thí Trắc Nghiệm Công Nghệ 10</h1>
         <p>Hệ thống hỗ trợ 2 bộ đề thi riêng biệt: <strong>Đề 1 (KTTX 9 câu • 10 phút • 10.0đ)</strong> và <strong>Đề 2 (Test Nhanh 5 câu • 5 phút • 5.0đ)</strong>.</p>
@@ -734,13 +735,27 @@
       <!-- Candidate login form card -->
       <div class="card" style="box-shadow: 0 4px 16px rgba(2, 132, 199, 0.08);">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; border-bottom:1px solid #bae6fd; padding-bottom:8px;">
-          <span style="font-size:22px;">🎓</span>
+          <span style="font-size:24px;">🎓</span>
           <div>
-            <h2 style="font-size:15px; font-weight:800; color:#0369a1;">
+            <h2 style="font-size:16px; font-weight:800; color:#0369a1;">
               Cổng Đăng Nhập Thí Sinh (4 Lớp: 10C05, 10C06, 10C07, 10C08)
             </h2>
-            <div style="font-size:11px; color:#64748b;">Học sinh đăng nhập 1 lần, hệ thống sẽ tự động ghi nhớ cho các lần mở web sau</div>
+            <div style="font-size:11px; color:#64748b;">Học sinh đăng nhập 1 lần, hệ thống sẽ tự động ghi nhớ thông tin cho các lần mở web sau</div>
           </div>
+        </div>
+
+        <!-- Banner khi đã có thông tin ghi nhớ lần trước -->
+        <div id="remembered-account-alert" class="hidden" style="background:#ecfdf5; border:1px solid #86efac; border-radius:12px; padding:10px 14px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:18px;">💾</span>
+            <div style="font-size:12px; color:#166534;">
+              <strong>Đã ghi nhớ thông tin đăng nhập:</strong>
+              <div id="remembered-account-desc" style="font-size:11px; color:#15803d; margin-top:2px;"></div>
+            </div>
+          </div>
+          <button id="btn-clear-remembered" type="button" style="background:#ffffff; border:1px solid #fca5a5; color:#b91c1c; font-size:11px; font-weight:700; padding:4px 10px; border-radius:8px; cursor:pointer;">
+            Xóa nhớ / Nhập bạn khác
+          </button>
         </div>
 
         <div class="input-group">
@@ -757,24 +772,25 @@
           <div class="input-group">
             <label>2. Nhập Mã số / STT (VD: 15):</label>
             <input type="number" id="input-code-num" class="input-control" placeholder="VD: 15" min="1" style="background:#f0f9ff; font-weight:800; border:2px solid #0284c7; font-size:14px; margin-bottom:4px;">
-            <select id="select-code" class="input-control" style="background:#f8fafc; font-size:11px; padding:4px;"><option value="">-- Hoặc chọn nhanh từ danh sách --</option><option value="1">STT 1 — Lê Hồng Hải Anh</option><option value="2">STT 2 — Nguyễn Ngọc Mỹ Anh</option><option value="3">STT 3 — Nguyễn Bùi Thiên Ân</option><option value="4">STT 4 — Lê Gia Bảo</option><option value="5">STT 5 — Nguyễn Gia Bảo</option><option value="6">STT 6 — Hoàng Minh Cảnh</option><option value="7">STT 7 — Võ Ngọc Minh Châu</option><option value="8">STT 8 — Nguyễn Ngọc Thùy Dương</option><option value="9">STT 9 — Trần Tiến Đạt</option><option value="10">STT 10 — Bùi Hoàng Hải</option><option value="11">STT 11 — Vòng Quân Hải</option><option value="12">STT 12 — Phạm Lê Nhã Hân</option><option value="13">STT 13 — Đặng Kim Hiền</option><option value="14">STT 14 — Lê Thị Cẩm Hiền</option><option value="15">STT 15 — Đặng Nhựt Huy</option><option value="16">STT 16 — Trần Nguyễn Mai Ka</option><option value="17">STT 17 — Lê Uyên Khanh</option><option value="18">STT 18 — Trần Ngọc Ngân Khánh</option><option value="19">STT 19 — Nguyễn Đăng Khoa</option><option value="20">STT 20 — Trần Quốc Kiệt</option><option value="21">STT 21 — Dương Ngọc Linh</option><option value="22">STT 22 — Nguyễn Đỗ Phương Linh</option><option value="23">STT 23 — Nguyễn Hoàng Khánh Linh</option><option value="24">STT 24 — Võ Ngọc Yến Linh</option><option value="25">STT 25 — Lê Thành Nam</option><option value="26">STT 26 — Lê Kim Ngân</option><option value="27">STT 27 — Lê Trọng Nghĩa</option><option value="28">STT 28 — Mai Thị Kim Ngọc</option><option value="29">STT 29 — Huỳnh Nguyễn Minh Nguyên</option><option value="30">STT 30 — Nguyễn An Nhi</option><option value="31">STT 31 — Nguyễn Lê Yến Nhi</option><option value="32">STT 32 — Lê Hoàng Phúc</option><option value="33">STT 33 — Lôi Bảo Phúc</option><option value="34">STT 34 — Nguyễn Phương Quỳnh</option><option value="35">STT 35 — Nguyễn Minh Sang</option><option value="36">STT 36 — Giang Minh Thiện</option><option value="37">STT 37 — Huỳnh Lê Phúc Thịnh</option><option value="38">STT 38 — Trần Anh Thư</option><option value="39">STT 39 — Trần Thùy Tiên</option><option value="40">STT 40 — Trịnh Nguyễn Bảo Tiên</option><option value="41">STT 41 — Nguyễn Thị Huyền Trang</option><option value="42">STT 42 — Nguyễn Ngọc Trâm</option><option value="43">STT 43 — Trần Thị Bảo Trân</option><option value="44">STT 44 — Mai Thị Phương Trinh</option><option value="45">STT 45 — Nguyễn Hoàng Nhật Vi</option><option value="46">STT 46 — Trần Nguyễn Khánh Vy</option></select>
+            <select id="select-code" class="input-control" style="background:#f8fafc; font-size:11px; padding:4px;">
+            </select>
           </div>
           <div class="input-group">
             <label>3. Họ và tên học sinh:</label>
-            <input type="text" id="input-name" class="input-control" readonly="" style="background:#f8fafc; font-weight:700; color:#0f172a;" placeholder="Tự động hiện tên khi nhập số">
-            <span id="name-status" style="font-size:10px; color:#16a34a; font-weight:600; margin-top:2px; display:block;">✓ Khớp danh sách: Dương Ngọc Linh (STT 21 - Lớp 10C05)</span>
+            <input type="text" id="input-name" class="input-control" readonly style="background:#f8fafc; font-weight:700; color:#0f172a;" placeholder="Tự động hiện tên khi nhập số">
+            <span id="name-status" style="font-size:10px; color:#16a34a; font-weight:600; margin-top:2px; display:block;"></span>
           </div>
         </div>
 
         <div style="display:flex; align-items:center; gap:8px; margin:10px 0 14px 0; font-size:12px; color:#334155;">
-          <input type="checkbox" id="check-remember-student" checked="" style="width:16px; height:16px; accent-color:#0284c7; cursor:pointer;">
+          <input type="checkbox" id="check-remember-student" checked style="width:16px; height:16px; accent-color:#0284c7; cursor:pointer;">
           <label for="check-remember-student" style="cursor:pointer; font-weight:600;">
-            Ghi nhớ thông tin đăng nhập trên thiết bị này (lần sau mở web tự động vào phòng thi)
+            Ghi nhớ thông tin đăng nhập trên thiết bị này (lần sau mở web tự động điền sẵn)
           </label>
         </div>
 
         <button id="btn-student-login" class="btn btn-primary" style="padding:12px; font-size:14px; font-weight:800; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);">
-          🚀 Xác Nhận Đăng Nhập &amp; Vào Phòng Thi
+          🚀 Xác Nhận Đăng Nhập & Vào Phòng Thi
         </button>
       </div>
     </div>
@@ -790,20 +806,25 @@
             </div>
             <div>
               <div style="font-size:11px; color:#0369a1; font-weight:700; text-transform:uppercase;">Thí Sinh Đang Dự Thi:</div>
-              <strong id="lobby-student-name" style="font-size:15px; color:#0f172a;">Dương Ngọc Linh</strong>
-              <span id="lobby-student-meta" style="font-size:12px; color:#475569; margin-left:6px;">(Lớp 10C05 • STT #21)</span>
+              <strong id="lobby-student-name" style="font-size:15px; color:#0f172a;">---</strong>
+              <span id="lobby-student-meta" style="font-size:12px; color:#475569; margin-left:6px;"></span>
             </div>
           </div>
-          <button id="btn-switch-student-lobby" class="btn btn-secondary" style="width:auto; padding:6px 12px; font-size:11px; background:#ffffff;">
-            🔄 Đổi Thí Sinh Khác
-          </button>
+          <div style="display:flex; gap:6px;">
+            <button id="btn-switch-student-lobby" class="btn btn-secondary" style="width:auto; padding:6px 12px; font-size:11px; background:#ffffff;">
+              🔄 Đổi Thí Sinh / Đăng Xuất
+            </button>
+          </div>
         </div>
       </div>
+
 
       <!-- Live Room Status Banner -->
       <div id="room-status-banner" class="room-status-bar both-open">
         <span id="room-status-indicator" style="width:10px; height:10px; border-radius:999px; background:#10b981; flex-shrink:0;"></span>
-        <div id="room-status-text"><strong>Cả 2 bộ đề đang mở:</strong> Giáo viên đã mở quyền vào thi cho cả 2 đề. Học sinh chọn 1 trong 2 bộ đề bên dưới để bắt đầu.</div>
+        <div id="room-status-text">
+          <strong>Cả 2 bộ đề đang mở:</strong> Giáo viên đã mở quyền vào thi cho cả 2 đề. Học sinh chọn bộ đề bên dưới để bắt đầu.
+        </div>
       </div>
 
       <!-- 2 Dedicated Exam Selection Cards -->
@@ -821,10 +842,12 @@
                 <span style="font-size:10px; font-weight:900; text-transform:uppercase; background:#0284c7; color:#ffffff; padding:2px 8px; border-radius:999px;">
                   Bộ Đề Số 1
                 </span>
-                <span id="exam1-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">Đang Mở</span>
+                <span id="exam1-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                  Đang Mở
+                </span>
               </div>
               <h4 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:4px;">
-                KTTX Bài 3 &amp; 4 (Chuẩn Ma Trận)
+                KTTX Bài 3 & 4 (Chuẩn Ma Trận)
               </h4>
               <p style="font-size:12px; color:#475569; margin-bottom:10px; line-height:1.4;">
                 Đề kiểm tra thường xuyên 9 câu: 8 câu trắc nghiệm nhiều lựa chọn (3 biết, 3 hiểu, 2 vận dụng) + 1 câu Đúng/Sai 4 ý có bối cảnh thực tế.
@@ -847,7 +870,9 @@
               <div id="exam1-closed-alert" class="hidden" style="font-size:11px; color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:6px 10px; border-radius:8px; margin-bottom:8px; font-weight:600;">
                 ⚠️ Giáo viên hiện đang tạm khóa Đề 1. Vui lòng chờ giáo viên mở phòng thi!
               </div>
-              <button id="btn-start-exam-1" class="btn btn-primary" style="padding:12px; font-weight:800;">🚀 Vào Thi Đề 1 (9 Câu Ngẫu Nhiên)</button>
+              <button id="btn-start-exam-1" class="btn btn-primary" style="padding:12px; font-weight:800;">
+                🚀 Vào Thi Đề 1 (9 Câu Ngẫu Nhiên)
+              </button>
             </div>
           </div>
 
@@ -858,7 +883,9 @@
                 <span style="font-size:10px; font-weight:900; text-transform:uppercase; background:#059669; color:#ffffff; padding:2px 8px; border-radius:999px;">
                   Bộ Đề Số 2 • Test Nhanh
                 </span>
-                <span id="exam2-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">Đang Mở</span>
+                <span id="exam2-badge-status" style="font-size:10px; font-weight:800; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                  Đang Mở
+                </span>
               </div>
               <h4 style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:4px;">
                 Test Nhanh 5 Câu (Chuẩn File PDF)
@@ -884,7 +911,9 @@
               <div id="exam2-closed-alert" class="hidden" style="font-size:11px; color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:6px 10px; border-radius:8px; margin-bottom:8px; font-weight:600;">
                 ⚠️ Giáo viên hiện đang tạm khóa Đề 2. Vui lòng chờ giáo viên mở phòng thi!
               </div>
-              <button id="btn-start-exam-2" class="btn btn-emerald" style="padding:12px; font-weight:800;">⚡ Vào Thi Đề 2 (Test Nhanh 5 Câu)</button>
+              <button id="btn-start-exam-2" class="btn btn-emerald" style="padding:12px; font-weight:800;">
+                ⚡ Vào Thi Đề 2 (Test Nhanh 5 Câu)
+              </button>
             </div>
           </div>
 
@@ -898,29 +927,29 @@
       <!-- Proctoring Header Bar -->
       <div class="proctor-bar">
         <div>
-          <span id="exam-badge-type" style="font-size:10px; color:#0284c7; font-weight:800; text-transform:uppercase; display:block;">KTTX BÀI 3 &amp; 4 (9 CÂU - 10 PHÚT)</span>
+          <span id="exam-badge-type" style="font-size:10px; color:#0284c7; font-weight:800; text-transform:uppercase; display:block;">ĐỀ THI ĐANG LÀM</span>
           <div class="timer">
             <span>⏱️</span>
-            <span id="timer-text">08:05</span>
+            <span id="timer-text">10:00</span>
           </div>
         </div>
 
         <div>
           <span style="font-size:10px; color:#64748b; font-weight:700; display:block; text-align:right;">VI PHẠM (TỐI ĐA 3)</span>
           <div class="strikes">
-            <div id="strike-1" class="strike-badge active">1/3</div>
-            <div id="strike-2" class="strike-badge active">2/3</div>
+            <div id="strike-1" class="strike-badge">1/3</div>
+            <div id="strike-2" class="strike-badge">2/3</div>
             <div id="strike-3" class="strike-badge">3/3</div>
           </div>
         </div>
       </div>
 
       <!-- Horizontal Question Slider -->
-      <div id="slider-track" class="slider-track"><button class="slider-btn done">1</button><button class="slider-btn done">2</button><button class="slider-btn done">3</button><button class="slider-btn done">4</button><button class="slider-btn done">5</button><button class="slider-btn done">6</button><button class="slider-btn done">7</button><button class="slider-btn done">8</button><button class="slider-btn current forfeited">9</button></div>
+      <div id="slider-track" class="slider-track"></div>
 
       <!-- Question Card -->
       <div class="card" style="min-height:280px;">
-        <div id="watermark-layer" class="watermark-layer"><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div><div>10C05 • #21 • Dương Ngọc Linh</div></div>
+        <div id="watermark-layer" class="watermark-layer"></div>
         <div id="blur-shield" class="blur-shield hidden">
           <div style="font-size:28px; margin-bottom:6px;">⚠️</div>
           <strong style="color:#0f172a; font-size:14px;">Màn Hình Đang Tạm Khóa</strong>
@@ -932,89 +961,46 @@
           </button>
         </div>
 
-        <div id="forfeit-banner" class="forfeited-banner">
+        <div id="forfeit-banner" class="forfeited-banner hidden">
           <span>🚨</span>
           <span>Câu này đã bị PHẠT 0 ĐIỂM do thí sinh vi phạm thoát màn hình / chụp màn hình.</span>
         </div>
 
         <div class="q-meta">
-          <span id="q-level-tag" class="q-tag" style="display: inline-block;">Đúng / Sai</span>
-          <span id="q-points-tag" class="q-pts">2.0 điểm</span>
+          <span id="q-level-tag" class="q-tag">Nhận biết</span>
+          <span id="q-points-tag" class="q-pts">1.0 điểm</span>
         </div>
 
-        <h2 id="q-title" class="q-title">Câu 9 [Trắc nghiệm Đúng/Sai - 2.0đ]: Chuỗi công nghệ CAD/CAM/CNC trong sản xuất khuôn mẫu</h2>
+        <h2 id="q-title" class="q-title">Nội dung câu hỏi...</h2>
 
         <!-- Context Box for Question 9 in Exam 1 -->
-        <div id="q-context-box" class="context-box">
-          <strong>Bối cảnh: Doanh nghiệp cơ khí chính xác áp dụng chuỗi CAD/CAM/CNC để chế tạo khuôn ép nhựa vỏ điện thoại thông minh.</strong>
-          <div style="margin-top:6px; font-size:11px; color:#0284c7; border-top:1px dashed #bae6fd; padding-top:4px;">
-            Quy tắc chấm: Đúng 1 lệnh: <strong>0,2đ</strong> • Đúng 2: <strong>0,5đ</strong> • Đúng 3: <strong>1,0đ</strong> • Đúng 4: <strong>2,0đ</strong>
-          </div>
-        </div>
+        <div id="q-context-box" class="context-box hidden"></div>
 
         <!-- Options Container for Multiple Choice -->
-        <div id="mc-options-container" class="hidden"><div class="option-item">
-          <div class="opt-letter">A</div>
-          <div class="opt-text" style="flex:1;">Robot thông minh chỉ có thể di chuyển bằng hệ thống bánh xích</div>
-          
-        </div><div class="option-item selected">
-          <div class="opt-letter">B</div>
-          <div class="opt-text" style="flex:1;">Robot thông minh vận hành không tiêu tốn bất kỳ nguồn điện nào</div>
-          <span style="color:#0284c7; font-weight:800; margin-left:auto;">✓</span>
-        </div><div class="option-item">
-          <div class="opt-letter">C</div>
-          <div class="opt-text" style="flex:1;">Robot thông minh có "bộ não" AI có khả năng nhận thức và tự ra quyết định</div>
-          
-        </div><div class="option-item">
-          <div class="opt-letter">D</div>
-          <div class="opt-text" style="flex:1;">Robot thông minh có kích thước chiều cao lớn gấp nhiều lần</div>
-          
-        </div></div>
+        <div id="mc-options-container"></div>
 
         <!-- Options Container for True / False -->
-        <div id="tf-options-container" class=""><div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:6px;">Chọn ĐÚNG hoặc SAI cho từng nhận định:</div><div class="tf-row">
-          <div class="tf-text">a) CAD là phần mềm đảm nhận việc thiết kế mô hình 3D và xuất thông số kỹ thuật của chi tiết.</div>
-          <div class="tf-btns">
-            <button class="tf-btn active-true">ĐÚNG</button>
-            <button class="tf-btn ">SAI</button>
-          </div>
-        </div><div class="tf-row">
-          <div class="tf-text">b) Sản phẩm đầu ra trực tiếp của phần mềm CAM là chi tiết kim loại thực tế đã gia công hoàn thiện.</div>
-          <div class="tf-btns">
-            <button class="tf-btn ">ĐÚNG</button>
-            <button class="tf-btn active-false">SAI</button>
-          </div>
-        </div><div class="tf-row">
-          <div class="tf-text">c) Khi hiệu chỉnh kích thước vỏ điện thoại trên CAD, hệ thống CAM cho phép cập nhật lại đường chạy dao gia công.</div>
-          <div class="tf-btns">
-            <button class="tf-btn active-true">ĐÚNG</button>
-            <button class="tf-btn ">SAI</button>
-          </div>
-        </div><div class="tf-row">
-          <div class="tf-text">d) Máy công cụ CNC vận hành hoàn toàn phụ thuộc vào thao tác gạt cần điều khiển thủ công của người thợ.</div>
-          <div class="tf-btns">
-            <button class="tf-btn ">ĐÚNG</button>
-            <button class="tf-btn active-false">SAI</button>
-          </div>
-        </div></div>
+        <div id="tf-options-container" class="hidden"></div>
 
         <!-- Prev / Next Desktop Buttons -->
         <div id="desktop-nav" style="display:flex; justify-content:space-between; margin-top:16px; padding-top:12px; border-top:1px solid #f1f5f9;">
           <button id="btn-prev" class="btn btn-secondary" style="width:auto; padding:8px 16px;">← Câu trước</button>
-          <button id="btn-submit-desktop" class="btn btn-danger" style="width: auto; padding: 8px 20px; display: inline-flex;">Nộp bài thi</button>
-          <button id="btn-next" class="btn btn-primary" style="width: auto; padding: 8px 16px; display: none;">Câu sau →</button>
+          <button id="btn-submit-desktop" class="btn btn-danger" style="width:auto; padding:8px 20px; display:none;">Nộp bài thi</button>
+          <button id="btn-next" class="btn btn-primary" style="width:auto; padding:8px 16px;">Câu sau →</button>
         </div>
       </div>
     </div>
 
     <!-- VIEW 3: RESULT -->
-    <div id="view-result" class="">
+    <div id="view-result" class="hidden">
       <div class="card" style="text-align:center;">
-        <span id="result-status-tag" style="display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 999px; margin-bottom: 6px; background: rgb(254, 226, 226); color: rgb(185, 28, 28);">CHƯA ĐẠT</span>
-        <h2 id="result-name" style="font-size:18px; font-weight:800; color:#0f172a;">Dương Ngọc Linh</h2>
-        <div id="result-meta" style="font-size:12px; color:#64748b;">SBD: 21 • Lớp: 10C05 • Đề 1 (KTTX 9 Câu)</div>
+        <span id="result-status-tag" style="display:inline-block; font-size:11px; font-weight:800; padding:4px 12px; border-radius:999px; margin-bottom:6px;">
+          HOÀN THÀNH BÀI THI
+        </span>
+        <h2 id="result-name" style="font-size:18px; font-weight:800; color:#0f172a;">Nguyễn Văn An</h2>
+        <div id="result-meta" style="font-size:12px; color:#64748b;">SBD: 15 • Lớp 10C05 • Đề 1</div>
 
-        <div id="result-score-box" class="result-score-badge">3.0/10</div>
+        <div id="result-score-box" class="result-score-badge">0.0/10</div>
 
         <div id="disqualified-box" class="hidden" style="background:#ffe4e6; border:1px solid #fecdd3; color:#9f1239; padding:10px; border-radius:12px; font-size:12px; font-weight:700; margin:10px 0;">
           🚨 BÀI THI BỊ ĐÌNH CHỈ: Thí sinh đã thoát màn hình 3 lần theo quy chế. Toàn bộ bài thi bị hủy điểm (0 điểm).
@@ -1023,18 +1009,18 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; text-align:left;">
           <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:10px;">
             <div style="font-size:10px; color:#64748b;">Số câu đúng:</div>
-            <strong id="res-correct" style="font-size:15px; color:#16a34a; font-family:monospace;">3/9 câu</strong>
+            <strong id="res-correct" style="font-size:15px; color:#16a34a; font-family:monospace;">0/9 câu</strong>
           </div>
           <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:10px;">
             <div style="font-size:10px; color:#64748b;">Số lần vi phạm:</div>
-            <strong id="res-violations" style="font-size:15px; color:#e11d48; font-family:monospace;">2 lần</strong>
+            <strong id="res-violations" style="font-size:15px; color:#e11d48; font-family:monospace;">0 lần</strong>
           </div>
         </div>
 
         <!-- Google Sheets Sync Row Box -->
         <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:12px; margin-top:14px; text-align:left;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="color:#065f46; font-size:12px;">📊 Bảng Điểm Sheet DANH SACH HS &amp; KET QUA TX</strong>
+            <strong style="color:#065f46; font-size:12px;">📊 Bảng Điểm Sheet DANH SACH HS & KET QUA TX</strong>
             <span style="font-size:10px; font-family:monospace; background:#ffffff; border:1px solid #6ee7b7; padding:2px 6px; border-radius:6px; color:#047857;">ID: 1DTIBxYMavsb...</span>
           </div>
           <p style="font-size:11px; color:#064e3b; margin-bottom:8px;">
@@ -1058,298 +1044,16 @@
       </div>
 
       <!-- Detailed Review List -->
-      <div id="review-list"><h3 style="font-size:14px; font-weight:800; margin:16px 0 8px 0; color:#0f172a;">Chi Tiết Từng Câu Hỏi:</h3><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 1 (1.0đ) [Nhận biết]</strong>
-            <span style="background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">0 điểm</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 1 (1.0 điểm): Sản phẩm đầu ra trực tiếp của quá trình phần mềm CAM (Computer Aided Manufacturing) là gì?
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#fff1f2; border-color:#fca5a5; color:#991b1b;">
-                <strong>A.</strong> Bản vẽ thiết kế 3D hoàn chỉnh trên màn hình máy tính (Thí sinh chọn) 
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>B.</strong> Chi tiết cơ khí bằng kim loại đã gia công xong trên máy  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>C.</strong> Sản phẩm mẫu bằng nhựa in 3D  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>D.</strong> Quy trình công nghệ và chương trình/mã lệnh gia công điều khiển máy  (Đáp án chuẩn)
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> CAM xuất mã lệnh gia công điều khiển máy CNC.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 2 (1.0đ) [Thông hiểu]</strong>
-            <span style="background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">0 điểm</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 2 (1.0 điểm): Muốn nâng cao độ nhẵn bóng bề mặt của sản phẩm in 3D, kỹ sư cần điều chỉnh thông số nào?
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>A.</strong> Tăng chiều dày của mỗi lớp in lên mức tối đa của máy  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#fff1f2; border-color:#fca5a5; color:#991b1b;">
-                <strong>B.</strong> Tăng tốc độ di chuyển đầu in lên gấp 10 lần (Thí sinh chọn) 
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>C.</strong> Tắt quạt làm mát đầu phun nhựa trong suốt quá trình in  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>D.</strong> Giảm chiều dày của mỗi lớp in (thiết lập lớp in mỏng hơn)  (Đáp án chuẩn)
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Giảm chiều dày lớp in (layer height) làm bề mặt mịn hơn.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 3 (1.0đ) [Thông hiểu]</strong>
-            <span style="background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">0 điểm</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 3 (1.0 điểm): Ưu điểm lớn nhất của công nghệ truyền thông không dây so với truyền thông có dây là gì?
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#fff1f2; border-color:#fca5a5; color:#991b1b;">
-                <strong>A.</strong> Không đòi hỏi bất kỳ trạm phát sóng hay thiết bị thu phát nào (Thí sinh chọn) 
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>B.</strong> Tính linh động và cơ động cao, kết nối các thiết bị di động không cần dây dẫn vật lý  (Đáp án chuẩn)
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>C.</strong> Tín hiệu hoàn toàn không bao giờ bị suy hao khi gặp vật cản bê tông  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>D.</strong> Băng thông truyền dữ liệu luôn tuyệt đối vô hạn trong mọi điều kiện  
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Tính cơ động và linh hoạt không cần dây cáp vật lý.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 4 (1.0đ) [Vận dụng]</strong>
-            <span style="background:#dcfce7; color:#15803d; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">✓ Đạt +1.0đ</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 4 (1.0 điểm): Để gia công một trục truyền động cơ khí có rãnh then với yêu cầu độ chính xác cao và độ nhẵn bóng bề mặt tốt, trình tự công nghệ hợp lý là:
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>A.</strong> Hàn dính then vào trục thô → Cán qua hai trục cán  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>B.</strong> Đúc cát phôi → Đem lắp ráp ngay không cần gia công cơ  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>C.</strong> Đúc phôi thô → Tiện tròn xoay trục → Phay rãnh then → Mài tinh đạt kích thước (Thí sinh chọn) (Đáp án chuẩn)
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>D.</strong> Dập nguội phôi → Kéo qua lỗ khuôn kéo  
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Tiện trục tròn → Phay rãnh then → Mài bóng cổ trục đạt dung sai.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 5 (1.0đ) [Nhận biết]</strong>
-            <span style="background:#dcfce7; color:#15803d; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">✓ Đạt +1.0đ</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 5 (1.0 điểm): Độ nhẵn bề mặt của sản phẩm chế tạo bằng công nghệ in 3D phụ thuộc trực tiếp vào yếu tố kỹ thuật nào?
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>A.</strong> Màu sắc nguyên bản của cuộn nhựa in  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>B.</strong> Độ dày của từng lớp in vật liệu xếp chồng lên nhau (Thí sinh chọn) (Đáp án chuẩn)
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>C.</strong> Tốc độ quay của quạt làm mát nguồn điện máy in  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>D.</strong> Độ ẩm tương đối của không khí phòng làm việc  
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Độ dày lớp in càng mỏng thì bề mặt càng nhẵn mịn.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 6 (1.0đ) [Thông hiểu]</strong>
-            <span style="background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">0 điểm</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 6 (1.0 điểm): Sự khác biệt kỹ thuật cơ bản giữa đúc áp lực và đúc ly tâm là gì?
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>A.</strong> Đúc áp lực dùng piston ép kim loại lỏng vào khuôn; đúc ly tâm dùng lực quay tạo lực quán tính  (Đáp án chuẩn)
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#fff1f2; border-color:#fca5a5; color:#991b1b;">
-                <strong>B.</strong> Đúc áp lực thực hiện trong môi trường chân không; đúc ly tâm thực hiện dưới nước (Thí sinh chọn) 
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>C.</strong> Đúc áp lực tạo ra sản phẩm dạng ống dài; đúc ly tâm tạo chi tiết hình hộp  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>D.</strong> Đúc áp lực chỉ dùng cho chất dẻo; đúc ly tâm chỉ dùng cho gỗ  
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Đúc áp lực ép bằng piston; đúc ly tâm dùng lực quán tính quay.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 7 (1.0đ) [Vận dụng]</strong>
-            <span style="background:#dcfce7; color:#15803d; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">✓ Đạt +1.0đ</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 7 (1.0 điểm): Hệ thống tự động đóng rèm cửa, bật điều hòa và kích hoạt báo động khi gia chủ rời nhà là ứng dụng của:
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>A.</strong> Công nghệ Internet vạn vật (IoT - Ngôi nhà thông minh) (Thí sinh chọn) (Đáp án chuẩn)
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>B.</strong> Công nghệ hàn hồ quang que  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>C.</strong> Công nghệ cán thép xây dựng  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>D.</strong> Công nghệ đúc ly tâm  
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Ngôi nhà thông minh (Smart Home IoT).
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 8 (1.0đ) [Nhận biết]</strong>
-            <span style="background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">0 điểm</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 8 (1.0 điểm): Điểm khác biệt cốt lõi giữa Robot thông minh và Robot cơ khí truyền thống là gì?
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>A.</strong> Robot thông minh chỉ có thể di chuyển bằng hệ thống bánh xích  
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#fff1f2; border-color:#fca5a5; color:#991b1b;">
-                <strong>B.</strong> Robot thông minh vận hành không tiêu tốn bất kỳ nguồn điện nào (Thí sinh chọn) 
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ecfdf5; border-color:#86efac; color:#166534; font-weight:700;">
-                <strong>C.</strong> Robot thông minh có "bộ não" AI có khả năng nhận thức và tự ra quyết định  (Đáp án chuẩn)
-              </div>
-            
-              <div style="padding:6px 10px; border-radius:8px; margin-bottom:4px; font-size:12px; border:1px solid #e2e8f0;background:#ffffff; color:#475569;">
-                <strong>D.</strong> Robot thông minh có kích thước chiều cao lớn gấp nhiều lần  
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              💡 <strong>Giải thích:</strong> Robot thông minh có AI và cảm biến nhận thức môi trường.
-            </div>
-          
-        </div><div class="card" style="margin-bottom: 10px; padding: 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12px; color:#0f172a;">Câu 9 (2.0đ) [Đúng / Sai]</strong>
-            <span style="background:#ffe4e6; color:#e11d48; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:800;">🚨 Phạt 0đ (Thoát màn hình/Chụp)</span>
-          </div>
-          <div style="font-size:13px; color:#1e293b; font-weight:600; margin-bottom:6px;">
-            Câu 9 [Trắc nghiệm Đúng/Sai - 2.0đ]: Chuỗi công nghệ CAD/CAM/CNC trong sản xuất khuôn mẫu
-          </div>
-          
-            <div style="margin:8px 0;">
-              <div style="padding:6px 8px; border-radius:8px; margin-bottom:4px; font-size:11px; background:#ecfdf5; display:flex; justify-content:space-between; align-items:center;">
-                <span>a) CAD là phần mềm đảm nhận việc thiết kế mô hình 3D và xuất thông số kỹ thuật của chi tiết.</span>
-                <span style="font-weight:700; font-family:monospace; margin-left:8px;">
-                  Chọn: ĐÚNG | Đáp án: ĐÚNG
-                </span>
-              </div>
-            
-              <div style="padding:6px 8px; border-radius:8px; margin-bottom:4px; font-size:11px; background:#ecfdf5; display:flex; justify-content:space-between; align-items:center;">
-                <span>b) Sản phẩm đầu ra trực tiếp của phần mềm CAM là chi tiết kim loại thực tế đã gia công hoàn thiện.</span>
-                <span style="font-weight:700; font-family:monospace; margin-left:8px;">
-                  Chọn: SAI | Đáp án: SAI
-                </span>
-              </div>
-            
-              <div style="padding:6px 8px; border-radius:8px; margin-bottom:4px; font-size:11px; background:#ecfdf5; display:flex; justify-content:space-between; align-items:center;">
-                <span>c) Khi hiệu chỉnh kích thước vỏ điện thoại trên CAD, hệ thống CAM cho phép cập nhật lại đường chạy dao gia công.</span>
-                <span style="font-weight:700; font-family:monospace; margin-left:8px;">
-                  Chọn: ĐÚNG | Đáp án: ĐÚNG
-                </span>
-              </div>
-            
-              <div style="padding:6px 8px; border-radius:8px; margin-bottom:4px; font-size:11px; background:#ecfdf5; display:flex; justify-content:space-between; align-items:center;">
-                <span>d) Máy công cụ CNC vận hành hoàn toàn phụ thuộc vào thao tác gạt cần điều khiển thủ công của người thợ.</span>
-                <span style="font-weight:700; font-family:monospace; margin-left:8px;">
-                  Chọn: SAI | Đáp án: SAI
-                </span>
-              </div>
-            </div>
-            <div style="font-size:11px; color:#0369a1; background:#f0f9ff; padding:6px 10px; border-radius:8px; margin-top:6px;">
-              Đáp án: a) ĐÚNG | b) SAI (CAM xuất mã G-code) | c) ĐÚNG | d) SAI (CNC chạy tự động).
-            </div>
-          
-        </div></div>
+      <div id="review-list"></div>
     </div>
 
   </div>
 
   <!-- STICKY BOTTOM BAR FOR MOBILE -->
-  <div id="mobile-bar" class="mobile-bar" style="display: none;">
+  <div id="mobile-bar" class="mobile-bar" style="display:none;">
     <button id="m-btn-prev" class="btn btn-secondary" style="flex:1;">← Trước</button>
-    <button id="m-btn-next" class="btn btn-secondary" style="flex: 1 1 0%; display: none;">Sau →</button>
-    <button id="m-btn-submit" class="btn btn-danger" style="flex: 1.2 1 0%; display: inline-flex;">Nộp bài</button>
+    <button id="m-btn-next" class="btn btn-secondary" style="flex:1;">Sau →</button>
+    <button id="m-btn-submit" class="btn btn-danger" style="flex:1.2; display:none;">Nộp bài</button>
   </div>
 
   <!-- FLOATING SIMULATION DOCK FOR PROCTOR TESTING -->
@@ -1369,9 +1073,15 @@
   <div id="alert-modal" class="modal-overlay hidden">
     <div class="modal-card">
       <div style="font-size:32px; text-align:center; margin-bottom:6px;">🚨</div>
-      <h3 id="modal-title" style="font-size:15px; font-weight:800; text-align:center; color:#9f1239; margin-bottom:6px;">🚨 CẢNH BÁO VI PHẠM LẦN 2/3!</h3>
-      <div id="modal-desc" style="font-size:12px; color:#475569; text-align:center; margin-bottom:12px; line-height:1.4;">Giao diện thi mất tiêu điểm (chuyển app hoặc chụp màn hình). Vi phạm ghi nhận lúc 05:28:29.</div>
-      <div id="modal-penalty" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; padding:8px 10px; border-radius:10px; font-size:11px; font-weight:700; text-align:center; margin-bottom:14px;">Câu hỏi số 9 đã bị đánh dấu SAI (0 điểm) và không được tính điểm.</div>
+      <h3 id="modal-title" style="font-size:15px; font-weight:800; text-align:center; color:#9f1239; margin-bottom:6px;">
+        CẢNH BÁO VI PHẠM PHÒNG THI!
+      </h3>
+      <div id="modal-desc" style="font-size:12px; color:#475569; text-align:center; margin-bottom:12px; line-height:1.4;">
+        Thí sinh đã rời khỏi màn hình bài thi.
+      </div>
+      <div id="modal-penalty" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; padding:8px 10px; border-radius:10px; font-size:11px; font-weight:700; text-align:center; margin-bottom:14px;">
+        Đánh dấu câu hỏi hiện tại là SAI (0 điểm).
+      </div>
       <button id="btn-modal-ack" class="btn btn-danger">Tôi Đã Hiểu Và Tiếp Tục</button>
     </div>
   </div>
@@ -1426,7 +1136,7 @@
   </div>
 
   <!-- GIAO VIEN PORTAL MODAL (MAI HANG) -->
-  <div id="gv-portal-modal" class="modal-overlay">
+  <div id="gv-portal-modal" class="modal-overlay hidden">
     <div class="modal-card" style="max-width:860px; width:95%; max-height:90vh; overflow-y:auto; padding:20px;">
       
       <!-- Top header bar -->
@@ -1434,7 +1144,7 @@
         <div style="display:flex; align-items:center; gap:8px;">
           <span style="font-size:24px;">👩‍🏫</span>
           <div>
-            <h3 style="font-size:16px; font-weight:800; color:#0369a1;">Cổng Tài Nguyên &amp; Quản Trị Giáo Viên</h3>
+            <h3 style="font-size:16px; font-weight:800; color:#0369a1;">Cổng Tài Nguyên & Quản Trị Giáo Viên</h3>
             <div style="font-size:11px; color:#64748b;">Hệ thống khảo thí Công nghệ 10 • Giáo viên: Mai Hằng</div>
           </div>
         </div>
@@ -1442,7 +1152,7 @@
       </div>
 
       <!-- VIEW 1: LOGIN BOX -->
-      <div id="gv-auth-box" class="hidden">
+      <div id="gv-auth-box">
         <div style="max-width:400px; margin:20px auto; background:#f8fafc; border:1px solid #bae6fd; border-radius:18px; padding:20px;">
           <div style="text-align:center; margin-bottom:14px;">
             <div style="font-size:36px; margin-bottom:4px;">🔐</div>
@@ -1471,7 +1181,7 @@
       </div>
 
       <!-- VIEW 2: AUTHENTICATED GV PANEL CONTENT -->
-      <div id="gv-panel-content" class="">
+      <div id="gv-panel-content" class="hidden">
         
         <!-- Teacher Profile & Logout -->
         <div style="display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border:1px solid #bae6fd; border-radius:14px; padding:10px 14px; margin-bottom:14px;">
@@ -1489,16 +1199,16 @@
 
         <!-- TABS NAVIGATION -->
         <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:14px; padding-bottom:4px; border-bottom:1px solid #e2e8f0;">
-          <button id="tab-btn-apps" class="btn btn-secondary" style="width:auto; padding:8px 16px; font-size:12px;">
+          <button id="tab-btn-apps" class="btn btn-primary" style="width:auto; padding:8px 16px; font-size:12px;">
             📊 Mã Google Apps Script
           </button>
-          <button id="tab-btn-html" class="btn btn-primary" style="width:auto; padding:8px 16px; font-size:12px;">
+          <button id="tab-btn-html" class="btn btn-secondary" style="width:auto; padding:8px 16px; font-size:12px;">
             💾 Tệp HTML Offline
           </button>
         </div>
 
         <!-- TAB 1: MÃ GOOGLE APPS SCRIPT -->
-        <div id="tab-pane-apps" class="hidden">
+        <div id="tab-pane-apps">
           <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:12px; margin-bottom:12px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
               <strong style="color:#065f46; font-size:13px;">📋 Mã Google Apps Script Tích Hợp Google Sheets</strong>
@@ -1510,83 +1220,11 @@
               Mã này dùng để dán vào <strong>Tiện ích mở rộng &gt; Apps Script</strong> trong Google Sheets. Mã tự động tạo 2 sheet: <strong>DANH SACH HS</strong> (lưu thí sinh đăng nhập) và <strong>KET QUA KIEM TRA TX</strong> (lưu 14 cột điểm và kết quả bài làm).
             </p>
           </div>
-          <pre id="gv-apps-script-code" style="background:#0f172a; color:#f8fafc; padding:14px; border-radius:12px; font-family:monospace; font-size:11px; overflow-x:auto; max-height:48vh; line-height:1.5;">/**
- * =========================================================================
- * EDUSECURE - HỆ THỐNG THI TRẮC NGHIỆM CÔNG NGHỆ 10
- * MÃ GOOGLE APPS SCRIPT KẾT NỐI VỚI GOOGLE SHEETS
- * Tác giả: GV Mai Hằng
- * =========================================================================
- */
-
-function doPost(e) {
-  try {
-    var rawData = e.postData.contents;
-    var data = JSON.parse(rawData);
-    var sheetId = data.sheetId || "1DTIBxYMavsb2tF56hJLPeT4n3n7YTBKB6ckpjDzSrOs";
-    var ss = SpreadsheetApp.openById(sheetId);
-
-    // 1. GHI DANH SÁCH HỌC SINH ĐĂNG NHẬP
-    if (data.action === "LOGIN") {
-      var logSheet = ss.getSheetByName("DANH SACH HS");
-      if (!logSheet) {
-        logSheet = ss.insertSheet("DANH SACH HS");
-        logSheet.appendRow(["Thời Gian Đăng Nhập", "Mã / STT", "Họ Và Tên", "Lớp Học", "Loại Đề Thi"]);
-        logSheet.getRange(1, 1, 1, 5).setFontWeight("bold").setBackground("#e0f2fe");
-      }
-      logSheet.appendRow([
-        data.loginTime || new Date().toLocaleString("vi-VN"),
-        data.studentCode || "",
-        data.fullName || "",
-        data.className || "",
-        data.testType || ""
-      ]);
-      return ContentService.createTextOutput(JSON.stringify({ status: "success", action: "LOGIN" }))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
-
-    // 2. GHI KẾT QUẢ BÀI THI (14 CỘT CHUẨN)
-    if (data.action === "SUBMISSION") {
-      var resSheet = ss.getSheetByName("KET QUA KIEM TRA TX");
-      if (!resSheet) {
-        resSheet = ss.insertSheet("KET QUA KIEM TRA TX");
-        resSheet.appendRow([
-          "Thời Gian Nộp", "STT Thí Sinh", "Họ Và Tên Thí Sinh", "Lớp", "Tên Đề Thi", "Mã Đề",
-          "Lần Thi", "Số Lần Vi Phạm", "Thời Gian Làm Bài", "Điểm Số", "Đúng Nhận Biết",
-          "Đúng Thông Hiểu", "Đúng Vận Dụng", "Kết QuẢ Đúng/Sai (4 ý)"
-        ]);
-        resSheet.getRange(1, 1, 1, 14).setFontWeight("bold").setBackground("#dcfce7");
-      }
-      resSheet.appendRow([
-        data.finishTime || new Date().toLocaleString("vi-VN"),
-        data.studentCode || "",
-        data.fullName || "",
-        data.className || "",
-        data.testName || "",
-        data.examCode || "",
-        data.attemptLabel || "Lần 1: Chính thức",
-        data.violationsCount !== undefined ? data.violationsCount : 0,
-        data.timeSpentFormatted || "",
-        data.score !== undefined ? data.score : 0,
-        data.correctNhanBiet !== undefined ? data.correctNhanBiet : 0,
-        data.correctThongHieu !== undefined ? data.correctThongHieu : 0,
-        data.correctVanDung !== undefined ? data.correctVanDung : 0,
-        data.tfResultText || ""
-      ]);
-      return ContentService.createTextOutput(JSON.stringify({ status: "success", action: "SUBMISSION" }))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
-
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "Hành động không xác định" }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}</pre>
+          <pre id="gv-apps-script-code" style="background:#0f172a; color:#f8fafc; padding:14px; border-radius:12px; font-family:monospace; font-size:11px; overflow-x:auto; max-height:48vh; line-height:1.5;"></pre>
         </div>
 
         <!-- TAB 4: TỆP HTML OFFLINE -->
-        <div id="tab-pane-html" class="">
+        <div id="tab-pane-html" class="hidden">
           <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:14px; padding:14px; margin-bottom:14px;">
             <h4 style="font-size:13px; font-weight:800; color:#0369a1; margin-bottom:4px;">
               💾 Tệp HTML EduSecure Offline Đầy Đủ
@@ -2114,7 +1752,7 @@ function doPost(e) {
     let remaining = 10 * 60;
     let timer = null;
     let isActive = false;
-    let student = { name: 'Nguyễn Văn An', code: '15', class: '10C05' };
+    let student = { name: '', code: '', class: '10C05' };
     let lastViolation = 0;
     let isConfirmingSubmit = false;
 
@@ -2357,9 +1995,6 @@ function doPost(e) {
     }
 
     function handleSwitchStudent() {
-      try {
-        localStorage.removeItem(STUDENT_STORAGE_KEY);
-      } catch (e) {}
       showLoginView();
       setTimeout(() => {
         const numInput = document.getElementById('input-code-num');
@@ -2370,7 +2005,32 @@ function doPost(e) {
       }, 100);
     }
 
+    function handleClearRemembered() {
+      try {
+        localStorage.removeItem(STUDENT_STORAGE_KEY);
+      } catch (e) {}
+      student = { name: '', code: '', class: document.getElementById('select-class').value };
+      document.getElementById('input-code-num').value = '';
+      document.getElementById('input-name').value = '';
+      const statusSpan = document.getElementById('name-status');
+      if (statusSpan) statusSpan.textContent = '';
+      const remAlert = document.getElementById('remembered-account-alert');
+      if (remAlert) remAlert.classList.add('hidden');
+      const btnLogin = document.getElementById('btn-student-login');
+      if (btnLogin) btnLogin.innerHTML = '🚀 Xác Nhận Đăng Nhập & Vào Phòng Thi';
+      const numInput = document.getElementById('input-code-num');
+      if (numInput) numInput.focus();
+    }
+
     function initStudentSession() {
+      // 1. QUY TẮC CỐT LÕI: Khi mở web lần đầu hoặc tải lại trang, LUÔN BẮT ĐẦU TẠI TRANG ĐĂNG NHẬP CỦA HỌC SINH!
+      showLoginView();
+
+      const remAlert = document.getElementById('remembered-account-alert');
+      const remDesc = document.getElementById('remembered-account-desc');
+      const btnLogin = document.getElementById('btn-student-login');
+
+      // 2. Nếu học sinh đã đăng nhập 1 lần trước đó: NHỚ NỘI DUNG ĐĂNG NHẬP (điền sẵn lớp, số báo danh, họ và tên)
       try {
         const saved = localStorage.getItem(STUDENT_STORAGE_KEY);
         if (saved) {
@@ -2380,24 +2040,43 @@ function doPost(e) {
             const match = list.find(s => s.code === String(parsed.code) || parseInt(s.code, 10) === parseInt(parsed.code, 10));
             if (match) {
               student = { name: match.name, code: match.code, class: parsed.class };
+              // Điền sẵn nội dung đăng nhập vào form
               document.getElementById('select-class').value = parsed.class;
               updateStudentSelect();
               document.getElementById('input-code-num').value = match.code;
               syncFromNumberInput();
-              showLobbyView(student);
+
+              // Hiển thị thông báo đã nhớ nội dung đăng nhập
+              if (remAlert && remDesc) {
+                remDesc.innerHTML = `Thí sinh: <strong>${match.name}</strong> • Lớp <strong>${parsed.class}</strong> • STT <strong>#${match.code}</strong>`;
+                remAlert.classList.remove('hidden');
+              }
+              if (btnLogin) {
+                btnLogin.innerHTML = `🚀 Tiếp Tục Vào Phòng Thi (${match.name} - #${match.code})`;
+              }
               return;
             }
           }
         }
       } catch (e) {}
 
-      // Default: Khi mở web đầu tiên chưa đăng nhập -> hiển thị trang đăng nhập học sinh
-      showLoginView();
+      // Nếu là lần đầu tiên chưa đăng nhập: để trống form
+      if (remAlert) remAlert.classList.add('hidden');
+      document.getElementById('input-code-num').value = '';
+      document.getElementById('input-name').value = '';
+      const statusSpan = document.getElementById('name-status');
+      if (statusSpan) statusSpan.textContent = '';
+      if (btnLogin) {
+        btnLogin.innerHTML = '🚀 Xác Nhận Đăng Nhập & Vào Phòng Thi';
+      }
     }
 
     // Wiring student login actions
     const btnStudentLogin = document.getElementById('btn-student-login');
     if (btnStudentLogin) btnStudentLogin.onclick = handleStudentLogin;
+
+    const btnClearRem = document.getElementById('btn-clear-remembered');
+    if (btnClearRem) btnClearRem.onclick = handleClearRemembered;
 
     const btnSwitchLobby = document.getElementById('btn-switch-student-lobby');
     if (btnSwitchLobby) btnSwitchLobby.onclick = handleSwitchStudent;
@@ -2413,6 +2092,7 @@ function doPost(e) {
         }
       });
     }
+
 
     // =========================================================================
     // 8. START EXAMS LOGIC (ĐỀ 1 & ĐỀ 2)
@@ -3322,13 +3002,42 @@ function doPost(e) {
     // Tab 4: Download HTML File
     const btnDownloadHtml = document.getElementById('btn-download-html');
     if (btnDownloadHtml) {
-      btnDownloadHtml.onclick = () => {
-        const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      btnDownloadHtml.onclick = async () => {
+        try {
+          const res = await fetch('/public/EduSecure_Offline_MaiHang.html');
+          if (res.ok) {
+            const htmlText = await res.text();
+            const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'EduSecure_Offline_MaiHang.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            return;
+          }
+        } catch (e) {}
+
+        const clone = document.documentElement.cloneNode(true);
+        const cloneLogin = clone.querySelector('#view-login');
+        const cloneLobby = clone.querySelector('#view-lobby');
+        const cloneExam = clone.querySelector('#view-exam');
+        const cloneResult = clone.querySelector('#view-result');
+        const cloneModal = clone.querySelector('#gv-portal-modal');
+        if (cloneLogin) cloneLogin.classList.remove('hidden');
+        if (cloneLobby) cloneLobby.classList.add('hidden');
+        if (cloneExam) cloneExam.classList.add('hidden');
+        if (cloneResult) cloneResult.classList.add('hidden');
+        if (cloneModal) cloneModal.classList.add('hidden');
+
+        const fullHtml = '<!DOCTYPE html>\n' + clone.outerHTML;
         const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'EduSecure_CongNghe10_MaiHang.html';
+        a.download = 'EduSecure_Offline_MaiHang.html';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -3339,8 +3048,30 @@ function doPost(e) {
     // Tab 4: Copy HTML code
     const btnCopyHtml = document.getElementById('btn-copy-html-code');
     if (btnCopyHtml) {
-      btnCopyHtml.onclick = () => {
-        const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      btnCopyHtml.onclick = async () => {
+        try {
+          const res = await fetch('/public/EduSecure_Offline_MaiHang.html');
+          if (res.ok) {
+            const htmlText = await res.text();
+            await navigator.clipboard.writeText(htmlText);
+            alert('Đã sao chép toàn bộ mã nguồn HTML chuẩn vào bộ nhớ tạm (Clipboard)!');
+            return;
+          }
+        } catch (e) {}
+
+        const clone = document.documentElement.cloneNode(true);
+        const cloneLogin = clone.querySelector('#view-login');
+        const cloneLobby = clone.querySelector('#view-lobby');
+        const cloneExam = clone.querySelector('#view-exam');
+        const cloneResult = clone.querySelector('#view-result');
+        const cloneModal = clone.querySelector('#gv-portal-modal');
+        if (cloneLogin) cloneLogin.classList.remove('hidden');
+        if (cloneLobby) cloneLobby.classList.add('hidden');
+        if (cloneExam) cloneExam.classList.add('hidden');
+        if (cloneResult) cloneResult.classList.add('hidden');
+        if (cloneModal) cloneModal.classList.add('hidden');
+
+        const fullHtml = '<!DOCTYPE html>\n' + clone.outerHTML;
         navigator.clipboard.writeText(fullHtml).then(() => {
           alert('Đã sao chép toàn bộ mã nguồn HTML vào bộ nhớ tạm (Clipboard)!');
         }).catch(() => {
@@ -3353,6 +3084,5 @@ function doPost(e) {
     loadRoomStatus();
     initStudentSession();
   </script>
-
-
-</body></html>
+</body>
+</html>
