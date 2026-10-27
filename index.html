@@ -607,25 +607,33 @@
       }
     }
 
-    /* Floating Simulation Dock */
+    /* Floating Simulation Dock - Phía bên trái trên cùng */
     .sim-dock {
       position: fixed;
-      bottom: 60px;
-      right: 10px;
+      top: 66px;
+      left: 12px;
       background: #ffffff;
       border: 1px solid #bae6fd;
-      border-radius: 14px;
-      padding: 8px 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      z-index: 40;
+      border-radius: 16px;
+      padding: 9px 11px;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.12);
+      z-index: 45;
       font-size: 11px;
-      max-width: 200px;
+      width: 175px;
+      transition: all 0.2s ease;
     }
     @media (min-width: 600px) {
       .sim-dock {
-        bottom: 14px;
-        right: 14px;
+        top: 68px;
+        left: 14px;
+        width: 185px;
+        padding: 10px 12px;
       }
+    }
+    .sim-dock-minimized {
+      width: auto !important;
+      padding: 6px 10px !important;
+      border-radius: 12px !important;
     }
 
     /* Modal */
@@ -1056,15 +1064,20 @@
     <button id="m-btn-submit" class="btn btn-danger" style="flex:1.2; display:none;">Nộp bài</button>
   </div>
 
-  <!-- FLOATING SIMULATION DOCK FOR PROCTOR TESTING -->
+  <!-- FLOATING SIMULATION DOCK FOR PROCTOR TESTING (PHÍA BÊN TRÁI TRÊN CÙNG) -->
   <div id="sim-dock" class="sim-dock hidden">
-    <div style="font-weight:800; color:#0369a1; margin-bottom:4px; font-size:10px;">🧪 TEST GIÁM SÁT:</div>
-    <div style="display:flex; flex-direction:column; gap:4px;">
-      <button id="btn-sim-exit" style="background:#ffe4e6; border:1px solid #fecdd3; color:#9f1239; padding:4px 6px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">
-        🚨 Test: Thoát App
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+      <div style="font-weight:800; color:#0369a1; font-size:11px; display:flex; align-items:center; gap:4px;">
+        <span>🧪</span> TEST GIÁM SÁT:
+      </div>
+      <button id="btn-toggle-sim" title="Thu gọn / Mở rộng" style="background:none; border:none; color:#64748b; font-size:12px; font-weight:700; cursor:pointer; padding:0 3px; line-height:1;">−</button>
+    </div>
+    <div id="sim-dock-body" style="display:flex; flex-direction:column; gap:6px;">
+      <button id="btn-sim-exit" style="background:#ffe4e6; border:1px solid #fecdd3; color:#9f1239; padding:6px 8px; border-radius:8px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; transition:transform 0.1s;">
+        <span>🚨</span> Test: Thoát App
       </button>
-      <button id="btn-sim-shot" style="background:#e0f2fe; border:1px solid #bae6fd; color:#0369a1; padding:4px 6px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">
-        📱 Test: Chụp Màn Hình
+      <button id="btn-sim-shot" style="background:#e0f2fe; border:1px solid #bae6fd; color:#0369a1; padding:6px 8px; border-radius:8px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; transition:transform 0.1s;">
+        <span>📱</span> Test: Chụp Màn Hình
       </button>
     </div>
   </div>
@@ -2341,6 +2354,24 @@
     });
 
     // Simulation buttons
+    const btnToggleSim = document.getElementById('btn-toggle-sim');
+    const simDockBody = document.getElementById('sim-dock-body');
+    if (btnToggleSim && simDockBody) {
+      btnToggleSim.onclick = (e) => {
+        e.stopPropagation();
+        const isCollapsed = simDockBody.style.display === 'none';
+        if (isCollapsed) {
+          simDockBody.style.display = 'flex';
+          simDock.classList.remove('sim-dock-minimized');
+          btnToggleSim.textContent = '−';
+        } else {
+          simDockBody.style.display = 'none';
+          simDock.classList.add('sim-dock-minimized');
+          btnToggleSim.textContent = '+';
+        }
+      };
+    }
+
     document.getElementById('btn-sim-exit').onclick = () => {
       onViolation(`Giả lập học sinh thoát app tại Câu #${currentIdx + 1}`);
     };
